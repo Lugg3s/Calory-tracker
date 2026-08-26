@@ -21,3 +21,4 @@ Eine solche Visualisierung wäre eine Schätzung bzw. Visualisierung und keine z
 - personalisierte Mahlzeitenvorschläge
 - LLM-basierte Ernährungsberatung
 - bessere Modellierung von Trainings- und Aktivitätsdaten
+- Wenn ein Plan erstellt wurde, gibt die App feedback wie schwer das Ziel gesetzt ist (1kg pro woche abzunehmen benötogt mehr disziplin als 0,2kg). Dann kann die App dem uswr zb so ein Feedback geben: "Dein Ziel ist sehr ambitioniert gesetzt. Bist du Zielstrebig/Diszipliniert genug um den Plan wirklich durchzuziehen? Alternativ schlage ich vor, dass wir deine Ziele nochmal überarbeiten."
