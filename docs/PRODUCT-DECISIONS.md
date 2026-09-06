@@ -139,8 +139,23 @@ Further complexity should be offered after plan creation through calculation det
 
 On the optional current-KFA screen, the user may open visual examples to help estimate their body-fat percentage.
 
-The reference images should be generated in advance rather than generated individually for each user at runtime. The library should be segmented by the previously entered sex / biological category, height range, weight range, and KFA level. The current working direction is to use KFA levels in approximately five-percentage-point steps.
+The reference images should be generated in advance rather than generated individually for each user at runtime. The library should be segmented by the previously entered sex / biological category, body-shape reference bucket, and KFA level. The current working direction is to use KFA levels in approximately five-percentage-point steps.
 
 At runtime, the app selects the closest suitable reference group from the library based on the user's entered body data. The images are only shown when the user actively requests examples, so the default KFA screen remains minimalistic.
 
-These images are an orientation aid for self-estimation, not a body-fat measurement or a claim that a specific appearance corresponds exactly to a specific KFA. Exact height ranges, weight ranges, and bin sizes still need to be defined.
+These images are an orientation aid for self-estimation, not a body-fat measurement or a claim that a specific appearance corresponds exactly to a specific KFA.
+
+## D-022 — KFA reference-image body-shape bucket is derived automatically from height and weight
+**Status:** decided direction
+
+The user should not be asked an additional question about their body build just to select suitable KFA reference images.
+
+Instead, the app should derive a coarse internal body-shape/reference bucket from the height and weight already entered by the user, for example using a BMI-like height-to-weight relationship. The reference library can then be indexed approximately by:
+
+- sex / biological category
+- derived body-shape/reference bucket
+- KFA level
+
+This reduces the required number of pre-generated reference images compared with storing a full grid for every height and weight combination.
+
+The derived bucket is only an internal matching heuristic for choosing visual examples. It must not be presented as a KFA measurement or as a medical/health classification. The exact formula, number of buckets, and bucket thresholds remain open.
