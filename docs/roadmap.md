@@ -12,7 +12,7 @@
 
 - [ ] Wireframes erstellen
 - [ ] Wireframes mit Figma / Uizard / Motif bzw. geeignetem Tool iterieren
-- [ ] Onboarding-Flow definieren
+- [x] Onboarding-Flow definieren
 - [ ] Berechnungsansicht definieren
 - [ ] Main Screen definieren
 
