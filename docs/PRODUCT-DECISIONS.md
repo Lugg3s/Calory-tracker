@@ -133,3 +133,14 @@ Exact copy, controls, visual treatment, and micro-interactions may change during
 Once the required onboarding inputs are complete, the app should show the user's first plan rather than continuing with additional mandatory detail screens.
 
 Further complexity should be offered after plan creation through calculation details, settings, or a "refine plan" area. This can include deeper explanations, additional activity/training details, manual calorie-target adjustment, macro-target adjustment, and later personalization options.
+
+## D-021 — Current KFA can be estimated with a pre-generated reference-image library
+**Status:** decided direction
+
+On the optional current-KFA screen, the user may open visual examples to help estimate their body-fat percentage.
+
+The reference images should be generated in advance rather than generated individually for each user at runtime. The library should be segmented by the previously entered sex / biological category, height range, weight range, and KFA level. The current working direction is to use KFA levels in approximately five-percentage-point steps.
+
+At runtime, the app selects the closest suitable reference group from the library based on the user's entered body data. The images are only shown when the user actively requests examples, so the default KFA screen remains minimalistic.
+
+These images are an orientation aid for self-estimation, not a body-fat measurement or a claim that a specific appearance corresponds exactly to a specific KFA. Exact height ranges, weight ranges, and bin sizes still need to be defined.
