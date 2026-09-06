@@ -96,9 +96,11 @@ Target KFA is also optional, but it should only be available if current KFA is k
 
 If current KFA is available, it should be allowed to influence the energy-requirement estimate because two people with the same height and weight can have different body composition and therefore different estimated energy requirements.
 
-To make current-KFA self-estimation easier, the KFA screen may offer an optional visual reference view. The app should use a pre-generated library segmented by sex / biological category, height range, weight range, and KFA level. The current direction is approximately five-percentage-point KFA steps. At runtime, the app selects the closest suitable reference group from the user's previously entered data and only displays it when the user actively opens the examples.
+To make current-KFA self-estimation easier, the KFA screen may offer an optional visual reference view. The app should use a pre-generated image library. Rather than storing a full image grid for every height and weight combination or asking the user for an additional body-build input, the app should derive a coarse internal body-shape/reference bucket from the height and weight already entered, for example using a BMI-like height-to-weight relationship.
 
-These reference images are an orientation aid only. They must not be presented as a KFA measurement or as proof that a specific appearance corresponds exactly to a specific body-fat percentage. Exact height/weight ranges and bin sizes remain open.
+The reference library can then be indexed approximately by sex / biological category, the derived body-shape/reference bucket, and KFA level. The current direction is approximately five-percentage-point KFA steps. At runtime, the app selects the closest suitable reference group and only displays it when the user actively opens the examples.
+
+The derived bucket is only a matching heuristic for visual references. It must not be presented as a medical classification or KFA measurement. The reference images themselves are also an orientation aid only and must not imply that a specific appearance maps exactly to a specific KFA. The exact bucket formula, number of buckets, thresholds, KFA range, and image variants remain open.
 
 KFA can additionally provide an informational projection: if current KFA is known and lean mass is assumed constant, the app can estimate the KFA after losing a specified amount of weight. This is a projection, not a measurement.
 
