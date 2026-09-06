@@ -87,6 +87,27 @@ Der aktuell vorgesehene Flow ist:
 
 Die genaue Beschreibung der Screens und des anschließenden Flows steht in [`app-flow.md`](app-flow.md).
 
+## KFA-Hilfe mit Referenzbildern
+
+Der Screen für den aktuellen KFA bleibt standardmäßig minimalistisch und kann übersprungen werden.
+
+Wenn der Nutzer seinen aktuellen KFA nicht kennt, kann er aktiv eine visuelle Hilfe öffnen, z. B. über einen Button wie **„Beispiele anzeigen“**.
+
+Dafür soll eine vorab erzeugte Referenzbibliothek genutzt werden. Die Bilder werden nach den bereits bekannten Nutzerdaten ausgewählt:
+
+- Geschlecht / biologische Kategorie
+- Größenbereich
+- Gewichtsbereich
+- KFA-Stufe
+
+Die aktuelle Richtung ist, KFA-Beispiele ungefähr in **5-Prozentpunkt-Schritten** anzubieten. Die App zeigt nur die zur Person passendste bzw. nächstliegende Referenzgruppe an, nicht die gesamte Bibliothek.
+
+Die Bilder werden **nicht für jeden Nutzer live generiert**, sondern vorher für typische Größen- und Gewichtsklassen erstellt.
+
+Wichtig: Die Referenzbilder dienen nur der groben Selbsteinschätzung. Sie sind keine Messung des tatsächlichen KFA und dürfen keine exakte Zuordnung suggerieren.
+
+Die genauen Größenbereiche, Gewichtsklassen und Abstände innerhalb der Referenzbibliothek sind noch festzulegen.
+
 ## Nach dem ersten Plan
 
 Nach der Planerstellung soll der Nutzer nicht durch weitere Pflichtfragen aufgehalten werden. Zusätzliche Details werden nachgelagert angeboten, z. B. über „Plan verfeinern“, Berechnungsdetails oder Einstellungen.
