@@ -54,6 +54,17 @@ Kurze Einführung und primäre Aktion, z. B. **„Plan erstellen“**.
 
 Der aktuelle KFA ist optional. Der Nutzer kann diesen Screen überspringen.
 
+Wenn der Nutzer seinen KFA nicht kennt, kann er aktiv eine visuelle Hilfsansicht öffnen, z. B. über **„Beispiele anzeigen“**. Die App wählt dafür aus einer vorab generierten Referenzbibliothek Bilder aus, die möglichst gut zu den bereits eingegebenen Daten passen:
+
+- Geschlecht / biologische Kategorie
+- Größenbereich
+- Gewichtsbereich
+- KFA-Stufe
+
+Die aktuelle Richtung ist, KFA-Stufen ungefähr in 5-Prozentpunkt-Schritten abzubilden. Die Referenzbilder werden nicht live für den einzelnen Nutzer generiert, sondern im Voraus für typische Kombinationen erstellt.
+
+Die visuelle Hilfe ist nur eine grobe Orientierung zur Selbsteinschätzung und keine KFA-Messung. Der Nutzer sieht die Bilder nur, wenn er diese Hilfe ausdrücklich öffnet; der normale Screen bleibt minimalistisch.
+
 ### Screen 7 — Alltagstyp
 
 **Parameter:** Alltagsaktivität / Tätigkeit, z. B. überwiegend sitzend
@@ -124,3 +135,5 @@ Die bereits getroffene Produktentscheidung bleibt bestehen: Die manuelle Anpassu
 ## Status
 
 Der grundsätzliche Flow und das Prinzip „ein Parameter pro Eingabe-Screen“ sind festgelegt. Exakte Texte, Controls, visuelle Gestaltung und mögliche Mikro-Interaktionen werden in der Wireframe-/Designphase iteriert.
+
+Für die KFA-Referenzbibliothek sind insbesondere die exakten Größenbereiche, Gewichtsklassen und Bildvarianten noch festzulegen.
