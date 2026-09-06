@@ -32,9 +32,11 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie werden Schätzungen und Unsicherheit dargestellt?
 - Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
 - Müssen Trainingsdauer und/oder Trainingsintensität als zusätzliche bedingte Onboarding-Screens vor der ersten Planberechnung erfasst werden, oder können diese Angaben erst später unter „Plan verfeinern“ ergänzt werden?
-- Welche exakten Größenbereiche und Gewichtsklassen verwenden wir für die vorab generierte KFA-Referenzbibliothek?
-- Wie groß sollen die Abstände zwischen Größen- und Gewichtsklassen sein, damit die Referenzbilder hilfreich bleiben, ohne die Bibliothek unnötig groß zu machen?
+- Wie genau wird aus Größe und Gewicht die interne Körperform-/Referenzkategorie für KFA-Vergleichsbilder abgeleitet?
+- Wie viele Körperform-/Referenzkategorien brauchen wir, damit die Bildbibliothek klein bleibt und die Beispiele trotzdem hilfreich sind?
+- Welche Grenzwerte sollen diese Kategorien haben, und wie vermeiden wir irreführende Zuordnungen bei sehr muskulösen oder anderweitig atypischen Körperzusammensetzungen?
 - Welche KFA-Spanne soll die Referenzbibliothek abdecken und bleiben 5-Prozentpunkt-Schritte als Standard geeignet?
+- Reicht für die erste Version eine Frontansicht pro Referenzkombination oder brauchen wir zusätzliche Bildansichten?
 - Wie stellen wir bei KFA-Referenzbildern klar genug dar, dass Körperform und Fettverteilung individuell variieren und die Bilder nur eine grobe Orientierung sind?
 
 ## Food Tracking
