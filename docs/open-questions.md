@@ -10,7 +10,6 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie wird Sport berücksichtigt?
 - Wie werden unterschiedliche Sportarten und Trainingsintensitäten modelliert?
 - Wie genau soll KFA in die Berechnung einfließen?
-- Wann ist KFA optional, wann erforderlich?
 - Welche Grenzen gelten für das empfohlene Defizit?
 - Welche Methode verwenden wir für die Projektion über längere Zeiträume?
 - Wie berücksichtigen wir metabolische Anpassungen und sinkenden Energiebedarf bei Gewichtsverlust?
@@ -32,6 +31,7 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie stark soll die App Nutzer vor sehr aggressiven Zielen warnen?
 - Wie werden Schätzungen und Unsicherheit dargestellt?
 - Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
+- Müssen Trainingsdauer und/oder Trainingsintensität als zusätzliche bedingte Onboarding-Screens vor der ersten Planberechnung erfasst werden, oder können diese Angaben erst später unter „Plan verfeinern“ ergänzt werden?
 
 ## Food Tracking
 
