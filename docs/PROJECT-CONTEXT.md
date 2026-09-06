@@ -60,6 +60,34 @@ Numbers above are illustrative only. The exact model must be scientifically esta
 ### Training profile
 The onboarding should identify regular strength training or other performance-oriented sport because this affects protein recommendations.
 
+## Current onboarding UX
+
+The onboarding should be short, lightweight, and visually minimal. The current design target is that a normal first-time user can complete it in roughly two minutes.
+
+The decided interaction principle is **one input parameter per screen**. Relevant screens may expose a small optional explanation describing why the input is requested and what it can influence. That explanation is hidden by default so the normal screen remains uncluttered.
+
+Current intended sequence:
+
+1. start
+2. sex / biological category
+3. age
+4. height
+5. current weight
+6. optional current KFA
+7. everyday activity type
+8. average daily steps
+9. sport/training frequency
+10. training type when relevant
+11. target weight
+12. optional target KFA when current KFA is known
+13. timeframe
+14. tracking mode
+15. plan result
+
+After the first plan is shown, additional complexity should be optional and moved into calculation details, settings, or a "refine plan" area rather than extending the mandatory onboarding.
+
+See `app-flow.md` and `onboarding.md` for the detailed flow.
+
 ## KFA rules
 
 Current KFA is optional.
