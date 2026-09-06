@@ -7,6 +7,7 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [Produktvision](product-vision.md)
 - [MVP-Anforderungen](mvp-requirements.md)
 - [Onboarding](onboarding.md)
+- [App Flow](app-flow.md)
 - [Kalorienberechnung](calorie-calculation.md)
 - [Ernährung & Makronährstoffe](nutrition-and-macros.md)
 - [Food Tracking](food-tracking.md)
