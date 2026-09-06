@@ -93,20 +93,21 @@ Der Screen für den aktuellen KFA bleibt standardmäßig minimalistisch und kann
 
 Wenn der Nutzer seinen aktuellen KFA nicht kennt, kann er aktiv eine visuelle Hilfe öffnen, z. B. über einen Button wie **„Beispiele anzeigen“**.
 
-Dafür soll eine vorab erzeugte Referenzbibliothek genutzt werden. Die Bilder werden nach den bereits bekannten Nutzerdaten ausgewählt:
+Dafür soll eine vorab erzeugte Referenzbibliothek genutzt werden. Die App benötigt dafür keine zusätzliche Frage zum Körperbau. Stattdessen wird intern aus den bereits eingegebenen Werten Größe und Gewicht eine grobe Körperform-/Referenzkategorie abgeleitet, beispielsweise über eine BMI-ähnliche Größen-Gewichts-Relation.
+
+Die Bilder werden anschließend ungefähr nach folgenden Merkmalen ausgewählt:
 
 - Geschlecht / biologische Kategorie
-- Größenbereich
-- Gewichtsbereich
+- intern abgeleitete Körperform-/Referenzkategorie
 - KFA-Stufe
 
 Die aktuelle Richtung ist, KFA-Beispiele ungefähr in **5-Prozentpunkt-Schritten** anzubieten. Die App zeigt nur die zur Person passendste bzw. nächstliegende Referenzgruppe an, nicht die gesamte Bibliothek.
 
-Die Bilder werden **nicht für jeden Nutzer live generiert**, sondern vorher für typische Größen- und Gewichtsklassen erstellt.
+Die Bilder werden **nicht für jeden Nutzer live generiert**, sondern vorher für eine überschaubare Zahl typischer Referenzkategorien erstellt. Dadurch muss nicht jede Kombination aus Größe und Gewicht als eigenes Bild vorliegen.
 
-Wichtig: Die Referenzbilder dienen nur der groben Selbsteinschätzung. Sie sind keine Messung des tatsächlichen KFA und dürfen keine exakte Zuordnung suggerieren.
+Wichtig: Die intern abgeleitete Kategorie dient ausschließlich der Auswahl möglichst passender Vergleichsbilder. Sie ist keine medizinische Einstufung und keine KFA-Messung. Auch die Referenzbilder selbst dienen nur der groben Selbsteinschätzung und dürfen keine exakte Zuordnung suggerieren.
 
-Die genauen Größenbereiche, Gewichtsklassen und Abstände innerhalb der Referenzbibliothek sind noch festzulegen.
+Die genaue Berechnung der Referenzkategorie, die Anzahl der Kategorien und deren Grenzwerte sind noch festzulegen.
 
 ## Nach dem ersten Plan
 
