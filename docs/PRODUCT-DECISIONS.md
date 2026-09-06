@@ -82,3 +82,54 @@ AI may interpret natural-language food input, but fundamental calorie and goal c
 **Status:** decided direction
 
 Future image-based KFA visualizations are intended to help users understand possible target physiques, not to measure body-fat percentage accurately.
+
+## D-016 — Onboarding should be short
+**Status:** decided
+
+The initial onboarding should not feel like a long questionnaire. The current UX target is that a normal first-time user can complete it in roughly two minutes.
+
+This is a design target rather than a hard timing requirement; completeness of necessary inputs still takes priority.
+
+## D-017 — One input parameter per onboarding screen
+**Status:** decided
+
+The onboarding should use one input parameter per screen rather than combining many fields on one page. The goal is to keep every screen visually simple and quick to complete.
+
+Conditional screens are allowed, for example training type only when sport/training is relevant and target KFA only when current KFA is available.
+
+## D-018 — Explanations are optional and hidden by default
+**Status:** decided
+
+Each relevant onboarding input should be able to expose a short explanation of why the value is requested and what it can influence.
+
+The explanation should be hidden by default so the normal screen remains minimalistic and uncluttered.
+
+## D-019 — Current onboarding sequence
+**Status:** decided direction
+
+The current intended sequence is:
+
+1. start
+2. sex / biological category
+3. age
+4. height
+5. current weight
+6. optional current KFA
+7. everyday activity type
+8. average daily steps
+9. sport/training frequency
+10. training type when relevant
+11. target weight
+12. optional target KFA when current KFA is known
+13. timeframe
+14. tracking mode
+15. plan result
+
+Exact copy, controls, visual treatment, and micro-interactions may change during wireframing.
+
+## D-020 — Show the first plan before advanced refinement
+**Status:** decided
+
+Once the required onboarding inputs are complete, the app should show the user's first plan rather than continuing with additional mandatory detail screens.
+
+Further complexity should be offered after plan creation through calculation details, settings, or a "refine plan" area. This can include deeper explanations, additional activity/training details, manual calorie-target adjustment, macro-target adjustment, and later personalization options.
