@@ -96,6 +96,10 @@ Target KFA is also optional, but it should only be available if current KFA is k
 
 If current KFA is available, it should be allowed to influence the energy-requirement estimate because two people with the same height and weight can have different body composition and therefore different estimated energy requirements.
 
+To make current-KFA self-estimation easier, the KFA screen may offer an optional visual reference view. The app should use a pre-generated library segmented by sex / biological category, height range, weight range, and KFA level. The current direction is approximately five-percentage-point KFA steps. At runtime, the app selects the closest suitable reference group from the user's previously entered data and only displays it when the user actively opens the examples.
+
+These reference images are an orientation aid only. They must not be presented as a KFA measurement or as proof that a specific appearance corresponds exactly to a specific body-fat percentage. Exact height/weight ranges and bin sizes remain open.
+
 KFA can additionally provide an informational projection: if current KFA is known and lean mass is assumed constant, the app can estimate the KFA after losing a specified amount of weight. This is a projection, not a measurement.
 
 ## Weight-loss calculation concept
