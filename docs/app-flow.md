@@ -54,16 +54,17 @@ Kurze Einführung und primäre Aktion, z. B. **„Plan erstellen“**.
 
 Der aktuelle KFA ist optional. Der Nutzer kann diesen Screen überspringen.
 
-Wenn der Nutzer seinen KFA nicht kennt, kann er aktiv eine visuelle Hilfsansicht öffnen, z. B. über **„Beispiele anzeigen“**. Die App wählt dafür aus einer vorab generierten Referenzbibliothek Bilder aus, die möglichst gut zu den bereits eingegebenen Daten passen:
+Wenn der Nutzer seinen KFA nicht kennt, kann er aktiv eine visuelle Hilfsansicht öffnen, z. B. über **„Beispiele anzeigen“**. Die App wählt dafür aus einer vorab generierten Referenzbibliothek Bilder aus, die möglichst gut zu den bereits eingegebenen Daten passen.
+
+Damit dafür keine zusätzliche Körperbau-Frage nötig ist, leitet die App intern aus Größe und Gewicht eine grobe Körperform-/Referenzkategorie ab, beispielsweise über eine BMI-ähnliche Größen-Gewichts-Relation. Die Referenzbibliothek kann dadurch ungefähr nach folgenden Merkmalen organisiert werden:
 
 - Geschlecht / biologische Kategorie
-- Größenbereich
-- Gewichtsbereich
+- abgeleitete Körperform-/Referenzkategorie
 - KFA-Stufe
 
-Die aktuelle Richtung ist, KFA-Stufen ungefähr in 5-Prozentpunkt-Schritten abzubilden. Die Referenzbilder werden nicht live für den einzelnen Nutzer generiert, sondern im Voraus für typische Kombinationen erstellt.
+Die aktuelle Richtung ist, KFA-Stufen ungefähr in 5-Prozentpunkt-Schritten abzubilden. Die Referenzbilder werden nicht live für den einzelnen Nutzer generiert, sondern im Voraus für eine begrenzte Anzahl typischer Kategorien erstellt. Ein vollständiges Raster für jede Größen- und Gewichtskombination ist damit nicht erforderlich.
 
-Die visuelle Hilfe ist nur eine grobe Orientierung zur Selbsteinschätzung und keine KFA-Messung. Der Nutzer sieht die Bilder nur, wenn er diese Hilfe ausdrücklich öffnet; der normale Screen bleibt minimalistisch.
+Die intern abgeleitete Referenzkategorie dient ausschließlich der Auswahl geeigneter Vergleichsbilder und ist keine medizinische Klassifikation. Die visuelle Hilfe ist insgesamt nur eine grobe Orientierung zur Selbsteinschätzung und keine KFA-Messung. Der Nutzer sieht die Bilder nur, wenn er diese Hilfe ausdrücklich öffnet; der normale Screen bleibt minimalistisch.
 
 ### Screen 7 — Alltagstyp
 
@@ -136,4 +137,4 @@ Die bereits getroffene Produktentscheidung bleibt bestehen: Die manuelle Anpassu
 
 Der grundsätzliche Flow und das Prinzip „ein Parameter pro Eingabe-Screen“ sind festgelegt. Exakte Texte, Controls, visuelle Gestaltung und mögliche Mikro-Interaktionen werden in der Wireframe-/Designphase iteriert.
 
-Für die KFA-Referenzbibliothek sind insbesondere die exakten Größenbereiche, Gewichtsklassen und Bildvarianten noch festzulegen.
+Für die KFA-Referenzbibliothek sind insbesondere die genaue Ableitung der Körperform-/Referenzkategorien, die Anzahl der Kategorien, deren Grenzwerte, die KFA-Spanne und die benötigten Bildvarianten noch festzulegen.
