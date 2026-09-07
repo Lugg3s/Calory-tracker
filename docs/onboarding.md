@@ -52,6 +52,20 @@ Komplexere Erklärungen, Formeln und Details werden nach der initialen Dateneing
 
 **Regel:** Ein Ziel-KFA wird nur angeboten, wenn ein aktueller KFA angegeben wurde.
 
+### Wochenbudget / Cheat Day
+
+Im Onboarding soll zusätzlich ein eigener Screen für einen geplanten **Cheat Day** bzw. einen Tag mit höherem Kalorienbudget vorgesehen werden.
+
+Dieser Punkt ist inhaltlich noch offen. Festzulegen sind insbesondere:
+
+- ob der Nutzer einen solchen Tag nutzen möchte;
+- welcher Wochentag gewählt wird;
+- wie hoch das zusätzliche Budget an diesem Tag sein darf;
+- wie die übrigen Tage angepasst werden, damit das geplante Wochenbudget und durchschnittliche Defizit erhalten bleiben;
+- ob im Produkt eine neutralere Bezeichnung als „Cheat Day“ verwendet wird.
+
+Die genaue UX und Berechnungslogik sind noch nicht entschieden.
+
 ### Trainings-/Ernährungsprofil
 
 Der Nutzer soll angeben können, ob er beispielsweise regelmäßig Kraftsport bzw. Leistungssport betreibt. Diese Information beeinflusst insbesondere die Proteinempfehlung.
@@ -82,8 +96,9 @@ Der aktuell vorgesehene Flow ist:
 11. Zielgewicht
 12. Ziel-KFA, nur wenn aktueller KFA vorhanden; optional
 13. gewünschter Zeitraum
-14. Tracking-Modus
-15. Plan-Ergebnis
+14. Cheat Day / höheres Tagesbudget — Details noch offen
+15. Tracking-Modus
+16. Plan-Ergebnis
 
 Die genaue Beschreibung der Screens und des anschließenden Flows steht in [`app-flow.md`](app-flow.md).
 
