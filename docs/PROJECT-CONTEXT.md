@@ -81,8 +81,11 @@ Current intended sequence:
 11. target weight
 12. optional target KFA when current KFA is known
 13. timeframe
-14. tracking mode
-15. plan result
+14. planned cheat day / higher-calorie day — details still open
+15. tracking mode
+16. plan result
+
+The planned cheat-day screen should allow a higher-calorie day to be incorporated into a **weekly calorie budget** rather than simply adding calories on top of the plan. The exact UX, terminology, allowed increase, redistribution across the other days, and safety limits are still unresolved and belong in `open-questions.md`.
 
 After the first plan is shown, additional complexity should be optional and moved into calculation details, settings, or a "refine plan" area rather than extending the mandatory onboarding.
 
@@ -112,6 +115,9 @@ KFA can additionally provide an informational projection: if current KFA is know
 4. Spread that deficit over the requested timeframe.
 5. Subtract the average daily deficit from estimated maintenance expenditure.
 6. Present the resulting calorie target and all calculation steps.
+7. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
+
+The exact weekly-budget and cheat-day redistribution logic is still open and must be validated before implementation.
 
 Approximately 7,000–7,700 kcal per kg was discussed as a rough model assumption. This is **not a final product constant**. Scientific validation is required, and real weight change is not a simple linear conversion of calories into fat mass.
 
@@ -205,6 +211,7 @@ This is visualization, not reliable KFA measurement.
 - deficit calculation
 - activity/exercise contribution
 - calorie target
+- planned cheat-day / higher-calorie-day screen with weekly-budget handling, exact logic still open
 - optional macro mode
 - validated macro targets
 - editable calorie target in settings
