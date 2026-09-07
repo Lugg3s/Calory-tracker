@@ -13,6 +13,9 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Welche Grenzen gelten für das empfohlene Defizit?
 - Welche Methode verwenden wir für die Projektion über längere Zeiträume?
 - Wie berücksichtigen wir metabolische Anpassungen und sinkenden Energiebedarf bei Gewichtsverlust?
+- Wie wird aus dem durchschnittlichen täglichen Kalorienziel ein Wochenbudget abgeleitet?
+- Wie wird ein geplanter Cheat Day in das Wochenbudget eingerechnet, ohne das geplante durchschnittliche Defizit über die Woche unbeabsichtigt zu verändern?
+- Wie werden die Kalorien auf Cheat Day und übrige Wochentage verteilt, und welche Grenzen gelten für diese Umverteilung?
 
 ## Wissenschaft
 
@@ -32,6 +35,9 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie werden Schätzungen und Unsicherheit dargestellt?
 - Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
 - Müssen Trainingsdauer und/oder Trainingsintensität als zusätzliche bedingte Onboarding-Screens vor der ersten Planberechnung erfasst werden, oder können diese Angaben erst später unter „Plan verfeinern“ ergänzt werden?
+- Wie genau soll der geplante Cheat-Day-Screen im Onboarding aussehen?
+- Ist ein Cheat Day optional, welcher Wochentag wird gewählt und wie viel zusätzliches Kalorienbudget kann der Nutzer dafür einplanen?
+- Soll die App statt des Begriffs „Cheat Day“ eventuell eine neutralere Bezeichnung wie „flexibler Tag“ oder „höheres Tagesbudget“ verwenden?
 - Wie genau wird aus Größe und Gewicht die interne Körperform-/Referenzkategorie für KFA-Vergleichsbilder abgeleitet?
 - Wie viele Körperform-/Referenzkategorien brauchen wir, damit die Bildbibliothek klein bleibt und die Beispiele trotzdem hilfreich sind?
 - Welche Grenzwerte sollen diese Kategorien haben, und wie vermeiden wir irreführende Zuordnungen bei sehr muskulösen oder anderweitig atypischen Körperzusammensetzungen?
