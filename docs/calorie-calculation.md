@@ -18,6 +18,7 @@ Grundsätzlich soll der Rechenweg aus mehreren transparenten Komponenten bestehe
 6. Bestimmung des für das Ziel erforderlichen Gesamtdefizits
 7. Verteilung des Defizits auf den gewünschten Zeitraum
 8. daraus resultierendes durchschnittliches tägliches Kalorienziel
+9. optional Ableitung eines Wochenbudgets und Verteilung dieses Budgets auf unterschiedlich hohe Tagesziele, z. B. für einen geplanten Cheat Day
 
 Die konkrete Formel für den Grundumsatz, die TDEE-Methode und die Aktivitätsparameter sind noch festzulegen und wissenschaftlich zu recherchieren.
 
@@ -41,6 +42,26 @@ Grundumsatz                         1.650 kcal
 Die Zahlen sind ausschließlich illustrative Beispiele.
 
 Der Nutzer soll beispielsweise erkennen können, dass eine Änderung von 5.000 auf 6.000 durchschnittliche Schritte den geschätzten Energieverbrauch verändert. Ebenso soll die App zeigen können, welchen ungefähren zusätzlichen Energieverbrauch regelmäßiges Krafttraining oder Joggen beiträgt.
+
+## Wochenbudget und geplanter Cheat Day
+
+Zusätzlich zum durchschnittlichen Tagesziel soll die App einen geplanten Cheat Day bzw. einen Tag mit höherem Kalorienbudget über ein **Wochenbudget** abbilden können.
+
+Grundidee:
+
+- Ausgangspunkt bleibt das durchschnittliche Kalorienziel, das sich aus Erhaltungsbedarf und geplantem Defizit ergibt.
+- Daraus kann ein Wochenbudget abgeleitet werden.
+- Wenn an einem ausgewählten Tag ein höheres Budget vorgesehen ist, müssen die übrigen Tage entsprechend angepasst werden, damit das geplante Wochenbudget und damit das durchschnittliche Defizit nicht unbeabsichtigt verändert werden.
+
+Die konkrete Verteilungslogik ist noch offen. Insbesondere müssen festgelegt werden:
+
+- wie hoch der Cheat-Day-Aufschlag maximal sein darf;
+- wie die übrigen Tagesziele reduziert werden;
+- welche Mindest- bzw. Sicherheitsgrenzen für einzelne Tage gelten;
+- ob das Wochenbudget immer exakt eingehalten werden soll oder eine gewisse Flexibilität erlaubt wird;
+- wie die Verteilung transparent und verständlich dargestellt wird.
+
+Der Begriff „Cheat Day“ ist vorläufig. Für die finale UX kann eine neutralere Bezeichnung wie „flexibler Tag“ oder „höheres Tagesbudget“ sinnvoller sein.
 
 ## Erklärung der Gewichtsabnahme
 
