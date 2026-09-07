@@ -98,7 +98,23 @@ Dieser Screen wird nur angeboten, wenn der Nutzer zuvor einen aktuellen KFA ange
 
 **Parameter:** gewünschter Zeitraum bis zum Ziel
 
-### Screen 14 — Tracking-Modus
+### Screen 14 — Cheat Day / höheres Tagesbudget
+
+**Parameter:** geplante Verteilung des Kalorienbudgets über die Woche
+
+Für das Onboarding ist ein eigener Screen vorgesehen, über den der Nutzer einen geplanten Cheat Day bzw. einen Tag mit höherem Kalorienbudget berücksichtigen kann.
+
+Die Funktion ist als offener Produktpunkt dokumentiert. Noch festzulegen sind insbesondere:
+
+- ob der Screen nur eine Ja/Nein-Auswahl oder direkt einen Wochentag enthält;
+- ob und wie der Nutzer die Höhe des zusätzlichen Tagesbudgets festlegt;
+- wie viele Kalorien an den übrigen Tagen abgezogen werden;
+- welche Grenzen für eine sichere und sinnvolle Umverteilung gelten;
+- ob im finalen Produkt eine neutralere Bezeichnung als „Cheat Day“ verwendet wird.
+
+Die zentrale Anforderung ist, dass ein höheres Budget an einem Tag **innerhalb des Wochenbudgets berücksichtigt** wird. Der Cheat Day darf also nicht einfach zusätzliche Kalorien oberhalb des geplanten Wochenbudgets hinzufügen, wenn dadurch das vorgesehene durchschnittliche Defizit verändert würde.
+
+### Screen 15 — Tracking-Modus
 
 **Parameter:** Tracking-Präferenz
 
@@ -107,13 +123,13 @@ Auswahl:
 - nur Kalorien
 - Kalorien + Makronährstoffe
 
-### Screen 15 — Plan-Ergebnis
+### Screen 16 — Plan-Ergebnis
 
 **Parameter:** keiner
 
 Nach Abschluss der Eingaben wird direkt der erste Plan gezeigt. Die Ergebnisansicht soll mindestens enthalten:
 
-- vorgeschlagenes Kalorienziel
+- vorgeschlagenes Kalorienziel bzw. die geplante Wochenverteilung
 - geschätzten Erhaltungsbedarf
 - geplantes durchschnittliches Defizit
 - kurze Einschätzung des Plans
@@ -136,5 +152,7 @@ Die bereits getroffene Produktentscheidung bleibt bestehen: Die manuelle Anpassu
 ## Status
 
 Der grundsätzliche Flow und das Prinzip „ein Parameter pro Eingabe-Screen“ sind festgelegt. Exakte Texte, Controls, visuelle Gestaltung und mögliche Mikro-Interaktionen werden in der Wireframe-/Designphase iteriert.
+
+Der Cheat-Day-/Wochenbudget-Screen ist als notwendiger zusätzlicher Onboarding-Punkt aufgenommen, seine konkrete UX und Berechnungslogik sind jedoch noch offen.
 
 Für die KFA-Referenzbibliothek sind insbesondere die genaue Ableitung der Körperform-/Referenzkategorien, die Anzahl der Kategorien, deren Grenzwerte, die KFA-Spanne und die benötigten Bildvarianten noch festzulegen.
