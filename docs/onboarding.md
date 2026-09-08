@@ -46,11 +46,22 @@ Komplexere Erklärungen, Formeln und Details werden nach der initialen Dateneing
 
 ### Ziel
 
+Der Nutzer legt einen Zeitraum und ein primäres Körperziel fest.
+
+Ohne aktuellen KFA:
+
 - Zielgewicht
-- gewünschter Zeitraum
-- optional Ziel-KFA
+
+Mit aktuellem KFA kann der Nutzer wählen zwischen:
+
+- Zielgewicht
+- Ziel-KFA
+
+Wählt der Nutzer Ziel-KFA, soll dieser auch anhand passender Referenzbilder ausgewählt werden können. Die App leitet daraus ein ungefähres Zielgewicht und die dafür erforderliche Gewichtsabnahme ab.
 
 **Regel:** Ein Ziel-KFA wird nur angeboten, wenn ein aktueller KFA angegeben wurde.
+
+Die Ableitung des Zielgewichts aus dem Ziel-KFA ist eine Modellrechnung unter der Annahme möglichst konstanter fettfreier Masse und keine exakte Vorhersage.
 
 ### Wochenbudget / Cheat Day
 
@@ -93,12 +104,14 @@ Der aktuell vorgesehene Flow ist:
 8. durchschnittliche Schritte
 9. Sporthäufigkeit
 10. Trainingsart, nur wenn Sport/Training angegeben wurde
-11. Zielgewicht
-12. Ziel-KFA, nur wenn aktueller KFA vorhanden; optional
+11. Zielart: Zielgewicht oder Ziel-KFA; die Auswahl wird nur benötigt, wenn aktueller KFA vorhanden ist
+12. Zielwert: Zielgewicht oder Ziel-KFA, abhängig von der Zielart
 13. gewünschter Zeitraum
 14. Cheat Day / höheres Tagesbudget — Details noch offen
 15. Tracking-Modus
 16. Plan-Ergebnis
+
+Wenn kein aktueller KFA angegeben wurde, entfällt die Auswahl der Zielart und der Nutzer gibt direkt ein Zielgewicht an.
 
 Die genaue Beschreibung der Screens und des anschließenden Flows steht in [`app-flow.md`](app-flow.md).
 
@@ -123,6 +136,20 @@ Die Bilder werden **nicht für jeden Nutzer live generiert**, sondern vorher fü
 Wichtig: Die intern abgeleitete Kategorie dient ausschließlich der Auswahl möglichst passender Vergleichsbilder. Sie ist keine medizinische Einstufung und keine KFA-Messung. Auch die Referenzbilder selbst dienen nur der groben Selbsteinschätzung und dürfen keine exakte Zuordnung suggerieren.
 
 Die genaue Berechnung der Referenzkategorie, die Anzahl der Kategorien und deren Grenzwerte sind noch festzulegen.
+
+## Ziel-KFA anhand von Bildern
+
+Wenn ein aktueller KFA angegeben wurde, kann dieselbe Referenzlogik zusätzlich für die Auswahl eines **Ziel-KFA** verwendet werden.
+
+Der Nutzer kann dann passende KFA-Beispiele ansehen und die gewünschte Zielstufe auswählen. Diese Auswahl ersetzt in diesem Zielmodus die direkte Eingabe eines Zielgewichts.
+
+Aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA berechnet die App anschließend näherungsweise:
+
+- die aktuelle fettfreie Masse;
+- das zum Ziel-KFA passende Modell-Zielgewicht;
+- die daraus resultierende notwendige Gewichtsabnahme in Kilogramm.
+
+Die Berechnung beruht zunächst auf der Annahme konstanter fettfreier Masse. Sowohl die Bildauswahl als auch die daraus abgeleitete Gewichtsangabe müssen als Schätzung gekennzeichnet werden.
 
 ## Nach dem ersten Plan
 
