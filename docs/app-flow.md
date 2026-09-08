@@ -84,15 +84,40 @@ Die intern abgeleitete Referenzkategorie dient ausschließlich der Auswahl geeig
 
 Dieser Screen wird nur gezeigt, wenn der Nutzer regelmäßigen Sport bzw. Training angegeben hat. Die genaue Granularität der auswählbaren Trainingsarten wird später im UX- und Berechnungsmodell festgelegt.
 
-### Screen 11 — Zielgewicht
+### Screen 11 — Zielart
 
-**Parameter:** Zielgewicht
+**Parameter:** primäre Zielart
 
-### Screen 12 — Ziel-KFA
+Wenn ein aktueller KFA vorhanden ist, kann der Nutzer wählen:
 
-**Parameter:** Ziel-KFA
+- **Zielgewicht**
+- **Ziel-KFA**
 
-Dieser Screen wird nur angeboten, wenn der Nutzer zuvor einen aktuellen KFA angegeben hat. Ziel-KFA bleibt optional.
+Wenn kein aktueller KFA angegeben wurde, entfällt diese Auswahl und die App verwendet automatisch Zielgewicht als Zielart.
+
+### Screen 12 — Zielwert
+
+**Parameter:** Zielgewicht oder Ziel-KFA, abhängig von der gewählten Zielart
+
+#### Variante A — Zielgewicht
+
+Der Nutzer gibt sein gewünschtes Zielgewicht an.
+
+#### Variante B — Ziel-KFA
+
+Diese Variante ist nur verfügbar, wenn ein aktueller KFA vorhanden ist.
+
+Der Nutzer soll den Ziel-KFA auch anhand visueller Referenzbilder auswählen können. Die App zeigt dafür passende KFA-Stufen aus der vorhandenen Referenzbibliothek. Die Bilder dienen nur als Orientierung und dürfen keine exakte Körperfettmessung suggerieren.
+
+Nach Auswahl des Ziel-KFA berechnet die App näherungsweise das dazugehörige Zielgewicht und die erforderliche Gewichtsabnahme. Der aktuelle Modellansatz ist:
+
+```text
+fettfreie Masse = aktuelles Gewicht × (1 - aktueller KFA)
+Zielgewicht = fettfreie Masse ÷ (1 - Ziel-KFA)
+notwendige Gewichtsabnahme = aktuelles Gewicht - Zielgewicht
+```
+
+Diese Berechnung setzt konstante fettfreie Masse voraus und ist daher ausdrücklich eine Modellschätzung.
 
 ### Screen 13 — Zeitraum
 
@@ -132,6 +157,8 @@ Nach Abschluss der Eingaben wird direkt der erste Plan gezeigt. Die Ergebnisansi
 - vorgeschlagenes Kalorienziel bzw. die geplante Wochenverteilung
 - geschätzten Erhaltungsbedarf
 - geplantes durchschnittliches Defizit
+- Zielgewicht; bei Ziel-KFA entweder direkt eingegeben oder von der App abgeleitet
+- bei Ziel-KFA: gewählten Ziel-KFA und geschätzte notwendige Gewichtsabnahme
 - kurze Einschätzung des Plans
 - Zugang zur detaillierten, nachvollziehbaren Berechnung
 
@@ -156,3 +183,5 @@ Der grundsätzliche Flow und das Prinzip „ein Parameter pro Eingabe-Screen“ 
 Der Cheat-Day-/Wochenbudget-Screen ist als notwendiger zusätzlicher Onboarding-Punkt aufgenommen, seine konkrete UX und Berechnungslogik sind jedoch noch offen.
 
 Für die KFA-Referenzbibliothek sind insbesondere die genaue Ableitung der Körperform-/Referenzkategorien, die Anzahl der Kategorien, deren Grenzwerte, die KFA-Spanne und die benötigten Bildvarianten noch festzulegen.
+
+Die Ziel-KFA-Variante als alternative primäre Zielart ist beschlossen. Die genaue Darstellung der Zielbilder und die wissenschaftlich sinnvolle Behandlung möglicher Änderungen der fettfreien Masse bleiben noch zu präzisieren.
