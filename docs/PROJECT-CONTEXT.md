@@ -15,7 +15,7 @@ The product should answer:
 - How many calories do I approximately need to maintain my weight?
 - Why is that the estimate?
 - How do my everyday activity, steps, and training affect it?
-- What deficit is required for my target weight and timeframe?
+- What deficit is required for my target weight or target KFA and timeframe?
 - What can I approximately eat today without perfect calorie tracking?
 
 ## Core UX: transparent calculation
@@ -53,9 +53,8 @@ Numbers above are illustrative only. The exact model must be scientifically esta
 - training frequency and relevant duration/intensity
 
 ### Goal
-- target weight
+- target weight, or when current KFA is known: target KFA
 - timeframe
-- optional target KFA
 
 ### Training profile
 The onboarding should identify regular strength training or other performance-oriented sport because this affects protein recommendations.
@@ -78,12 +77,14 @@ Current intended sequence:
 8. average daily steps
 9. sport/training frequency
 10. training type when relevant
-11. target weight
-12. optional target KFA when current KFA is known
+11. goal type when current KFA is known: target weight or target KFA
+12. goal value: target weight or target KFA
 13. timeframe
 14. planned cheat day / higher-calorie day — details still open
 15. tracking mode
 16. plan result
+
+If no current KFA was entered, the KFA goal option is unavailable and the user proceeds with target weight.
 
 The planned cheat-day screen should allow a higher-calorie day to be incorporated into a **weekly calorie budget** rather than simply adding calories on top of the plan. The exact UX, terminology, allowed increase, redistribution across the other days, and safety limits are still unresolved and belong in `open-questions.md`.
 
@@ -95,7 +96,7 @@ See `app-flow.md` and `onboarding.md` for the detailed flow.
 
 Current KFA is optional.
 
-Target KFA is also optional, but it should only be available if current KFA is known. The basic weight-loss plan must not require KFA.
+Target KFA is also optional in the sense that the user does not need KFA to use the app. However, **target KFA can only be selected when current KFA is known**.
 
 If current KFA is available, it should be allowed to influence the energy-requirement estimate because two people with the same height and weight can have different body composition and therefore different estimated energy requirements.
 
@@ -105,17 +106,34 @@ The reference library can then be indexed approximately by sex / biological cate
 
 The derived bucket is only a matching heuristic for visual references. It must not be presented as a medical classification or KFA measurement. The reference images themselves are also an orientation aid only and must not imply that a specific appearance maps exactly to a specific KFA. The exact bucket formula, number of buckets, thresholds, KFA range, and image variants remain open.
 
-KFA can additionally provide an informational projection: if current KFA is known and lean mass is assumed constant, the app can estimate the KFA after losing a specified amount of weight. This is a projection, not a measurement.
+## Target KFA as an alternative primary goal
+
+When current KFA is known, the user may choose **target KFA instead of target weight** as the primary goal.
+
+The target KFA should be selectable using visual reference images so the user can choose a desired body-fat level by appearance rather than needing an exact percentage in mind.
+
+The app then derives an approximate target weight and required weight loss under an explicit constant-fat-free-mass assumption:
+
+```text
+fat-free mass = current weight × (1 - current KFA)
+target weight = fat-free mass ÷ (1 - target KFA)
+required weight loss = current weight - target weight
+```
+
+This is a model estimate, not a prediction. Actual fat-free mass can change during weight loss, and visual KFA references are approximate.
+
+The reverse projection also remains useful: if current KFA is known and the user chooses target weight, the app can estimate the resulting KFA under the same constant-fat-free-mass assumption.
 
 ## Weight-loss calculation concept
 
 1. Estimate maintenance energy expenditure.
-2. Calculate the difference between current and target weight.
-3. Translate the intended loss into an approximate total energy deficit using a scientifically justified model assumption.
-4. Spread that deficit over the requested timeframe.
-5. Subtract the average daily deficit from estimated maintenance expenditure.
-6. Present the resulting calorie target and all calculation steps.
-7. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
+2. Determine target weight directly from the user or derive it from target KFA when that goal mode is selected.
+3. Calculate the difference between current and target weight.
+4. Translate the intended loss into an approximate total energy deficit using a scientifically justified model assumption.
+5. Spread that deficit over the requested timeframe.
+6. Subtract the average daily deficit from estimated maintenance expenditure.
+7. Present the resulting calorie target and all calculation steps.
+8. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
 
 The exact weekly-budget and cheat-day redistribution logic is still open and must be validated before implementation.
 
@@ -203,9 +221,11 @@ This is visualization, not reliable KFA measurement.
 - onboarding
 - body/activity data
 - target weight
+- target KFA as an alternative primary goal only when current KFA is known
+- target-KFA selection via reference images
+- derived target weight / required weight loss for target-KFA mode
 - timeframe
 - optional current KFA
-- target KFA only when current KFA is known
 - energy requirement calculation
 - transparent calculation breakdown
 - deficit calculation
@@ -220,7 +240,7 @@ This is visualization, not reliable KFA measurement.
 - LLM
 - voice food logging
 - AI meal alternatives
-- AI-generated body/KFA visualization
+- AI-generated body/KFA visualization generated uniquely for each user
 
 ## Development plan discussed
 
