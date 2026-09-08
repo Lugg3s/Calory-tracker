@@ -119,11 +119,14 @@ The current intended sequence is:
 8. average daily steps
 9. sport/training frequency
 10. training type when relevant
-11. target weight
-12. optional target KFA when current KFA is known
+11. goal type when current KFA is known: target weight or target KFA
+12. goal value: target weight or target KFA, depending on the selected goal type
 13. timeframe
-14. tracking mode
-15. plan result
+14. planned cheat day / higher-calorie day — details still open
+15. tracking mode
+16. plan result
+
+If no current KFA was entered, the KFA goal option is unavailable and the user proceeds directly with target weight.
 
 Exact copy, controls, visual treatment, and micro-interactions may change during wireframing.
 
@@ -159,3 +162,22 @@ Instead, the app should derive a coarse internal body-shape/reference bucket fro
 This reduces the required number of pre-generated reference images compared with storing a full grid for every height and weight combination.
 
 The derived bucket is only an internal matching heuristic for choosing visual examples. It must not be presented as a KFA measurement or as a medical/health classification. The exact formula, number of buckets, and bucket thresholds remain open.
+
+## D-023 — Target KFA can replace target weight as the primary goal
+**Status:** decided direction
+
+When the user has entered a current KFA, they may choose a **target KFA instead of a target weight** as their primary goal.
+
+The target KFA should be selectable with visual reference images so the user can choose a desired body-fat level by appearance rather than needing to know a percentage precisely.
+
+The app then derives the approximate target weight and required kilograms of weight loss from current weight, current KFA, and target KFA. The initial model direction is to assume constant fat-free mass:
+
+```text
+fat-free mass = current weight × (1 - current KFA)
+target weight = fat-free mass ÷ (1 - target KFA)
+required weight loss = current weight - target weight
+```
+
+This is a model estimate, not a prediction of actual body composition. The app must communicate that lean mass may change during weight loss and that KFA reference images are only approximate orientation aids.
+
+If the user did not provide a current KFA, this goal mode is unavailable and target weight remains the required goal input.
