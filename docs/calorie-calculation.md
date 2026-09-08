@@ -15,10 +15,11 @@ Grundsätzlich soll der Rechenweg aus mehreren transparenten Komponenten bestehe
 3. Schritte
 4. geplantes Training / Sport
 5. Summe = geschätzter Erhaltungsbedarf
-6. Bestimmung des für das Ziel erforderlichen Gesamtdefizits
-7. Verteilung des Defizits auf den gewünschten Zeitraum
-8. daraus resultierendes durchschnittliches tägliches Kalorienziel
-9. optional Ableitung eines Wochenbudgets und Verteilung dieses Budgets auf unterschiedlich hohe Tagesziele, z. B. für einen geplanten Cheat Day
+6. Bestimmung des Zielgewichts direkt aus Nutzereingabe oder, bei Ziel-KFA, modellhafte Ableitung eines Zielgewichts
+7. Bestimmung des für das Ziel erforderlichen Gesamtdefizits
+8. Verteilung des Defizits auf den gewünschten Zeitraum
+9. daraus resultierendes durchschnittliches tägliches Kalorienziel
+10. optional Ableitung eines Wochenbudgets und Verteilung dieses Budgets auf unterschiedlich hohe Tagesziele, z. B. für einen geplanten Cheat Day
 
 Die konkrete Formel für den Grundumsatz, die TDEE-Methode und die Aktivitätsparameter sind noch festzulegen und wissenschaftlich zu recherchieren.
 
@@ -108,11 +109,9 @@ Wenn der Nutzer einen aktuellen KFA angibt, soll dieser in die Berechnung des En
 
 Die konkrete mathematische Methode ist noch offen.
 
-## KFA als zusätzliche Projektion
+## KFA als Projektion von Gewicht zu KFA
 
-Der KFA muss nicht zwingend Bestandteil der Zielgewichtsberechnung sein.
-
-Wenn ein aktueller KFA bekannt ist, kann die App zusätzlich eine informative Projektion anbieten. Beispiel:
+Wenn ein aktueller KFA bekannt ist und der Nutzer ein Zielgewicht vorgibt, kann die App zusätzlich eine informative KFA-Projektion anbieten. Beispiel:
 
 ```text
 Aktuelles Gewicht:      80 kg
@@ -128,11 +127,44 @@ Zielgewicht 75 kg
 
 Das ist ausdrücklich eine **Modellrechnung unter der Annahme konstanter fettfreier Masse**, keine Vorhersage des tatsächlichen zukünftigen KFA.
 
-## Ziel-KFA
+## Ziel-KFA als alternative Zielart
 
-Ein Ziel-KFA ist optional.
+Wenn ein aktueller KFA angegeben wurde, kann der Nutzer statt eines Zielgewichts einen **Ziel-KFA** als primäres Ziel wählen.
 
-Wenn ein Ziel-KFA angeboten wird, muss ein aktueller KFA vorhanden sein. Der Ziel-KFA soll zunächst als Zielvariable bzw. zusätzliche Information dienen und nicht automatisch die gesamte Gewichtsverlustberechnung dominieren.
+Der Ziel-KFA soll auch anhand visueller Referenzbilder auswählbar sein. Diese Bilder dienen nur der groben Orientierung und sind keine KFA-Messung.
+
+In diesem Zielmodus leitet die App das ungefähre Zielgewicht und die erforderliche Gewichtsabnahme aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA ab.
+
+Aktueller Modellansatz:
+
+```text
+fettfreie Masse = aktuelles Gewicht × (1 - aktueller KFA)
+
+Zielgewicht = fettfreie Masse ÷ (1 - Ziel-KFA)
+
+notwendige Gewichtsabnahme = aktuelles Gewicht - Zielgewicht
+```
+
+Beispiel:
+
+```text
+Aktuelles Gewicht:      80 kg
+Aktueller KFA:          20 %
+Ziel-KFA:               15 %
+
+Fettfreie Masse:
+80 kg × 0,80 = 64 kg
+
+Modell-Zielgewicht:
+64 kg ÷ 0,85 ≈ 75,3 kg
+
+Geschätzte notwendige Gewichtsabnahme:
+80 kg - 75,3 kg ≈ 4,7 kg
+```
+
+Diese Berechnung setzt konstante fettfreie Masse voraus. In der Realität kann sich fettfreie Masse während einer Gewichtsabnahme verändern. Deshalb müssen sowohl das abgeleitete Zielgewicht als auch die notwendige Gewichtsabnahme als **Schätzwerte** dargestellt werden.
+
+Wenn kein aktueller KFA angegeben wurde, ist diese Zielart nicht verfügbar.
 
 ## Manuelle Anpassung
 
