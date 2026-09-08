@@ -15,8 +15,8 @@ Grundsätzlich soll der Rechenweg aus mehreren transparenten Komponenten bestehe
 3. Schritte
 4. geplantes Training / Sport
 5. Summe = geschätzter Erhaltungsbedarf
-6. Bestimmung des Zielgewichts direkt aus Nutzereingabe oder, bei Ziel-KFA, modellhafte Ableitung eines Zielgewichts
-7. Bestimmung des für das Ziel erforderlichen Gesamtdefizits
+6. Zielgewicht bestimmen: direkt aus Nutzereingabe oder, bei vorhandenem aktuellem KFA, modellhaft aus einem gewählten Ziel-KFA ableiten
+7. Bestimmung des für das Zielgewicht erforderlichen Gesamtdefizits
 8. Verteilung des Defizits auf den gewünschten Zeitraum
 9. daraus resultierendes durchschnittliches tägliches Kalorienziel
 10. optional Ableitung eines Wochenbudgets und Verteilung dieses Budgets auf unterschiedlich hohe Tagesziele, z. B. für einen geplanten Cheat Day
@@ -127,13 +127,11 @@ Zielgewicht 75 kg
 
 Das ist ausdrücklich eine **Modellrechnung unter der Annahme konstanter fettfreier Masse**, keine Vorhersage des tatsächlichen zukünftigen KFA.
 
-## Ziel-KFA als alternative Zielart
+## Ziel-KFA zur Ableitung des Zielgewichts
 
-Wenn ein aktueller KFA angegeben wurde, kann der Nutzer statt eines Zielgewichts einen **Ziel-KFA** als primäres Ziel wählen.
+Wenn ein aktueller KFA angegeben wurde, kann der Nutzer einen **Ziel-KFA** auswählen, auch anhand visueller Referenzbilder.
 
-Der Ziel-KFA soll auch anhand visueller Referenzbilder auswählbar sein. Diese Bilder dienen nur der groben Orientierung und sind keine KFA-Messung.
-
-In diesem Zielmodus leitet die App das ungefähre Zielgewicht und die erforderliche Gewichtsabnahme aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA ab.
+Der Ziel-KFA ersetzt nicht das Zielgewicht in der eigentlichen Gewichtsverlustberechnung. Stattdessen leitet die App daraus zunächst ein ungefähres Zielgewicht und die erforderliche Gewichtsabnahme ab. Dieses abgeleitete Zielgewicht wird anschließend wie ein direkt eingegebenes Zielgewicht für die weitere Defizitberechnung verwendet.
 
 Aktueller Modellansatz:
 
@@ -164,7 +162,7 @@ Geschätzte notwendige Gewichtsabnahme:
 
 Diese Berechnung setzt konstante fettfreie Masse voraus. In der Realität kann sich fettfreie Masse während einer Gewichtsabnahme verändern. Deshalb müssen sowohl das abgeleitete Zielgewicht als auch die notwendige Gewichtsabnahme als **Schätzwerte** dargestellt werden.
 
-Wenn kein aktueller KFA angegeben wurde, ist diese Zielart nicht verfügbar.
+Wenn kein aktueller KFA angegeben wurde, ist die Ziel-KFA-basierte Ableitung nicht verfügbar.
 
 ## Manuelle Anpassung
 
