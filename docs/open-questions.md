@@ -38,7 +38,8 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie werden Schätzungen und Unsicherheit dargestellt?
 - Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
 - Müssen Trainingsdauer und/oder Trainingsintensität als zusätzliche bedingte Onboarding-Screens vor der ersten Planberechnung erfasst werden, oder können diese Angaben erst später unter „Plan verfeinern“ ergänzt werden?
-- Wie genau soll die Auswahl zwischen Zielgewicht und Ziel-KFA dargestellt werden, wenn ein aktueller KFA vorhanden ist?
+- Wie genau soll die Zieldefinition dargestellt werden, wenn ein aktueller KFA vorhanden ist: Zielgewicht direkt eingeben oder Ziel-KFA auswählen und daraus das Zielgewicht ableiten?
+- Soll der aus Ziel-KFA berechnete Zielgewichtswert dem Nutzer vor der Planerstellung noch einmal ausdrücklich zur Bestätigung gezeigt werden?
 - Soll der Ziel-KFA ausschließlich über Bildstufen gewählt werden oder zusätzlich numerisch fein angepasst werden können?
 - Wie zeigen wir dem Nutzer nach Auswahl eines Ziel-KFA verständlich, dass das daraus berechnete Zielgewicht und die notwendige Gewichtsabnahme nur Modellschätzungen sind?
 - Wie genau soll der geplante Cheat-Day-Screen im Onboarding aussehen?
