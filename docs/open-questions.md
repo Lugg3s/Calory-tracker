@@ -9,10 +9,12 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie werden Schritte zusätzlich berücksichtigt, ohne Doppelzählung mit einem Aktivitätsfaktor?
 - Wie wird Sport berücksichtigt?
 - Wie werden unterschiedliche Sportarten und Trainingsintensitäten modelliert?
-- Wie genau soll KFA in die Berechnung einfließen?
+- Wie genau soll KFA in die Berechnung des Energiebedarfs einfließen?
 - Welche Grenzen gelten für das empfohlene Defizit?
 - Welche Methode verwenden wir für die Projektion über längere Zeiträume?
 - Wie berücksichtigen wir metabolische Anpassungen und sinkenden Energiebedarf bei Gewichtsverlust?
+- Wie wissenschaftlich belastbar ist die Annahme konstanter fettfreier Masse für die Ableitung eines Zielgewichts aus aktuellem KFA und Ziel-KFA, und wie soll das Modell gegebenenfalls verbessert werden?
+- Wie gehen wir damit um, dass sich fettfreie Masse während einer Gewichtsabnahme verändern kann?
 - Wie wird aus dem durchschnittlichen täglichen Kalorienziel ein Wochenbudget abgeleitet?
 - Wie wird ein geplanter Cheat Day in das Wochenbudget eingerechnet, ohne das geplante durchschnittliche Defizit über die Woche unbeabsichtigt zu verändern?
 - Wie werden die Kalorien auf Cheat Day und übrige Wochentage verteilt, und welche Grenzen gelten für diese Umverteilung?
@@ -26,6 +28,7 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Ist 2,0 g/kg für Kraft-/Leistungssportler sinnvoll als MVP-Standard?
 - Ist 0,8 g/kg Fett als Mindestwert für die App geeignet?
 - Soll Protein bei vorhandenem KFA eher auf fettfreie Masse als auf Körpergewicht bezogen werden?
+- Welche Ziel-KFA-Bereiche sind für unterschiedliche Nutzergruppen sinnvoll bzw. sicher, und ab welchen Werten muss die App warnen oder Ziele ablehnen?
 
 ## Produkt / UX
 
@@ -35,6 +38,9 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie werden Schätzungen und Unsicherheit dargestellt?
 - Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
 - Müssen Trainingsdauer und/oder Trainingsintensität als zusätzliche bedingte Onboarding-Screens vor der ersten Planberechnung erfasst werden, oder können diese Angaben erst später unter „Plan verfeinern“ ergänzt werden?
+- Wie genau soll die Auswahl zwischen Zielgewicht und Ziel-KFA dargestellt werden, wenn ein aktueller KFA vorhanden ist?
+- Soll der Ziel-KFA ausschließlich über Bildstufen gewählt werden oder zusätzlich numerisch fein angepasst werden können?
+- Wie zeigen wir dem Nutzer nach Auswahl eines Ziel-KFA verständlich, dass das daraus berechnete Zielgewicht und die notwendige Gewichtsabnahme nur Modellschätzungen sind?
 - Wie genau soll der geplante Cheat-Day-Screen im Onboarding aussehen?
 - Ist ein Cheat Day optional, welcher Wochentag wird gewählt und wie viel zusätzliches Kalorienbudget kann der Nutzer dafür einplanen?
 - Soll die App statt des Begriffs „Cheat Day“ eventuell eine neutralere Bezeichnung wie „flexibler Tag“ oder „höheres Tagesbudget“ verwenden?
