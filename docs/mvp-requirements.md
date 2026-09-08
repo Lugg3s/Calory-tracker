@@ -15,20 +15,28 @@ Der Nutzer soll mindestens relevante Körperdaten und Informationen zur Alltagsa
 - Alltagsaktivität / Tätigkeit, z. B. überwiegend sitzend
 - Schritte bzw. durchschnittliche tägliche Schritte
 - Sport / Training
-- Zielgewicht
+- Zielgewicht oder, sofern aktueller KFA vorhanden ist, Ziel-KFA
 - Zeitraum bis zum Ziel
 
 Der aktuelle KFA ist **optional**.
 
-Das Ziel-KFA-Konzept ist ebenfalls optional. Ein Ziel-KFA soll nur verwendet werden, wenn ein aktueller KFA bekannt bzw. vom Nutzer angegeben wurde. Der KFA soll grundsätzlich nicht zwingend Bestandteil der Gewichtsverlust-Berechnung sein, sondern kann zusätzlich zur Information und für Projektionen verwendet werden. Wenn der aktuelle KFA angegeben ist, soll er jedoch bei der Berechnung des Energiebedarfs berücksichtigt werden können.
+Wenn kein aktueller KFA angegeben wurde, definiert der Nutzer sein Ziel über ein Zielgewicht.
+
+Wenn ein aktueller KFA angegeben wurde, darf der Nutzer als primäre Zielart zwischen **Zielgewicht** und **Ziel-KFA** wählen. Ein Ziel-KFA soll auch anhand visueller Referenzbilder auswählbar sein. In diesem Fall berechnet die App näherungsweise, welches Zielgewicht und welche Gewichtsabnahme dem gewählten Ziel-KFA entsprechen.
+
+Der aktuelle KFA soll bei der Berechnung des Energiebedarfs berücksichtigt werden können.
 
 ## Zielsetzung
 
-Der Nutzer soll ein Ziel über mindestens folgende Größen definieren können:
+Der Nutzer definiert:
 
-- Zielgewicht
-- Zeitraum
-- optional Ziel-KFA, sofern aktueller KFA vorhanden ist
+- eine primäre Zielart:
+  - Zielgewicht; oder
+  - Ziel-KFA, nur wenn aktueller KFA vorhanden ist
+- den entsprechenden Zielwert
+- den gewünschten Zeitraum
+
+Bei Ziel-KFA ist die daraus abgeleitete Gewichtsabnahme eine Modellschätzung. Die erste Modellrichtung geht von konstanter fettfreier Masse aus.
 
 ## Berechnung
 
@@ -36,8 +44,10 @@ Die App berechnet:
 
 1. geschätzten Grundumsatz
 2. geschätzten Erhaltungsbedarf / Gesamtenergieverbrauch
-3. notwendiges Energiedefizit für das gewünschte Ziel
-4. daraus abgeleitetes durchschnittliches Kalorienziel
+3. bei Ziel-KFA: modellhaftes Zielgewicht und notwendige Gewichtsabnahme
+4. notwendiges Energiedefizit für das gewünschte Ziel
+5. daraus abgeleitetes durchschnittliches Kalorienziel
+6. optional eine Wochenverteilung mit geplantem höherem Tagesbudget / Cheat Day
 
 Die konkrete wissenschaftliche Methode und alle Parameter werden separat dokumentiert und vor Implementierung validiert.
 
@@ -59,6 +69,8 @@ Grundumsatz                         XXXX kcal
 ```
 
 Die einzelnen Positionen sollen anklickbar bzw. erklärbar sein.
+
+Wenn Ziel-KFA als Zielart verwendet wird, soll zusätzlich nachvollziehbar dargestellt werden, wie aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA das modellhafte Zielgewicht und die erforderliche Gewichtsabnahme abgeleitet wurden.
 
 ## Änderbare Werte
 
