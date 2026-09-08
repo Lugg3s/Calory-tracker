@@ -15,7 +15,8 @@ The product should answer:
 - How many calories do I approximately need to maintain my weight?
 - Why is that the estimate?
 - How do my everyday activity, steps, and training affect it?
-- What deficit is required for my target weight or target KFA and timeframe?
+- What deficit is required for my target weight and timeframe?
+- If I know my current KFA, what target weight approximately corresponds to a desired target KFA?
 - What can I approximately eat today without perfect calorie tracking?
 
 ## Core UX: transparent calculation
@@ -53,8 +54,9 @@ Numbers above are illustrative only. The exact model must be scientifically esta
 - training frequency and relevant duration/intensity
 
 ### Goal
-- target weight, or when current KFA is known: target KFA
+- target weight, entered directly or derived from target KFA when current KFA is known
 - timeframe
+- optional target KFA as an input for deriving target weight when current KFA is known
 
 ### Training profile
 The onboarding should identify regular strength training or other performance-oriented sport because this affects protein recommendations.
@@ -77,14 +79,14 @@ Current intended sequence:
 8. average daily steps
 9. sport/training frequency
 10. training type when relevant
-11. goal type when current KFA is known: target weight or target KFA
-12. goal value: target weight or target KFA
+11. target definition: target weight directly, or target KFA when current KFA is known so the app can derive the corresponding target weight
+12. target weight / derived target weight confirmation
 13. timeframe
 14. planned cheat day / higher-calorie day — details still open
 15. tracking mode
 16. plan result
 
-If no current KFA was entered, the KFA goal option is unavailable and the user proceeds with target weight.
+If no current KFA was entered, target KFA is unavailable and the user enters a target weight directly.
 
 The planned cheat-day screen should allow a higher-calorie day to be incorporated into a **weekly calorie budget** rather than simply adding calories on top of the plan. The exact UX, terminology, allowed increase, redistribution across the other days, and safety limits are still unresolved and belong in `open-questions.md`.
 
@@ -106,13 +108,11 @@ The reference library can then be indexed approximately by sex / biological cate
 
 The derived bucket is only a matching heuristic for visual references. It must not be presented as a medical classification or KFA measurement. The reference images themselves are also an orientation aid only and must not imply that a specific appearance maps exactly to a specific KFA. The exact bucket formula, number of buckets, thresholds, KFA range, and image variants remain open.
 
-## Target KFA as an alternative primary goal
+## Target KFA as an input for deriving target weight
 
-When current KFA is known, the user may choose **target KFA instead of target weight** as the primary goal.
+When current KFA is known, the user may choose a **target KFA**, including via visual reference images.
 
-The target KFA should be selectable using visual reference images so the user can choose a desired body-fat level by appearance rather than needing an exact percentage in mind.
-
-The app then derives an approximate target weight and required weight loss under an explicit constant-fat-free-mass assumption:
+Target KFA does not replace target weight in the actual weight-loss calculation. Instead, it provides an alternative way to define the desired body-composition outcome. The app derives the corresponding approximate target weight and required weight loss under an explicit constant-fat-free-mass assumption:
 
 ```text
 fat-free mass = current weight × (1 - current KFA)
@@ -120,14 +120,16 @@ target weight = fat-free mass ÷ (1 - target KFA)
 required weight loss = current weight - target weight
 ```
 
+The derived target weight is then used as the target weight for the subsequent deficit and calorie-target calculation.
+
 This is a model estimate, not a prediction. Actual fat-free mass can change during weight loss, and visual KFA references are approximate.
 
-The reverse projection also remains useful: if current KFA is known and the user chooses target weight, the app can estimate the resulting KFA under the same constant-fat-free-mass assumption.
+The reverse projection also remains useful: if current KFA is known and the user chooses a target weight directly, the app can estimate the resulting KFA under the same constant-fat-free-mass assumption.
 
 ## Weight-loss calculation concept
 
 1. Estimate maintenance energy expenditure.
-2. Determine target weight directly from the user or derive it from target KFA when that goal mode is selected.
+2. Determine target weight directly from the user or derive it from target KFA when current KFA is known and that option is used.
 3. Calculate the difference between current and target weight.
 4. Translate the intended loss into an approximate total energy deficit using a scientifically justified model assumption.
 5. Spread that deficit over the requested timeframe.
@@ -220,10 +222,9 @@ This is visualization, not reliable KFA measurement.
 ### Include
 - onboarding
 - body/activity data
-- target weight
-- target KFA as an alternative primary goal only when current KFA is known
-- target-KFA selection via reference images
-- derived target weight / required weight loss for target-KFA mode
+- target weight, entered directly or derived from target KFA
+- target-KFA selection via reference images only when current KFA is known
+- derived target weight / required weight loss when target KFA is used
 - timeframe
 - optional current KFA
 - energy requirement calculation
