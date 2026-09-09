@@ -128,7 +128,7 @@ The current intended sequence is:
 12. target definition: target weight directly, or target KFA when current KFA is known so the app can derive the corresponding target weight
 13. target value / derived target weight confirmation
 14. timeframe
-15. planned cheat day / higher-calorie day — details still open
+15. planned cheat day / higher-calorie day
 16. tracking mode
 17. plan result
 
@@ -228,7 +228,7 @@ A typical training-duration input is therefore required when regular training is
 
 For the first version, the thermic effect of food (TEF) should be represented by an approximate **10 %** mixed-diet assumption. This is a planning approximation rather than an individual measurement.
 
-A later advanced model may make TEF dependent on macronutrient composition. The deficit model must account for the fact that TEF decreases when energy intake decreases.
+A later advanced model may make TEF dependent on macronutrient composition. The deficit calculation should use the lower TEF implied by lower target intake rather than assuming maintenance-level TEF remains unchanged.
 
 ## D-029 — V1 uses a static 7,700 kcal/kg deficit model
 **Status:** decided
@@ -246,3 +246,74 @@ The target weight may be entered directly or derived from target KFA according t
 V1 does **not** dynamically simulate body weight, RMR, TDEE, metabolic adaptation, or changing body composition day by day over the plan period. The 7,700 kcal/kg factor is a deliberate product simplification for planning and must not be presented as an exact biological constant.
 
 A dynamic model, such as iterative recalculation or a more complete physiological body-weight model, can be considered later as an advanced/adaptive feature. If the user later updates their actual weight, the app may recalculate the plan from the new current state rather than requiring continuous weight entry.
+
+## D-030 — Daily calorie target accounts for lower TEF during the deficit
+**Status:** decided direction
+
+Let `B` be the daily expenditure components before TEF:
+
+```text
+B = RMR + net everyday activity + net steps + net training
+maintenance calories M = B / 0.90
+```
+
+Let `D` be the planned average daily body-energy deficit from D-029. With the V1 assumption that TEF is approximately 10 % of calorie intake `C`, the target intake is solved as:
+
+```text
+D = B + 0.10 × C - C
+D = B - 0.90 × C
+C = (B - D) / 0.90
+```
+
+Equivalently:
+
+```text
+target calories C = maintenance calories M - D / 0.90
+```
+
+This keeps the 10 % TEF approximation internally consistent when calorie intake is lower than maintenance. It remains an approximate planning model, not a physiological simulation.
+
+## D-031 — Automatic plans use conservative deficit/intake guardrails
+**Status:** decided direction
+
+For normal automatically generated adult weight-loss plans, the first version should treat an average planned deficit above approximately **750 kcal/day** as too aggressive for the standard recommendation and propose a longer timeframe instead of silently producing a more restrictive plan. Evidence-based lifestyle interventions commonly use approximately 500–750 kcal/day energy deficits.
+
+As an additional product safety rail, the automatically recommended calorie target should not be pushed below approximately:
+
+- **1,200 kcal/day** for the female Mifflin equation category;
+- **1,500 kcal/day** for the male Mifflin equation category.
+
+These values are pragmatic guideline-derived planning floors, not individual physiological minimums. If the requested goal/timeframe would require a lower target, the app should extend the timeframe or ask the user to revise the goal rather than automatically recommending the lower intake.
+
+Very-low-energy diets around 800–1,000 kcal/day or lower are outside the normal self-directed MVP recommendation and belong in medically supervised contexts. Exact handling of manual overrides and special populations can be refined later.
+
+## D-032 — Weekly budget redistributes calories rather than adding a cheat day on top
+**Status:** decided direction
+
+The weekly calorie budget is derived directly from the average daily calorie target:
+
+```text
+weekly budget W = average daily target C × 7
+```
+
+Without a higher-calorie day, each day uses approximately `C` calories, subject only to integer rounding.
+
+For a planned higher-calorie/flexible day, the extra calories are redistributed **within the same weekly budget** rather than added on top of it.
+
+For one flexible day with budget `H`:
+
+```text
+regular-day budget L = (W - H) / 6
+```
+
+For `n` flexible days:
+
+```text
+regular-day budget L = (W - sum(H_i)) / (7 - n)
+```
+
+V1 automatic planning should use **maintenance calories as the maximum flexible-day budget**. In other words, the app can offer a maintenance-calorie day, but it should not automatically plan a calorie surplus on the flexible day. A lower flexible-day budget between the normal target and maintenance can also be selected.
+
+The redistribution is only valid if the resulting regular-day budgets still satisfy the same automatic-plan calorie guardrails. If they do not, the app should reduce the flexible-day budget or propose a longer overall timeframe.
+
+The implementation should preserve the weekly total exactly after integer rounding by distributing any 1-kcal remainder across the regular days. The existing manual calorie override in settings remains separate from this automatic weekly-budget logic.
