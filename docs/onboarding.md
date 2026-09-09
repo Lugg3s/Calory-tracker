@@ -2,87 +2,83 @@
 
 ## Ziel des Onboardings
 
-Das Onboarding sammelt nur Informationen, die für die Berechnung oder Personalisierung relevant sind. Die App soll den Nutzer nicht unnötig mit Fachbegriffen oder Detailfragen belasten.
-
-Der erste Durchlauf soll bewusst kurz bleiben und ungefähr in zwei Minuten machbar sein. Entscheidend ist ein schneller, leichter Flow, nicht eine starre Zeitgrenze.
+Das Onboarding sammelt nur Informationen, die für Berechnung oder Personalisierung relevant sind. Der erste Durchlauf soll ungefähr in zwei Minuten machbar sein und visuell minimalistisch bleiben.
 
 ## UX-Prinzipien
 
-Die Onboarding-Screens sollen standardmäßig sehr minimalistisch und aufgeräumt wirken.
-
-Grundsätzlich gilt:
-
-- pro Eingabe-Screen nur **ein Parameter**
+- pro Eingabe-Screen grundsätzlich **ein Parameter**
 - kurze, eindeutige Fragen
-- möglichst wenig zusätzliche UI
 - Erklärungen nur auf Wunsch einblenden
+- komplexere Formeln und Details erst nach dem ersten Plan
 
-Jeder relevante Eingabe-Screen soll eine kleine optionale Information anbieten können. Diese erklärt knapp:
-
-1. warum die Angabe benötigt wird;
-2. welchen Einfluss sie auf Berechnung, Empfehlung oder Personalisierung haben kann.
-
-Die Zusatzinformation ist standardmäßig ausgeblendet, damit der normale Screen visuell ruhig bleibt.
-
-Komplexere Erklärungen, Formeln und Details werden nach der initialen Dateneingabe angeboten, nicht zwingend während des ersten Durchlaufs.
+Jeder relevante Screen kann eine kleine optionale Erklärung enthalten: warum die Angabe benötigt wird und was sie beeinflusst.
 
 ## Vorgesehene Angaben
 
 ### Körperdaten
 
 - Alter
-- Geschlecht / biologische Kategorie für die gewählte Berechnung
+- Geschlecht / biologische Kategorie für die gewählte RMR-Gleichung
 - Größe
 - aktuelles Gewicht
 - optional aktueller KFA
 
 ### Aktivität
 
-- Alltagsaktivität / Tätigkeit
+- Alltagstyp
 - durchschnittliche Schritte pro Tag
-- Sportarten / Trainingsart
 - Trainingshäufigkeit
+- Trainingsart
 - typische Trainingsdauer pro Einheit, wenn Training angegeben wird
-- weitere Trainingsdetails nur soweit für die Berechnung relevant
 
-Die Alltagskomponente soll nach aktueller Berechnungsentscheidung MET-basiert modelliert werden. Wie die dafür erforderlichen Zeitanteile aus möglichst wenigen Nutzereingaben abgeleitet werden, ist noch festzulegen.
+Die Alltagskomponente wird MET-basiert modelliert. Für V1 soll der Nutzer **keine einzelnen Stunden für Sitzen, Stehen, Heben usw. eingeben müssen**. Stattdessen wird die Auswahl eines groben Alltagstyps intern auf ein vorläufiges 8-Stunden-MET-Referenzprofil gemappt. Die aktuell verwendeten Profile und bekannten Grenzen stehen in [`activity-model-v1.md`](activity-model-v1.md).
 
 ### Ziel
 
-Der Nutzer benötigt für die weitere Berechnung ein **Zielgewicht**.
+Der Plan arbeitet letztlich immer mit einem **Zielgewicht**.
 
 Ohne aktuellen KFA:
 
-- der Nutzer gibt das Zielgewicht direkt ein.
+- Zielgewicht direkt eingeben.
 
 Mit aktuellem KFA:
 
-- der Nutzer kann weiterhin ein Zielgewicht direkt eingeben;
-- alternativ kann er einen Ziel-KFA auswählen, auch anhand passender Referenzbilder;
-- aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA berechnet die App ein ungefähres Zielgewicht;
-- dieses abgeleitete Zielgewicht wird anschließend als Zielgewicht für die weitere Gewichtsverlust- und Kalorienberechnung verwendet.
+- Zielgewicht direkt eingeben; oder
+- Ziel-KFA wählen und daraus ein Modell-Zielgewicht ableiten.
 
-**Regel:** Ein Ziel-KFA wird nur angeboten, wenn ein aktueller KFA angegeben wurde.
+```text
+fettfreie Masse = aktuelles Gewicht × (1 - aktueller KFA)
+Zielgewicht = fettfreie Masse ÷ (1 - Ziel-KFA)
+```
 
-Die Ableitung des Zielgewichts aus dem Ziel-KFA ist eine Modellrechnung unter der Annahme möglichst konstanter fettfreier Masse und keine exakte Vorhersage.
+Ein Ziel-KFA wird nur angeboten, wenn ein aktueller KFA vorhanden ist.
 
-### Wochenbudget / Cheat Day
+### Wochenbudget / flexibler Tag
 
-Im Onboarding soll zusätzlich ein eigener Screen für einen geplanten **Cheat Day** bzw. einen Tag mit höherem Kalorienbudget vorgesehen werden.
+Im Onboarding ist ein eigener Screen für einen geplanten **Cheat Day / flexiblen Tag / Tag mit höherem Kalorienbudget** vorgesehen.
 
-Dieser Punkt ist inhaltlich noch offen. Festzulegen sind insbesondere:
+Die Berechnungsrichtung ist entschieden:
 
-- ob der Nutzer einen solchen Tag nutzen möchte;
-- welcher Wochentag gewählt wird;
-- wie hoch das zusätzliche Budget an diesem Tag sein darf;
-- wie die übrigen Tage angepasst werden, damit das geplante Wochenbudget und durchschnittliche Defizit erhalten bleiben;
-- ob im Produkt eine neutralere Bezeichnung als „Cheat Day“ verwendet wird.
+```text
+Wochenbudget W = durchschnittliches Tagesziel C × 7
+```
 
-Die genaue UX und Berechnungslogik sind noch nicht entschieden.
+Ein höherer Tag erhöht das Wochenbudget **nicht**, sondern verteilt dieselben Wochenkalorien anders.
 
-### Trainings-/Ernährungsprofil
+Für einen flexiblen Tag mit Budget `H`:
 
-Der Nutzer soll angeben können, ob er beispielsweise regelmäßig Kraftsport bzw. Leistungssport betreibt. Diese Information beeinflusst insbesondere die Proteinempfehlung.
+```text
+normale Tage L = (W - H) / 6
+```
+
+Für die automatische V1-Planung gilt:
+
+- flexibler Tag maximal bis zum geschätzten Erhaltungsbedarf;
+- kein automatisch geplanter Kalorienüberschuss;
+- die übrigen Tage müssen weiterhin die automatischen Planungsgrenzen einhalten;
+- andernfalls wird der flexible Tag reduziert oder ein längerer Zielzeitraum vorgeschlagen.
+
+Noch offen sind vor allem UX-Fragen: konkrete Bezeichnung, Wochentagsauswahl, Control für die Höhe des flexiblen Tages und Umgang mit mehreren flexiblen Tagen.
 
 ## Tracking-Präferenz
 
@@ -91,11 +87,7 @@ Der Nutzer kann wählen:
 - **Nur Kalorien tracken**
 - **Kalorien + Makronährstoffe tracken**
 
-Damit bleibt Makrotracking optional.
-
 ## Screen-Reihenfolge
-
-Der aktuell vorgesehene Flow ist:
 
 1. Start
 2. Geschlecht / biologische Kategorie
@@ -106,78 +98,50 @@ Der aktuell vorgesehene Flow ist:
 7. Alltagstyp
 8. durchschnittliche Schritte
 9. Sporthäufigkeit
-10. Trainingsart, nur wenn Sport/Training angegeben wurde
-11. typische Trainingsdauer, nur wenn Sport/Training angegeben wurde
-12. Zieldefinition: Zielgewicht direkt oder, wenn aktueller KFA vorhanden ist, Ziel-KFA zur Ableitung des Zielgewichts
-13. Zielgewicht bzw. Bestätigung des aus Ziel-KFA abgeleiteten Zielgewichts
+10. Trainingsart, nur wenn Training angegeben wurde
+11. typische Trainingsdauer, nur wenn Training angegeben wurde
+12. Zieldefinition
+13. Zielwert / abgeleitetes Zielgewicht
 14. gewünschter Zeitraum
-15. Cheat Day / höheres Tagesbudget — Details noch offen
+15. flexibler Tag / höheres Tagesbudget
 16. Tracking-Modus
 17. Plan-Ergebnis
 
-Wenn kein aktueller KFA angegeben wurde, ist die Ziel-KFA-Auswahl nicht verfügbar und der Nutzer gibt direkt ein Zielgewicht an.
-
-Die genaue Beschreibung der Screens und des anschließenden Flows steht in [`app-flow.md`](app-flow.md).
-
 ## KFA-Hilfe mit Referenzbildern
 
-Der Screen für den aktuellen KFA bleibt standardmäßig minimalistisch und kann übersprungen werden.
+Der aktuelle KFA ist optional. Wenn der Nutzer ihn nicht kennt, kann er aktiv Vergleichsbilder öffnen.
 
-Wenn der Nutzer seinen aktuellen KFA nicht kennt, kann er aktiv eine visuelle Hilfe öffnen, z. B. über einen Button wie **„Beispiele anzeigen“**.
-
-Dafür soll eine vorab erzeugte Referenzbibliothek genutzt werden. Die App benötigt dafür keine zusätzliche Frage zum Körperbau. Stattdessen wird intern aus den bereits eingegebenen Werten Größe und Gewicht eine grobe Körperform-/Referenzkategorie abgeleitet, beispielsweise über eine BMI-ähnliche Größen-Gewichts-Relation.
-
-Die Bilder werden anschließend ungefähr nach folgenden Merkmalen ausgewählt:
+Die Referenzbibliothek wird vorab erzeugt und ungefähr nach folgenden Merkmalen organisiert:
 
 - Geschlecht / biologische Kategorie
-- intern abgeleitete Körperform-/Referenzkategorie
+- intern aus Größe und Gewicht abgeleitete Körperform-/Referenzkategorie
 - KFA-Stufe
 
-Die aktuelle Richtung ist, KFA-Beispiele ungefähr in **5-Prozentpunkt-Schritten** anzubieten. Die Bildstufen sind jedoch nur visuelle Orientierungspunkte. Der Nutzer kann einen numerischen KFA-Wert zwischen den Bildstufen eingeben, z. B. 17 % zwischen 15 % und 20 %. Für die Berechnung wird immer der tatsächlich eingegebene numerische Wert verwendet.
+Die KFA-Bilder können ungefähr in **5-Prozentpunkt-Schritten** vorliegen. Diese Bildstufen sind nur visuelle Anker. Der Nutzer kann z. B. zwischen 15 % und 20 % einen Wert von 17 % eingeben. Für die Berechnung wird immer der tatsächliche numerische Wert verwendet.
 
-Die App zeigt nur die zur Person passendste bzw. nächstliegende Referenzgruppe an, nicht die gesamte Bibliothek.
+Die Referenzbilder sind keine Messung. Eine erhöhte Unsicherheit bei visuell geschätztem KFA kann intern für Entwickler/Validierung markiert werden; eine separate User-Warnung nur deshalb ist nicht erforderlich.
 
-Die Bilder werden **nicht für jeden Nutzer live generiert**, sondern vorher für eine überschaubare Zahl typischer Referenzkategorien erstellt. Dadurch muss nicht jede Kombination aus Größe und Gewicht als eigenes Bild vorliegen.
-
-Wichtig: Die intern abgeleitete Kategorie dient ausschließlich der Auswahl möglichst passender Vergleichsbilder. Sie ist keine medizinische Einstufung und keine KFA-Messung. Auch die Referenzbilder selbst dienen nur der groben Selbsteinschätzung und dürfen keine exakte Zuordnung suggerieren.
-
-Die zusätzliche Unsicherheit eines nur visuell geschätzten KFA kann intern für Entwickler und Modellvalidierung markiert werden. Sie muss nicht als gesonderte Warnung im User Interface erscheinen.
-
-Die genaue Berechnung der Referenzkategorie, die Anzahl der Kategorien und deren Grenzwerte sind noch festzulegen.
+Die genaue Bucket-Formel, Anzahl der Kategorien, Grenzwerte, KFA-Spanne und Bildansichten bleiben offen.
 
 ## Ziel-KFA anhand von Bildern
 
-Wenn ein aktueller KFA angegeben wurde, kann dieselbe Referenzlogik zusätzlich für die Auswahl eines **Ziel-KFA** verwendet werden.
+Wenn ein aktueller KFA vorhanden ist, kann dieselbe Bildlogik für einen Ziel-KFA genutzt werden. Auch der Ziel-KFA kann numerisch zwischen den Bildankern fein angepasst werden.
 
-Der Nutzer kann passende KFA-Beispiele ansehen und eine gewünschte Zielstufe auswählen. Auch hier sind die Bildstufen nur Ankerpunkte: Der Ziel-KFA kann numerisch zwischen den Bildstufen fein angepasst werden. Für die Zielgewichtsberechnung wird der exakte numerische Ziel-KFA verwendet.
-
-Der Ziel-KFA ist dabei keine eigenständige Ersatzgröße für das Zielgewicht, sondern dient dazu, das passende Zielgewicht herzuleiten.
-
-Aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA berechnet die App anschließend näherungsweise:
-
-- die aktuelle fettfreie Masse;
-- das zum Ziel-KFA passende Modell-Zielgewicht;
-- die daraus resultierende notwendige Gewichtsabnahme in Kilogramm.
-
-Das berechnete Modell-Zielgewicht wird danach als Zielgewicht für die weitere Planung verwendet.
-
-Die Berechnung beruht zunächst auf der Annahme konstanter fettfreier Masse. Sowohl die Bildauswahl als auch die daraus abgeleitete Gewichtsangabe müssen als Schätzung eingeordnet werden.
+Das daraus abgeleitete Zielgewicht ist eine Modellschätzung unter der Annahme konstanter fettfreier Masse.
 
 ## Training und Dauer
 
-Da die V1-Trainingsberechnung auf MET-Werten und Zeit basiert, reicht Trainingsart plus Häufigkeit allein nicht aus. Wenn der Nutzer Training angibt, wird daher zusätzlich die **typische Dauer einer Einheit** abgefragt.
+Da Training in V1 mit MET, Körpergewicht und Zeit berechnet wird, wird bei Training zusätzlich die typische Dauer einer Einheit benötigt.
 
-Eine separate Intensitätsfrage ist für das initiale Onboarding nicht zwingend erforderlich. Die App kann zunächst pro Trainingsart mit einem sinnvollen Standard-MET arbeiten und eine genauere Intensität später unter „Plan verfeinern“ anbieten.
+Eine separate Intensitätsfrage ist für das initiale Onboarding nicht zwingend. V1 kann zunächst Standard-MET-Werte pro Trainingsart verwenden; genauere Intensität kann später unter „Plan verfeinern“ ergänzt werden.
 
 ## Nach dem ersten Plan
 
-Nach der Planerstellung soll der Nutzer nicht durch weitere Pflichtfragen aufgehalten werden. Zusätzliche Details werden nachgelagert angeboten, z. B. über „Plan verfeinern“, Berechnungsdetails oder Einstellungen.
+Nach der Planerstellung folgen keine weiteren Pflichtfragen. Zusätzliche Details gehören in „Plan verfeinern“, Berechnungsdetails oder Einstellungen, z. B.:
 
-Dazu können unter anderem gehören:
-
-- detailliertere Erklärungen und Formeln
-- zusätzliche Aktivitäts-/Trainingsdetails
-- genauere Trainingsintensität
+- detaillierte Formeln
+- genauere Aktivitäts-/Trainingsdetails
+- Trainingsintensität
 - manuelle Anpassung des Kalorienziels
-- manuelle Anpassung von Makrozielen
+- manuelle Makroanpassungen
 - weitere Personalisierung
