@@ -24,10 +24,13 @@ The product should answer:
 The main calculation should resemble a cost calculation or payslip:
 
 ```text
-Base metabolic requirement           XXXX kcal
+Resting energy requirement           XXXX kcal
 + everyday activity                  XXXX kcal
 + steps                              XXXX kcal
 + exercise (daily average)           XXXX kcal
+--------------------------------------------
+= base before TEF                    XXXX kcal
++ thermic effect of food              XXX kcal
 --------------------------------------------
 = estimated maintenance need        XXXX kcal
 
@@ -36,7 +39,7 @@ Base metabolic requirement           XXXX kcal
 = suggested calorie target           XXXX kcal
 ```
 
-Numbers above are illustrative only. The exact model must be scientifically established. Every major component should be explainable in simple language.
+Numbers above are illustrative only. Every major component should be explainable in simple language, while avoiding false precision.
 
 ## User inputs
 
@@ -48,10 +51,12 @@ Numbers above are illustrative only. The exact model must be scientifically esta
 - optional current KFA
 
 ### Activity
-- everyday activity / occupation, e.g. sedentary office work
+- everyday activity / occupation
 - average daily steps
 - sport / exercise
-- training frequency and relevant duration/intensity
+- training frequency
+- typical training duration when training is present
+- additional duration/intensity information only where useful
 
 ### Goal
 - target weight, entered directly or derived from target KFA when current KFA is known
@@ -79,12 +84,13 @@ Current intended sequence:
 8. average daily steps
 9. sport/training frequency
 10. training type when relevant
-11. target definition: target weight directly, or target KFA when current KFA is known so the app can derive the corresponding target weight
-12. target weight / derived target weight confirmation
-13. timeframe
-14. planned cheat day / higher-calorie day — details still open
-15. tracking mode
-16. plan result
+11. typical training duration when relevant
+12. target definition: target weight directly, or target KFA when current KFA is known so the app can derive the corresponding target weight
+13. target weight / derived target weight confirmation
+14. timeframe
+15. planned cheat day / higher-calorie day — details still open
+16. tracking mode
+17. plan result
 
 If no current KFA was entered, target KFA is unavailable and the user enters a target weight directly.
 
@@ -100,17 +106,101 @@ Current KFA is optional.
 
 Target KFA is also optional in the sense that the user does not need KFA to use the app. However, **target KFA can only be selected when current KFA is known**.
 
-If current KFA is available, it should be allowed to influence the energy-requirement estimate because two people with the same height and weight can have different body composition and therefore different estimated energy requirements.
+Reference images may use coarse KFA anchors such as approximately five-percentage-point steps, but **the numeric KFA value is not constrained to those image steps**. A user may enter or fine-adjust an in-between value such as 17 %, and calculations use that exact numeric value. The same rule applies to current and target KFA.
 
 To make current-KFA self-estimation easier, the KFA screen may offer an optional visual reference view. The app should use a pre-generated image library. Rather than storing a full image grid for every height and weight combination or asking the user for an additional body-build input, the app should derive a coarse internal body-shape/reference bucket from the height and weight already entered, for example using a BMI-like height-to-weight relationship.
 
-The reference library can then be indexed approximately by sex / biological category, the derived body-shape/reference bucket, and KFA level. The current direction is approximately five-percentage-point KFA steps. At runtime, the app selects the closest suitable reference group and only displays it when the user actively opens the examples.
+The reference library can then be indexed approximately by sex / biological category, the derived body-shape/reference bucket, and KFA level. At runtime, the app selects the closest suitable reference group and only displays it when the user actively opens the examples.
 
-The derived bucket is only a matching heuristic for visual references. It must not be presented as a medical classification or KFA measurement. The reference images themselves are also an orientation aid only and must not imply that a specific appearance maps exactly to a specific KFA. The exact bucket formula, number of buckets, thresholds, KFA range, and image variants remain open.
+The derived bucket is only a matching heuristic for visual references. It must not be presented as a medical classification or KFA measurement. The reference images themselves are also an orientation aid only and must not imply that a specific appearance maps exactly to a specific KFA.
+
+If a KFA is estimated from those images, the added uncertainty may be marked internally for developers/model validation. A separate user-facing warning is **not required solely because the KFA was visually estimated**. General model uncertainty can still be communicated at product level.
+
+The exact bucket formula, number of buckets, thresholds, KFA range, and image variants remain open.
+
+## Resting-energy model
+
+The V1 equation routing is decided:
+
+- no current KFA → **Mifflin-St. Jeor**
+- current KFA available → **Cunningham 1980** based on fat-free mass
+
+```text
+Mifflin-St. Jeor, male:
+RMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age + 5
+
+Mifflin-St. Jeor, female:
+RMR = 10 × weight(kg) + 6.25 × height(cm) - 5 × age - 161
+
+Cunningham 1980:
+fat-free mass = weight × (1 - KFA)
+RMR = 500 + 22 × fat-free mass(kg)
+```
+
+## Maintenance-energy model
+
+The maintenance estimate should be component-based rather than a single opaque PAL multiplier:
+
+```text
+RMR
++ net everyday activity
++ net step energy
++ net training energy
+= base before TEF
+
++ TEF
+= estimated maintenance expenditure
+```
+
+### Everyday activity
+
+Everyday activity should use a **time-based MET model** rather than the previously discussed fixed RMR percentage add-ons.
+
+Relevant activities/time profiles should be mapped to appropriate MET values, preferably from the current Adult Compendium of Physical Activities. The exact mapping of onboarding activity categories to MET values and time exposures is still open.
+
+Because steps are calculated separately, walking must not be counted again in full inside the everyday MET block.
+
+### Steps
+
+V1 fallback direction:
+
+```text
+estimated step length = height × 0.414
+distance(km) = steps × step length(m) / 1,000
+net step kcal = distance(km) × body weight(kg) × 0.57 kcal/kg/km
+```
+
+`0.57 kcal/kg/km` is the current scientifically supported net walking-cost parameter. The `0.414 × height` step-length estimate is only a fallback and should be replaced by measured distance from phone/Health/wearable data when available.
+
+### Training
+
+Training uses activity type/MET, body weight, and duration. Resting energy during the same time is subtracted so only additional training expenditure is added.
+
+```text
+gross activity kcal = MET × 3.5 × weight(kg) / 200 × minutes
+net activity kcal = gross activity kcal - RMR / 1,440 × minutes
+```
+
+Weekly training energy is divided by 7 for an average daily plan. This is why typical training duration is now a conditional onboarding input.
+
+Sport-specific models or wearable data may later replace generic MET estimates when stronger measurements are available.
+
+### Thermic effect of food
+
+The MVP uses an approximate **10 % TEF assumption for a mixed diet**:
+
+```text
+base = RMR + net everyday activity + net steps + net training
+maintenance expenditure = base / 0.90
+```
+
+This is a planning approximation. A later advanced model may calculate TEF from macronutrient composition.
+
+The later deficit model must account for the fact that TEF decreases when calorie intake decreases.
 
 ## Target KFA as an input for deriving target weight
 
-When current KFA is known, the user may choose a **target KFA**, including via visual reference images.
+When current KFA is known, the user may choose a **target KFA**, including via visual reference images and numeric fine adjustment.
 
 Target KFA does not replace target weight in the actual weight-loss calculation. Instead, it provides an alternative way to define the desired body-composition outcome. The app derives the corresponding approximate target weight and required weight loss under an explicit constant-fat-free-mass assumption:
 
@@ -133,27 +223,14 @@ The reverse projection also remains useful: if current KFA is known and the user
 3. Calculate the difference between current and target weight.
 4. Translate the intended loss into an approximate total energy deficit using a scientifically justified model assumption.
 5. Spread that deficit over the requested timeframe.
-6. Subtract the average daily deficit from estimated maintenance expenditure.
-7. Present the resulting calorie target and all calculation steps.
-8. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
+6. Account for the fact that TEF and energy needs change when intake/body weight change.
+7. Derive the suggested calorie target.
+8. Present the resulting calorie target and all calculation steps.
+9. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
 
-The exact weekly-budget and cheat-day redistribution logic is still open and must be validated before implementation.
+The exact deficit model, weekly-budget logic, and cheat-day redistribution logic are still open and must be validated before implementation.
 
 Approximately 7,000–7,700 kcal per kg was discussed as a rough model assumption. This is **not a final product constant**. Scientific validation is required, and real weight change is not a simple linear conversion of calories into fat mass.
-
-## Activity and exercise
-
-The app should show approximate contributions from:
-
-- everyday activity
-- steps
-- strength training
-- running/jogging
-- other exercise
-
-The product idea is that a user can see, for example, that additional steps or training may increase estimated expenditure and therefore provide additional food-budget flexibility while maintaining the same overall deficit.
-
-The implementation must avoid double-counting activity. Exact methodology is still open.
 
 ## Manual calorie override
 
@@ -224,13 +301,17 @@ This is visualization, not reliable KFA measurement.
 - body/activity data
 - target weight, entered directly or derived from target KFA
 - target-KFA selection via reference images only when current KFA is known
+- numeric KFA fine adjustment independent of image anchor spacing
 - derived target weight / required weight loss when target KFA is used
 - timeframe
 - optional current KFA
-- energy requirement calculation
+- Mifflin/Cunningham resting-energy routing
+- MET-based everyday activity
+- separate step-energy component
+- MET-based training with duration
+- 10 % TEF approximation
 - transparent calculation breakdown
 - deficit calculation
-- activity/exercise contribution
 - calorie target
 - planned cheat-day / higher-calorie-day screen with weekly-budget handling, exact logic still open
 - optional macro mode
