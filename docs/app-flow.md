@@ -2,136 +2,76 @@
 
 ## Ziel
 
-Der erste Produkt-Flow soll den Nutzer möglichst schnell von der ersten App-Öffnung zu einem verständlichen Abnehmplan führen. Das Onboarding soll alle für den ersten Plan notwendigen Informationen erfassen, aber nicht wie ein langes Formular wirken.
+Der erste Produkt-Flow soll den Nutzer schnell von der ersten App-Öffnung zu einem verständlichen Abnehmplan führen. UX-Ziel: ungefähr zwei Minuten, mit einem Eingabeparameter pro Screen und optionalen Erklärungen nur auf Wunsch.
 
-Als UX-Ziel soll der erste Durchlauf ungefähr in zwei Minuten machbar sein. Entscheidend ist weniger eine harte Zeitgrenze als ein schneller, leichter und klarer Flow.
-
-## Designprinzip für Eingabe-Screens
-
-Die Eingabe-Screens sollen standardmäßig sehr minimalistisch und aufgeräumt sein.
-
-Grundregel:
-
-- pro Screen grundsätzlich nur **ein Eingabeparameter**
-- kurze, klare Frage bzw. Bezeichnung
-- möglichst wenig zusätzliche UI
-- der Nutzer kann bei Bedarf eine kleine Zusatzinformation einblenden
-
-Die optionale Zusatzinformation erklärt kurz:
-
-1. warum die Angabe benötigt wird;
-2. welchen Einfluss sie auf Berechnung, Empfehlung oder Personalisierung haben kann.
-
-Diese Erklärung ist standardmäßig ausgeblendet, damit der normale Screen visuell ruhig bleibt.
-
-## Vorgesehener MVP-Onboarding-Flow
+## MVP-Onboarding-Flow
 
 ### Screen 1 — Start
 
-**Parameter:** keiner
-
-Kurze Einführung und primäre Aktion, z. B. **„Plan erstellen“**.
+Kurze Einführung, primäre Aktion z. B. **„Plan erstellen“**.
 
 ### Screen 2 — Geschlecht / biologische Kategorie
 
-**Parameter:** Geschlecht bzw. die für die gewählte Berechnung erforderliche biologische Kategorie
+Für die gewählte RMR-Gleichung relevante Kategorie.
 
 ### Screen 3 — Alter
 
-**Parameter:** Alter
+Alter.
 
 ### Screen 4 — Größe
 
-**Parameter:** Körpergröße
+Körpergröße.
 
 ### Screen 5 — Aktuelles Gewicht
 
-**Parameter:** aktuelles Körpergewicht
+Aktuelles Körpergewicht.
 
 ### Screen 6 — Aktueller KFA
 
-**Parameter:** aktueller Körperfettanteil
+Optional. Kann übersprungen werden.
 
-Der aktuelle KFA ist optional. Der Nutzer kann diesen Screen überspringen.
+Auf Wunsch kann der Nutzer Referenzbilder öffnen. Die Bilder werden vorab generiert und anhand von Geschlecht/biologischer Kategorie, einer intern aus Größe und Gewicht abgeleiteten Referenzkategorie und KFA-Stufe ausgewählt.
 
-Wenn der Nutzer seinen KFA nicht kennt, kann er aktiv eine visuelle Hilfsansicht öffnen, z. B. über **„Beispiele anzeigen“**. Die App wählt dafür aus einer vorab generierten Referenzbibliothek Bilder aus, die möglichst gut zu den bereits eingegebenen Daten passen.
+Bildstufen, z. B. in 5-Prozentpunkt-Abständen, sind nur visuelle Anker. Der Nutzer kann numerisch Zwischenwerte eingeben; die Berechnung verwendet den exakten Wert.
 
-Damit dafür keine zusätzliche Körperbau-Frage nötig ist, leitet die App intern aus Größe und Gewicht eine grobe Körperform-/Referenzkategorie ab, beispielsweise über eine BMI-ähnliche Größen-Gewichts-Relation. Die Referenzbibliothek kann dadurch ungefähr nach folgenden Merkmalen organisiert werden:
-
-- Geschlecht / biologische Kategorie
-- abgeleitete Körperform-/Referenzkategorie
-- KFA-Stufe
-
-Die aktuelle Richtung ist, KFA-Stufen ungefähr in 5-Prozentpunkt-Schritten abzubilden. Diese Stufen sind nur visuelle Anker. Der Nutzer kann einen numerischen KFA-Wert zwischen den Bildstufen eingeben; die Berechnung verwendet immer den tatsächlich eingegebenen Wert.
-
-Die Referenzbilder werden nicht live für den einzelnen Nutzer generiert, sondern im Voraus für eine begrenzte Anzahl typischer Kategorien erstellt. Ein vollständiges Raster für jede Größen- und Gewichtskombination ist damit nicht erforderlich.
-
-Die intern abgeleitete Referenzkategorie dient ausschließlich der Auswahl geeigneter Vergleichsbilder und ist keine medizinische Klassifikation. Die visuelle Hilfe ist insgesamt nur eine grobe Orientierung zur Selbsteinschätzung und keine KFA-Messung. Der Nutzer sieht die Bilder nur, wenn er diese Hilfe ausdrücklich öffnet; der normale Screen bleibt minimalistisch.
-
-Die zusätzliche Unsicherheit eines nur visuell geschätzten KFA kann intern für Entwickler und spätere Modellvalidierung markiert werden. Eine eigene Warnung im User Interface ist dafür nicht erforderlich.
+Ein visuell geschätzter KFA darf für Cunningham verwendet werden. Die zusätzliche Unsicherheit wird intern dokumentiert und braucht keine gesonderte User-Warnung nur wegen der Schätzmethode.
 
 ### Screen 7 — Alltagstyp
 
-**Parameter:** Alltagsaktivität / Tätigkeit, z. B. überwiegend sitzend
+Der Nutzer wählt einen groben Alltagstyp.
 
-Die Alltagsaktivität soll im Berechnungsmodell MET-basiert abgebildet werden. Wie daraus die erforderlichen Zeitanteile mit möglichst wenigen zusätzlichen Eingaben entstehen, ist noch zu spezifizieren.
+Für V1 wird diese eine Auswahl intern auf ein vorläufiges 8-Stunden-MET-Profil gemappt. Der Nutzer muss nicht einzelne Stunden für Sitzen, Stehen, Heben usw. angeben. Die aktuelle Arbeitslogik steht in [`activity-model-v1.md`](activity-model-v1.md).
+
+Schritte werden separat berechnet und dürfen nicht vollständig noch einmal im Alltags-MET-Modell gezählt werden.
 
 ### Screen 8 — Schritte
 
-**Parameter:** durchschnittliche tägliche Schritte
-
-Schritte werden als eigene Geh-Komponente berechnet und dürfen im MET-Alltagsmodell nicht noch einmal vollständig gezählt werden.
+Durchschnittliche tägliche Schritte.
 
 ### Screen 9 — Sporthäufigkeit
 
-**Parameter:** Trainings-/Sporthäufigkeit
+Trainings-/Sporthäufigkeit.
 
 ### Screen 10 — Trainingsart
 
-**Parameter:** Trainingsart / Sportart
-
-Dieser Screen wird nur gezeigt, wenn der Nutzer regelmäßigen Sport bzw. Training angegeben hat. Die genaue Granularität der auswählbaren Trainingsarten wird später im UX- und Berechnungsmodell festgelegt.
+Nur wenn regelmäßiges Training angegeben wurde.
 
 ### Screen 11 — Typische Trainingsdauer
 
-**Parameter:** typische Dauer einer Trainingseinheit
+Nur wenn regelmäßiges Training angegeben wurde. Die Dauer wird benötigt, weil V1 Training aus MET, Körpergewicht und Zeit berechnet.
 
-Dieser Screen wird nur gezeigt, wenn der Nutzer regelmäßigen Sport bzw. Training angegeben hat. Die Dauer wird benötigt, weil die V1-Trainingsberechnung Trainingsart/MET, Körpergewicht und Zeit kombiniert.
-
-Eine separate Intensitätsfrage ist im initialen Onboarding nicht zwingend erforderlich. Genauere Intensitätsangaben können später unter „Plan verfeinern“ ergänzt werden.
+Eine separate Intensitätsfrage ist im initialen Onboarding nicht zwingend.
 
 ### Screen 12 — Zieldefinition
 
-**Parameter:** Art der Zieldefinition
+Der Plan arbeitet downstream immer mit einem Zielgewicht.
 
-Der Plan arbeitet letztlich immer mit einem **Zielgewicht**.
-
-Wenn kein aktueller KFA vorhanden ist:
-
-- der Nutzer gibt sein Zielgewicht direkt ein.
-
-Wenn ein aktueller KFA vorhanden ist:
-
-- der Nutzer kann sein Zielgewicht direkt eingeben; oder
-- er kann einen Ziel-KFA auswählen, aus dem die App das passende Zielgewicht berechnet.
+- ohne aktuellen KFA: Zielgewicht direkt
+- mit aktuellem KFA: Zielgewicht direkt oder Ziel-KFA zur Ableitung des Zielgewichts
 
 ### Screen 13 — Zielwert / abgeleitetes Zielgewicht
 
-**Parameter:** Zielgewicht bzw. Ziel-KFA zur Herleitung des Zielgewichts
-
-#### Variante A — Zielgewicht direkt
-
-Der Nutzer gibt sein gewünschtes Zielgewicht an.
-
-#### Variante B — Ziel-KFA zur Herleitung des Zielgewichts
-
-Diese Variante ist nur verfügbar, wenn ein aktueller KFA vorhanden ist.
-
-Der Nutzer soll den Ziel-KFA auch anhand visueller Referenzbilder auswählen können. Die App zeigt dafür passende KFA-Stufen aus der vorhandenen Referenzbibliothek. Die Bilder dienen nur als Orientierung und dürfen keine exakte Körperfettmessung suggerieren.
-
-Die Bildstufen begrenzen den numerischen Ziel-KFA nicht. Der Nutzer kann den Zielwert zwischen den visuellen Ankern fein einstellen; die Berechnung verwendet den exakten numerischen Wert.
-
-Nach Auswahl des Ziel-KFA berechnet die App näherungsweise das dazugehörige Zielgewicht und die erforderliche Gewichtsabnahme. Der aktuelle Modellansatz ist:
+Bei Ziel-KFA:
 
 ```text
 fettfreie Masse = aktuelles Gewicht × (1 - aktueller KFA)
@@ -139,76 +79,68 @@ Zielgewicht = fettfreie Masse ÷ (1 - Ziel-KFA)
 notwendige Gewichtsabnahme = aktuelles Gewicht - Zielgewicht
 ```
 
-Das so berechnete Zielgewicht ist anschließend das Zielgewicht für die weitere Defizit- und Kalorienplanung.
-
-Diese Berechnung setzt konstante fettfreie Masse voraus und ist daher ausdrücklich eine Modellschätzung.
+Auch der Ziel-KFA kann numerisch zwischen visuellen Bildankern fein angepasst werden.
 
 ### Screen 14 — Zeitraum
 
-**Parameter:** gewünschter Zeitraum bis zum Ziel
+Gewünschter Zeitraum bis zum Ziel.
 
-### Screen 15 — Cheat Day / höheres Tagesbudget
+### Screen 15 — Flexibler Tag / höheres Tagesbudget
 
-**Parameter:** geplante Verteilung des Kalorienbudgets über die Woche
+Die Berechnungslogik ist festgelegt, die genaue UX noch nicht.
 
-Für das Onboarding ist ein eigener Screen vorgesehen, über den der Nutzer einen geplanten Cheat Day bzw. einen Tag mit höherem Kalorienbudget berücksichtigen kann.
+```text
+Wochenbudget W = durchschnittliches Tagesziel C × 7
+```
 
-Die Funktion ist als offener Produktpunkt dokumentiert. Noch festzulegen sind insbesondere:
+Ein höherer Tag wird **innerhalb** desselben Wochenbudgets finanziert und nicht zusätzlich aufgeschlagen.
 
-- ob der Screen nur eine Ja/Nein-Auswahl oder direkt einen Wochentag enthält;
-- ob und wie der Nutzer die Höhe des zusätzlichen Tagesbudgets festlegt;
-- wie viele Kalorien an den übrigen Tagen abgezogen werden;
-- welche Grenzen für eine sichere und sinnvolle Umverteilung gelten;
-- ob im finalen Produkt eine neutralere Bezeichnung als „Cheat Day“ verwendet wird.
+Für einen flexiblen Tag mit Budget `H`:
 
-Die zentrale Anforderung ist, dass ein höheres Budget an einem Tag **innerhalb des Wochenbudgets berücksichtigt** wird. Der Cheat Day darf also nicht einfach zusätzliche Kalorien oberhalb des geplanten Wochenbudgets hinzufügen, wenn dadurch das vorgesehene durchschnittliche Defizit verändert würde.
+```text
+normale Tagesbudgets L = (W - H) / 6
+```
+
+Automatische V1-Regeln:
+
+- `H` maximal bis zum geschätzten Erhaltungsbedarf;
+- kein automatisch geplanter Überschuss;
+- die übrigen Tage müssen die automatischen Planungsgrenzen einhalten;
+- wenn nicht, wird `H` reduziert oder ein längerer Zielzeitraum vorgeschlagen.
+
+Offen bleiben insbesondere: Bezeichnung, Wochentags-Control, Budget-Control und UX für mehrere flexible Tage.
 
 ### Screen 16 — Tracking-Modus
-
-**Parameter:** Tracking-Präferenz
-
-Auswahl:
 
 - nur Kalorien
 - Kalorien + Makronährstoffe
 
 ### Screen 17 — Plan-Ergebnis
 
-**Parameter:** keiner
+Mindestens anzeigen:
 
-Nach Abschluss der Eingaben wird direkt der erste Plan gezeigt. Die Ergebnisansicht soll mindestens enthalten:
-
-- vorgeschlagenes Kalorienziel bzw. die geplante Wochenverteilung
+- durchschnittliches Tagesziel
+- ggf. Wochenverteilung mit flexiblem Tag
 - geschätzten Erhaltungsbedarf
 - geplantes durchschnittliches Defizit
-- Zielgewicht, entweder direkt eingegeben oder aus dem Ziel-KFA abgeleitet
-- falls Ziel-KFA verwendet wurde: gewählten Ziel-KFA und geschätzte notwendige Gewichtsabnahme
+- Zielgewicht
+- ggf. Ziel-KFA und daraus abgeleitete notwendige Gewichtsabnahme
 - kurze Einschätzung des Plans
-- Zugang zur detaillierten, nachvollziehbaren Berechnung
+- Zugang zur detaillierten Berechnung
 
 ## Nach dem Onboarding
 
-Nach dem ersten Plan soll der Nutzer nicht mit weiteren Pflichtfragen blockiert werden. Zusätzliche Komplexität wird nachgelagert angeboten, z. B. über **„Plan verfeinern“**, Berechnungsdetails oder Einstellungen.
+Zusätzliche Komplexität wird nachgelagert angeboten, z. B. über **„Plan verfeinern“**, Berechnungsdetails oder Einstellungen:
 
-Dort können später insbesondere liegen:
-
-- detailliertere Erklärungen und Formeln
-- zusätzliche Trainings-/Aktivitätsdetails
+- Formeln und Erklärungen
+- zusätzliche Aktivitäts-/Trainingsdetails
 - genauere Trainingsintensität
 - manuelle Anpassung des Kalorienziels
-- manuelle Anpassung von Makrozielen
-- weitere Personalisierungsoptionen
-
-Die bereits getroffene Produktentscheidung bleibt bestehen: Die manuelle Anpassung des Kalorienziels gehört nicht prominent auf den Main Screen.
+- manuelle Makroanpassung
+- weitere Personalisierung
 
 ## Status
 
-Der grundsätzliche Flow und das Prinzip „ein Parameter pro Eingabe-Screen“ sind festgelegt. Exakte Texte, Controls, visuelle Gestaltung und mögliche Mikro-Interaktionen werden in der Wireframe-/Designphase iteriert.
+Festgelegt sind der grundsätzliche 17-Screen-Flow, das Prinzip „ein Parameter pro Screen“, die bedingte Trainingsdauer, die KFA-Zielgewichtslogik und die Wochenbudget-/Flex-Day-Berechnungsrichtung.
 
-Die Trainingsdauer ist als bedingter Eingabe-Screen aufgenommen, weil das gewählte MET-basierte Trainingsmodell eine Zeitkomponente benötigt.
-
-Der Cheat-Day-/Wochenbudget-Screen ist als notwendiger zusätzlicher Onboarding-Punkt aufgenommen, seine konkrete UX und Berechnungslogik sind jedoch noch offen.
-
-Für die KFA-Referenzbibliothek sind insbesondere die genaue Ableitung der Körperform-/Referenzkategorien, die Anzahl der Kategorien, deren Grenzwerte, die KFA-Spanne und die benötigten Bildvarianten noch festzulegen.
-
-Beschlossen ist: Ein Ziel-KFA kann bei vorhandenem aktuellem KFA zur Herleitung des Zielgewichts verwendet und unabhängig von den groben Bildankern numerisch fein eingestellt werden. Die wissenschaftlich sinnvolle Behandlung möglicher Änderungen der fettfreien Masse bleibt noch zu präzisieren.
+Noch offen sind vor allem konkrete Controls/Microcopy, MET-Feinkalibrierung, KFA-Referenzbibliothek und die genaue UX des flexiblen Tages.
