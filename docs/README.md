@@ -2,7 +2,13 @@
 
 Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation für Calory Tracker.
 
-## Dokumente
+## Zentrale Referenz
+
+- [Project Context](PROJECT-CONTEXT.md)
+- [Product Decisions](PRODUCT-DECISIONS.md)
+- [Offene Fragen](open-questions.md)
+
+## Fach- und Produktdokumente
 
 - [Produktvision](product-vision.md)
 - [MVP-Anforderungen](mvp-requirements.md)
@@ -15,6 +21,5 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [AI & Voice](ai-and-voice.md)
 - [Zukünftige Features](future-features.md)
 - [Roadmap](roadmap.md)
-- [Offene Fragen](open-questions.md)
 
 > **Hinweis:** Dieses Dokumentationsset ist ein lebendes Dokument. Noch nicht wissenschaftlich validierte oder endgültig entschiedene Punkte werden ausdrücklich als offen bzw. vorläufig gekennzeichnet.
