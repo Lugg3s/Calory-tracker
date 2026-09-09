@@ -17,12 +17,17 @@ The user does not have to provide current KFA to use the basic weight-loss plann
 
 A target KFA should only be entered when current KFA is available. Otherwise the target KFA is not useful as a calculation target.
 
-## D-004 — KFA can affect energy estimation when available
-**Status:** decided direction
+## D-004 — KFA affects RMR estimation when available
+**Status:** decided
 
-When current KFA is supplied, it should be usable in the energy-requirement calculation because body composition can differ substantially at the same height and body weight.
+When current KFA is supplied, the app uses a fat-free-mass-based resting-energy equation. The current selected equation is Cunningham 1980:
 
-The mathematical implementation remains open.
+```text
+fat-free mass = body weight × (1 - KFA)
+RMR = 500 + 22 × fat-free mass(kg)
+```
+
+When no current KFA is supplied, the app uses Mifflin-St. Jeor instead. See D-024.
 
 ## D-005 — KFA can provide an informational projection
 **Status:** decided direction
@@ -95,7 +100,7 @@ This is a design target rather than a hard timing requirement; completeness of n
 
 The onboarding should use one input parameter per screen rather than combining many fields on one page. The goal is to keep every screen visually simple and quick to complete.
 
-Conditional screens are allowed, for example training type only when sport/training is relevant and target KFA only when current KFA is available.
+Conditional screens are allowed, for example training type and duration only when sport/training is relevant and target KFA only when current KFA is available.
 
 ## D-018 — Explanations are optional and hidden by default
 **Status:** decided
@@ -119,12 +124,13 @@ The current intended sequence is:
 8. average daily steps
 9. sport/training frequency
 10. training type when relevant
-11. target definition: target weight directly, or target KFA when current KFA is known so the app can derive the corresponding target weight
-12. target value / derived target weight confirmation
-13. timeframe
-14. planned cheat day / higher-calorie day — details still open
-15. tracking mode
-16. plan result
+11. typical training duration when relevant
+12. target definition: target weight directly, or target KFA when current KFA is known so the app can derive the corresponding target weight
+13. target value / derived target weight confirmation
+14. timeframe
+15. planned cheat day / higher-calorie day — details still open
+16. tracking mode
+17. plan result
 
 If no current KFA was entered, target KFA is unavailable and the user enters a target weight directly.
 
@@ -183,3 +189,43 @@ The derived target weight is then used as the target weight in the subsequent we
 This is a model estimate, not a prediction of actual body composition. The app must communicate that lean mass may change during weight loss and that KFA reference images are only approximate orientation aids.
 
 If the user did not provide a current KFA, target KFA is unavailable and the user must enter a target weight directly.
+
+## D-024 — Resting-energy equation routing
+**Status:** decided
+
+The first version uses:
+
+- **Mifflin-St. Jeor** when no current KFA is available;
+- **Cunningham 1980** (`RMR = 500 + 22 × fat-free mass`) when a current KFA is available.
+
+A KFA estimated from the app's reference images can still be used for Cunningham. The additional uncertainty caused by a visually estimated KFA should be documented internally for developers/model validation, but it does **not require a separate user-facing warning** solely because the KFA came from the reference images. The app may still communicate general model uncertainty elsewhere.
+
+## D-025 — KFA image intervals do not constrain numeric KFA values
+**Status:** decided
+
+Reference images may be provided at coarse anchors such as 10 %, 15 %, 20 %, and 25 %, but the user can enter or fine-adjust numeric KFA values between those anchors.
+
+The calculation always uses the actual numeric KFA value entered by the user, not the nearest image bucket. The same rule applies to current KFA and target KFA.
+
+## D-026 — Everyday activity uses a time-based MET model
+**Status:** decided direction
+
+The primary activity model should use **MET values with time exposure** rather than the previously proposed fixed RMR percentage add-ons.
+
+The model must keep walking/step energy separate so that activity is not counted twice. MET values should come from an appropriate scientific activity compendium, and the exact mapping from onboarding activity categories to MET values/time profiles remains to be specified.
+
+The earlier fixed RMR add-ons (`0.10 / 0.15 / 0.25 / 0.35`) are no longer the selected model.
+
+## D-027 — Training energy uses MET plus duration
+**Status:** decided direction
+
+Training energy should be estimated from training type, a suitable MET value, body weight, and duration. Only the additional energy above the already-accounted resting component should be added to maintenance expenditure.
+
+A typical training-duration input is therefore required when regular training is entered. Sport-specific models or wearable-derived data may replace the generic MET approach later where better data are available.
+
+## D-028 — TEF uses a 10% MVP approximation
+**Status:** decided direction
+
+For the first version, the thermic effect of food (TEF) should be represented by an approximate **10 %** mixed-diet assumption. This is a planning approximation rather than an individual measurement.
+
+A later advanced model may make TEF dependent on macronutrient composition. The deficit model must account for the fact that TEF decreases when energy intake decreases.
