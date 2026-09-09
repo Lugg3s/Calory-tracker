@@ -225,14 +225,38 @@ Das ist weiterhin eine vereinfachte Planung, aber mathematisch konsistent mit de
 
 ## Sicherheits- und Plausibilitätsgrenzen für automatisch erzeugte Pläne
 
-Für normale automatisch erzeugte Erwachsenen-Pläne gilt als V1-Richtung:
+Für normale automatisch erzeugte Erwachsenen-Pläne wird die obere Defizitgrenze **vom geschätzten Erhaltungsbedarf abhängig gemacht** und nicht als fixer kcal-Wert definiert.
 
-- Ein geplantes durchschnittliches Defizit von **mehr als ca. 750 kcal/Tag** wird nicht einfach automatisch empfohlen. Stattdessen wird ein längerer Zeitraum vorgeschlagen.
-- Die automatisch empfohlene Energieaufnahme soll ungefähr nicht unter **1.200 kcal/Tag** für die weibliche Mifflin-Kategorie und **1.500 kcal/Tag** für die männliche Mifflin-Kategorie fallen.
-- Diese Werte sind pragmatische Planungsgrenzen aus etablierten Gewichtsmanagement-Leitlinien und **keine individuellen physiologischen Mindestwerte**.
-- Sehr niedrige Energiezufuhren um 800–1.000 kcal/Tag oder darunter gehören in medizinisch betreute Kontexte und sind nicht Teil der normalen automatischen MVP-Empfehlung.
+V1 setzt als automatische Obergrenze eine maximale Reduktion der Kalorienaufnahme von **25 % des Erhaltungsbedarfs**:
 
-Wenn das gewünschte Ziel innerhalb des gewählten Zeitraums gegen eine dieser Grenzen verstößt, soll die App primär den Zeitraum verlängern bzw. eine Anpassung des Ziels vorschlagen.
+```text
+maximale Kalorienreduktion R_max = 0,25 × Erhaltungsbedarf M
+minimales Tagesziel aus dieser Grenze C_min = 0,75 × M
+```
+
+Da der 10-%-TEF im Defizitmodell separat berücksichtigt wird, entspricht dies intern einem maximalen geplanten Körperenergie-Defizit von:
+
+```text
+D_max = 0,90 × R_max
+D_max = 0,225 × M
+```
+
+Beispiele:
+
+```text
+M = 2.000 kcal → max. Kalorienreduktion 500 kcal → C >= 1.500 kcal
+M = 2.500 kcal → max. Kalorienreduktion 625 kcal → C >= 1.875 kcal
+M = 3.000 kcal → max. Kalorienreduktion 750 kcal → C >= 2.250 kcal
+M = 3.500 kcal → max. Kalorienreduktion 875 kcal → C >= 2.625 kcal
+```
+
+Die 25-%-Grenze ist eine konservative Produktentscheidung innerhalb des in etablierten Gewichtsmanagement-Leitlinien verwendeten Bereichs von ungefähr 15–30 % reduzierter Energieaufnahme. Sie ist keine individuelle physiologische Grenze.
+
+Zusätzlich soll die automatisch empfohlene Energieaufnahme ungefähr nicht unter **1.200 kcal/Tag** für die weibliche Mifflin-Kategorie und **1.500 kcal/Tag** für die männliche Mifflin-Kategorie fallen. Diese Werte sind pragmatische Planungsgrenzen und keine individuellen physiologischen Mindestwerte.
+
+Wenn Ziel und Zeitraum entweder die maintenance-relative 25-%-Grenze oder die absolute Kalorien-Untergrenze verletzen, soll die App primär einen längeren Zeitraum bzw. eine Anpassung des Ziels vorschlagen.
+
+Sehr niedrige Energiezufuhren um 800–1.000 kcal/Tag oder darunter gehören in medizinisch betreute Kontexte und sind nicht Teil der normalen automatischen MVP-Empfehlung.
 
 ## Wochenbudget
 
@@ -392,7 +416,9 @@ Für die aktuell gewählten Parameter und Modelle sind insbesondere relevant:
 - Review zur nahrungsinduzierten Thermogenese — PubMed PMID 15507147
 - Einschränkungen des Standardwerts `1 MET = 3,5 ml O₂/kg/min` — PubMed PMID 15831804
 
-Für Defizit- und Kaloriengrenzen dienen etablierte Gewichtsmanagement-Leitlinien als Orientierung. Die verwendeten Grenzwerte bleiben Produkt-Sicherheitsparameter und ersetzen keine individuelle medizinische Beurteilung.
+Für die maintenance-relative Defizitgrenze ist relevant, dass etablierte europäische Adipositas-Leitlinien eine Reduktion der Energieaufnahme um ungefähr **15–30 %** gegenüber der stabilen Ausgangsaufnahme als ausreichend und angemessen beschreiben. Die gewählten 25 % liegen innerhalb dieses Bereichs. Andere Leitlinien verwenden alternativ feste Defizite wie 500–750 kcal/Tag oder relative Reduktionen bis etwa 30 %.
+
+Die verwendeten Grenzwerte bleiben Produkt-Sicherheitsparameter und ersetzen keine individuelle medizinische Beurteilung.
 
 ## Wichtiger Grundsatz
 
