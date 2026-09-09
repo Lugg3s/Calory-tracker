@@ -176,7 +176,7 @@ Die Division durch `0,90` folgt daraus, dass bei Erhaltung ungefähr 10 % der au
 
 Die 10 % sind eine Modellnäherung und keine individuelle Messung. Später kann TEF makronährstoffabhängig berechnet werden, da Protein typischerweise einen höheren TEF als Kohlenhydrate und Fett verursacht.
 
-Wichtig für die spätere Defizitberechnung: Wenn die Energieaufnahme sinkt, sinkt auch der TEF. Das Defizitmodell darf daher nicht so tun, als bliebe der Erhaltungs-TEF bei reduzierter Kalorienzufuhr unverändert.
+Wichtig für die Defizitberechnung: Wenn die Energieaufnahme sinkt, sinkt auch der TEF. Das tägliche Kalorienziel muss deshalb so berechnet werden, dass nicht fälschlich der komplette TEF des Erhaltungsbedarfs als unverändert angenommen wird.
 
 ## Kostenrechnungs-ähnliche Darstellung
 
@@ -202,6 +202,47 @@ Die Zahlen sind ausschließlich illustrative Beispiele.
 
 Der Nutzer soll erkennen können, welchen ungefähren Beitrag einzelne Eingaben zum Ergebnis leisten. Die interne Modellunsicherheit einzelner Komponenten muss jedoch nicht für jede Quelle separat im UI ausgewiesen werden.
 
+## Statisches V1-Modell für Gewichtsverlust und Defizit
+
+Für V1 wird bewusst ein **statisches Planungsmodell** verwendet. Es findet keine tägliche Simulation des Körpergewichts, des RMR oder des TDEE über den Planzeitraum statt.
+
+Der ausgewählte Planungsfaktor beträgt:
+
+```text
+7.700 kcal pro kg geplanter Gewichtsabnahme
+```
+
+Der Rechenweg lautet:
+
+```text
+notwendige Gewichtsabnahme
+= aktuelles Gewicht - Zielgewicht
+
+gesamtes erforderliches Defizit
+= notwendige Gewichtsabnahme(kg) × 7.700 kcal
+
+durchschnittliches tägliches Defizit
+= gesamtes erforderliches Defizit / Anzahl der Tage
+```
+
+Beispiel:
+
+```text
+Aktuelles Gewicht: 80 kg
+Zielgewicht:        75 kg
+Zeitraum:           100 Tage
+
+Gewichtsabnahme = 5 kg
+Gesamtdefizit = 5 × 7.700 = 38.500 kcal
+Durchschnittliches Defizit = 38.500 / 100 = 385 kcal/Tag
+```
+
+Der Faktor `7.700 kcal/kg` ist eine **bewusste Produktvereinfachung für die Planung** und keine exakte biologische Konstante. Reale Gewichtsabnahme besteht nicht ausschließlich aus Fettverlust und verläuft nicht zwingend linear. Veränderungen des Energiebedarfs, der fettfreien Masse und metabolische Anpassungen werden in V1 nicht dynamisch Tag für Tag simuliert.
+
+Wenn der Nutzer später ein neues aktuelles Gewicht eingibt, kann der Plan von diesem neuen Ausgangspunkt neu berechnet werden. Eine regelmäßige Gewichtseingabe ist für die initiale Planung nicht erforderlich.
+
+Ein dynamisches oder adaptives Modell kann später als Ausbau ergänzt werden.
+
 ## Wochenbudget und geplanter Cheat Day
 
 Zusätzlich zum durchschnittlichen Tagesziel soll die App einen geplanten Cheat Day bzw. einen Tag mit höherem Kalorienbudget über ein **Wochenbudget** abbilden können.
@@ -221,31 +262,6 @@ Die konkrete Verteilungslogik ist noch offen. Insbesondere müssen festgelegt we
 - wie die Verteilung transparent und verständlich dargestellt wird.
 
 Der Begriff „Cheat Day“ ist vorläufig. Für die finale UX kann eine neutralere Bezeichnung wie „flexibler Tag“ oder „höheres Tagesbudget“ sinnvoller sein.
-
-## Erklärung der Gewichtsabnahme
-
-Die App soll die Grundidee sehr einfach erklären können:
-
-> Körperfett enthält gespeicherte Energie. Für eine grobe Planung kann man mit einer angenommenen Energiemenge pro Kilogramm Fettmasse rechnen. Diese Zahl ist eine Modellannahme und keine exakte biologische Konstante.
-
-Im Gespräch wurde als Faustregel **7.000–7.700 kcal pro kg Fettmasse** diskutiert. Der endgültige Produktwert muss vor der Implementierung anhand wissenschaftlicher Literatur festgelegt werden.
-
-Beispiel für die spätere Erklärung:
-
-```text
-Du möchtest 5 kg abnehmen.
-
-5 kg × angenommene Energiedifferenz pro kg
-= benötigtes Gesamtdefizit
-
-Gesamtdefizit ÷ Anzahl der Tage
-= durchschnittliches tägliches Defizit
-
-Erhaltungsbedarf - tägliches Defizit
-= vorgeschlagenes Kalorienziel
-```
-
-Die App muss dabei erklären, dass diese Rechnung eine Vereinfachung ist: Gewichtsverlust besteht nicht ausschließlich aus Fettverlust, die Energiebilanz verändert sich während einer Gewichtsabnahme und die tatsächliche Gewichtsabnahme verläuft nicht zwingend linear.
 
 ## KFA als Projektion von Gewicht zu KFA
 
@@ -325,8 +341,10 @@ Für die aktuell gewählten Parameter und Modelle sind insbesondere relevant:
 - Review zur nahrungsinduzierten Thermogenese — PubMed PMID 15507147
 - Untersuchung zur Einschränkung des Standardwerts `1 MET = 3,5 ml O₂/kg/min` — PubMed PMID 15831804
 
-Diese Quellen begründen die Modellrichtung, ersetzen aber keine spätere End-to-End-Validierung des gesamten TDEE-Modells gegen reale Nutzerdaten.
+Der statische Faktor von `7.700 kcal/kg` ist als Produktvereinfachung dokumentiert und soll in der Entwicklerdokumentation mit seiner wissenschaftlichen Herleitung und seinen Grenzen erläutert werden.
+
+Diese Quellen und Modellannahmen begründen die Modellrichtung, ersetzen aber keine spätere End-to-End-Validierung des gesamten TDEE- und Defizitmodells gegen reale Nutzerdaten.
 
 ## Wichtiger Grundsatz
 
-Alle Ergebnisse sind **Schätzwerte**. Die App soll diese Unsicherheit grundsätzlich transparent kommunizieren und später idealerweise aus dem tatsächlichen Gewichtsverlauf lernen bzw. die Schätzung regelmäßig anpassen.
+Alle Ergebnisse sind **Schätzwerte**. Die App soll diese Unsicherheit grundsätzlich transparent kommunizieren. Ein späteres adaptives Modell kann reale Gewichtsverläufe für eine Neuberechnung oder Kalibrierung verwenden; V1 setzt dies nicht voraus.
