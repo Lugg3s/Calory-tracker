@@ -273,17 +273,35 @@ target calories C = maintenance calories M - D / 0.90
 
 This keeps the 10 % TEF approximation internally consistent when calorie intake is lower than maintenance. It remains an approximate planning model, not a physiological simulation.
 
-## D-031 — Automatic plans use conservative deficit/intake guardrails
+## D-031 — Automatic plans use maintenance-relative deficit/intake guardrails
 **Status:** decided direction
 
-For normal automatically generated adult weight-loss plans, the first version should treat an average planned deficit above approximately **750 kcal/day** as too aggressive for the standard recommendation and propose a longer timeframe instead of silently producing a more restrictive plan. Evidence-based lifestyle interventions commonly use approximately 500–750 kcal/day energy deficits.
+For normal automatically generated adult weight-loss plans, the upper V1 guardrail is **relative to the user's estimated maintenance calories rather than a fixed kcal amount**.
+
+The automatically planned calorie intake should normally not be reduced by more than **25 % of estimated maintenance calories**:
+
+```text
+maximum calorie reduction R_max = 0.25 × maintenance calories M
+minimum target from this guardrail C_min = 0.75 × M
+```
+
+Because the V1 model separately accounts for the lower TEF at reduced intake, the corresponding maximum planned body-energy deficit `D` is:
+
+```text
+D_max = 0.90 × R_max
+D_max = 0.225 × M
+```
+
+If the deficit required by target weight and timeframe exceeds `D_max`, the app should propose a longer timeframe rather than silently producing a more restrictive plan.
+
+A 25 % intake reduction is a deliberate product choice within the roughly 15–30 % energy-intake reduction range used in established adult obesity-management guidance. It is not an individual physiological threshold.
 
 As an additional product safety rail, the automatically recommended calorie target should not be pushed below approximately:
 
 - **1,200 kcal/day** for the female Mifflin equation category;
 - **1,500 kcal/day** for the male Mifflin equation category.
 
-These values are pragmatic guideline-derived planning floors, not individual physiological minimums. If the requested goal/timeframe would require a lower target, the app should extend the timeframe or ask the user to revise the goal rather than automatically recommending the lower intake.
+These values are pragmatic guideline-derived planning floors, not individual physiological minimums. If either the maintenance-relative guardrail or the calorie floor is violated, the app should extend the timeframe or ask the user to revise the goal rather than automatically recommending the lower intake.
 
 Very-low-energy diets around 800–1,000 kcal/day or lower are outside the normal self-directed MVP recommendation and belong in medically supervised contexts. Exact handling of manual overrides and special populations can be refined later.
 
