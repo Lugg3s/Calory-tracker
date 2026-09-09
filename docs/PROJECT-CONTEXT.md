@@ -196,7 +196,7 @@ maintenance expenditure = base / 0.90
 
 This is a planning approximation. A later advanced model may calculate TEF from macronutrient composition.
 
-The later deficit model must account for the fact that TEF decreases when calorie intake decreases.
+When deriving a calorie target below maintenance, the lower TEF at lower intake must be handled consistently in the final target equation rather than assuming the maintenance-level TEF remains unchanged.
 
 ## Target KFA as an input for deriving target weight
 
@@ -218,19 +218,37 @@ The reverse projection also remains useful: if current KFA is known and the user
 
 ## Weight-loss calculation concept
 
-1. Estimate maintenance energy expenditure.
+V1 deliberately uses a **static planning model** rather than a dynamic day-by-day body-weight simulation.
+
+1. Estimate current maintenance energy expenditure.
 2. Determine target weight directly from the user or derive it from target KFA when current KFA is known and that option is used.
-3. Calculate the difference between current and target weight.
-4. Translate the intended loss into an approximate total energy deficit using a scientifically justified model assumption.
-5. Spread that deficit over the requested timeframe.
-6. Account for the fact that TEF and energy needs change when intake/body weight change.
-7. Derive the suggested calorie target.
-8. Present the resulting calorie target and all calculation steps.
-9. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
+3. Calculate required weight loss:
 
-The exact deficit model, weekly-budget logic, and cheat-day redistribution logic are still open and must be validated before implementation.
+```text
+required weight loss = current weight - target weight
+```
 
-Approximately 7,000–7,700 kcal per kg was discussed as a rough model assumption. This is **not a final product constant**. Scientific validation is required, and real weight change is not a simple linear conversion of calories into fat mass.
+4. Translate that intended loss into a total energy deficit using the selected V1 planning factor:
+
+```text
+total required deficit = required weight loss(kg) × 7,700 kcal
+```
+
+5. Spread the total deficit over the requested timeframe:
+
+```text
+average daily deficit = total required deficit ÷ number of plan days
+```
+
+6. Derive the suggested daily calorie target, while handling the lower TEF at lower food intake consistently.
+7. Present the calorie target and the calculation steps transparently.
+8. If a planned higher-calorie day is selected, derive a weekly calorie budget and redistribute calories across the week so the intended average deficit is preserved.
+
+The V1 plan does **not** dynamically recalculate body weight, RMR, TDEE, metabolic adaptation, or body composition for every simulated day. The factor **7,700 kcal/kg** is an explicit product simplification for planning, not an exact biological constant.
+
+A dynamic/adaptive model can be added later. If a user later enters a new measured current weight, the app may recalculate the plan from that new current state without requiring continuous weigh-ins.
+
+The exact safety limits for the daily deficit, the mathematical treatment of TEF in the deficit target, and the weekly-budget/cheat-day redistribution logic are still open.
 
 ## Manual calorie override
 
@@ -311,7 +329,7 @@ This is visualization, not reliable KFA measurement.
 - MET-based training with duration
 - 10 % TEF approximation
 - transparent calculation breakdown
-- deficit calculation
+- static 7,700 kcal/kg deficit planning model
 - calorie target
 - planned cheat-day / higher-calorie-day screen with weekly-budget handling, exact logic still open
 - optional macro mode
@@ -319,6 +337,7 @@ This is visualization, not reliable KFA measurement.
 - editable calorie target in settings
 
 ### Exclude initially
+- dynamic day-by-day body-weight/TDEE simulation
 - LLM
 - voice food logging
 - AI meal alternatives
