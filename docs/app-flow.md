@@ -62,17 +62,25 @@ Damit dafür keine zusätzliche Körperbau-Frage nötig ist, leitet die App inte
 - abgeleitete Körperform-/Referenzkategorie
 - KFA-Stufe
 
-Die aktuelle Richtung ist, KFA-Stufen ungefähr in 5-Prozentpunkt-Schritten abzubilden. Die Referenzbilder werden nicht live für den einzelnen Nutzer generiert, sondern im Voraus für eine begrenzte Anzahl typischer Kategorien erstellt. Ein vollständiges Raster für jede Größen- und Gewichtskombination ist damit nicht erforderlich.
+Die aktuelle Richtung ist, KFA-Stufen ungefähr in 5-Prozentpunkt-Schritten abzubilden. Diese Stufen sind nur visuelle Anker. Der Nutzer kann einen numerischen KFA-Wert zwischen den Bildstufen eingeben; die Berechnung verwendet immer den tatsächlich eingegebenen Wert.
+
+Die Referenzbilder werden nicht live für den einzelnen Nutzer generiert, sondern im Voraus für eine begrenzte Anzahl typischer Kategorien erstellt. Ein vollständiges Raster für jede Größen- und Gewichtskombination ist damit nicht erforderlich.
 
 Die intern abgeleitete Referenzkategorie dient ausschließlich der Auswahl geeigneter Vergleichsbilder und ist keine medizinische Klassifikation. Die visuelle Hilfe ist insgesamt nur eine grobe Orientierung zur Selbsteinschätzung und keine KFA-Messung. Der Nutzer sieht die Bilder nur, wenn er diese Hilfe ausdrücklich öffnet; der normale Screen bleibt minimalistisch.
+
+Die zusätzliche Unsicherheit eines nur visuell geschätzten KFA kann intern für Entwickler und spätere Modellvalidierung markiert werden. Eine eigene Warnung im User Interface ist dafür nicht erforderlich.
 
 ### Screen 7 — Alltagstyp
 
 **Parameter:** Alltagsaktivität / Tätigkeit, z. B. überwiegend sitzend
 
+Die Alltagsaktivität soll im Berechnungsmodell MET-basiert abgebildet werden. Wie daraus die erforderlichen Zeitanteile mit möglichst wenigen zusätzlichen Eingaben entstehen, ist noch zu spezifizieren.
+
 ### Screen 8 — Schritte
 
 **Parameter:** durchschnittliche tägliche Schritte
+
+Schritte werden als eigene Geh-Komponente berechnet und dürfen im MET-Alltagsmodell nicht noch einmal vollständig gezählt werden.
 
 ### Screen 9 — Sporthäufigkeit
 
@@ -84,7 +92,15 @@ Die intern abgeleitete Referenzkategorie dient ausschließlich der Auswahl geeig
 
 Dieser Screen wird nur gezeigt, wenn der Nutzer regelmäßigen Sport bzw. Training angegeben hat. Die genaue Granularität der auswählbaren Trainingsarten wird später im UX- und Berechnungsmodell festgelegt.
 
-### Screen 11 — Zieldefinition
+### Screen 11 — Typische Trainingsdauer
+
+**Parameter:** typische Dauer einer Trainingseinheit
+
+Dieser Screen wird nur gezeigt, wenn der Nutzer regelmäßigen Sport bzw. Training angegeben hat. Die Dauer wird benötigt, weil die V1-Trainingsberechnung Trainingsart/MET, Körpergewicht und Zeit kombiniert.
+
+Eine separate Intensitätsfrage ist im initialen Onboarding nicht zwingend erforderlich. Genauere Intensitätsangaben können später unter „Plan verfeinern“ ergänzt werden.
+
+### Screen 12 — Zieldefinition
 
 **Parameter:** Art der Zieldefinition
 
@@ -99,7 +115,7 @@ Wenn ein aktueller KFA vorhanden ist:
 - der Nutzer kann sein Zielgewicht direkt eingeben; oder
 - er kann einen Ziel-KFA auswählen, aus dem die App das passende Zielgewicht berechnet.
 
-### Screen 12 — Zielwert / abgeleitetes Zielgewicht
+### Screen 13 — Zielwert / abgeleitetes Zielgewicht
 
 **Parameter:** Zielgewicht bzw. Ziel-KFA zur Herleitung des Zielgewichts
 
@@ -113,6 +129,8 @@ Diese Variante ist nur verfügbar, wenn ein aktueller KFA vorhanden ist.
 
 Der Nutzer soll den Ziel-KFA auch anhand visueller Referenzbilder auswählen können. Die App zeigt dafür passende KFA-Stufen aus der vorhandenen Referenzbibliothek. Die Bilder dienen nur als Orientierung und dürfen keine exakte Körperfettmessung suggerieren.
 
+Die Bildstufen begrenzen den numerischen Ziel-KFA nicht. Der Nutzer kann den Zielwert zwischen den visuellen Ankern fein einstellen; die Berechnung verwendet den exakten numerischen Wert.
+
 Nach Auswahl des Ziel-KFA berechnet die App näherungsweise das dazugehörige Zielgewicht und die erforderliche Gewichtsabnahme. Der aktuelle Modellansatz ist:
 
 ```text
@@ -125,11 +143,11 @@ Das so berechnete Zielgewicht ist anschließend das Zielgewicht für die weitere
 
 Diese Berechnung setzt konstante fettfreie Masse voraus und ist daher ausdrücklich eine Modellschätzung.
 
-### Screen 13 — Zeitraum
+### Screen 14 — Zeitraum
 
 **Parameter:** gewünschter Zeitraum bis zum Ziel
 
-### Screen 14 — Cheat Day / höheres Tagesbudget
+### Screen 15 — Cheat Day / höheres Tagesbudget
 
 **Parameter:** geplante Verteilung des Kalorienbudgets über die Woche
 
@@ -145,7 +163,7 @@ Die Funktion ist als offener Produktpunkt dokumentiert. Noch festzulegen sind in
 
 Die zentrale Anforderung ist, dass ein höheres Budget an einem Tag **innerhalb des Wochenbudgets berücksichtigt** wird. Der Cheat Day darf also nicht einfach zusätzliche Kalorien oberhalb des geplanten Wochenbudgets hinzufügen, wenn dadurch das vorgesehene durchschnittliche Defizit verändert würde.
 
-### Screen 15 — Tracking-Modus
+### Screen 16 — Tracking-Modus
 
 **Parameter:** Tracking-Präferenz
 
@@ -154,7 +172,7 @@ Auswahl:
 - nur Kalorien
 - Kalorien + Makronährstoffe
 
-### Screen 16 — Plan-Ergebnis
+### Screen 17 — Plan-Ergebnis
 
 **Parameter:** keiner
 
@@ -175,7 +193,8 @@ Nach dem ersten Plan soll der Nutzer nicht mit weiteren Pflichtfragen blockiert 
 Dort können später insbesondere liegen:
 
 - detailliertere Erklärungen und Formeln
-- zusätzliche Trainings-/Aktivitätsdetails, sofern für die Berechnung sinnvoll
+- zusätzliche Trainings-/Aktivitätsdetails
+- genauere Trainingsintensität
 - manuelle Anpassung des Kalorienziels
 - manuelle Anpassung von Makrozielen
 - weitere Personalisierungsoptionen
@@ -186,8 +205,10 @@ Die bereits getroffene Produktentscheidung bleibt bestehen: Die manuelle Anpassu
 
 Der grundsätzliche Flow und das Prinzip „ein Parameter pro Eingabe-Screen“ sind festgelegt. Exakte Texte, Controls, visuelle Gestaltung und mögliche Mikro-Interaktionen werden in der Wireframe-/Designphase iteriert.
 
+Die Trainingsdauer ist als bedingter Eingabe-Screen aufgenommen, weil das gewählte MET-basierte Trainingsmodell eine Zeitkomponente benötigt.
+
 Der Cheat-Day-/Wochenbudget-Screen ist als notwendiger zusätzlicher Onboarding-Punkt aufgenommen, seine konkrete UX und Berechnungslogik sind jedoch noch offen.
 
 Für die KFA-Referenzbibliothek sind insbesondere die genaue Ableitung der Körperform-/Referenzkategorien, die Anzahl der Kategorien, deren Grenzwerte, die KFA-Spanne und die benötigten Bildvarianten noch festzulegen.
 
-Beschlossen ist: Ein Ziel-KFA kann bei vorhandenem aktuellem KFA zur Herleitung des Zielgewichts verwendet werden. Die genaue Darstellung der Zielbilder und die wissenschaftlich sinnvolle Behandlung möglicher Änderungen der fettfreien Masse bleiben noch zu präzisieren.
+Beschlossen ist: Ein Ziel-KFA kann bei vorhandenem aktuellem KFA zur Herleitung des Zielgewichts verwendet und unabhängig von den groben Bildankern numerisch fein eingestellt werden. Die wissenschaftlich sinnvolle Behandlung möglicher Änderungen der fettfreien Masse bleibt noch zu präzisieren.
