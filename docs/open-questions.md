@@ -15,8 +15,9 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wann sollen sportartspezifische Modelle, z. B. Pace/Distanz beim Laufen oder Watt beim Radfahren, den generischen MET-Ansatz ersetzen?
 - Soll TEF später im erweiterten Modus makronährstoffabhängig statt pauschal mit 10 % berechnet werden?
 - Welche Grenzen gelten für das empfohlene Defizit?
-- Welche Methode verwenden wir für die Projektion über längere Zeiträume?
-- Wie berücksichtigen wir metabolische Anpassungen und sinkenden Energiebedarf bei Gewichtsverlust?
+- Wie wird der 10-%-TEF bei einem statischen täglichen Kalorienziel mathematisch sauber berücksichtigt, damit der sinkende TEF bei niedrigerer Energieaufnahme nicht doppelt oder falsch behandelt wird?
+- Wann soll ein bestehender Plan neu berechnet werden, wenn der Nutzer später ein neues aktuelles Gewicht eingibt?
+- Soll nach dem MVP ein dynamisches/adaptives Gewichtsverlaufsmodell ergänzt werden, das sinkenden Energiebedarf, metabolische Anpassungen und veränderte Körperzusammensetzung berücksichtigt?
 - Wie wissenschaftlich belastbar ist die Annahme konstanter fettfreier Masse für die Ableitung eines Zielgewichts aus aktuellem KFA und Ziel-KFA, und wie soll das Modell gegebenenfalls verbessert werden?
 - Wie gehen wir damit um, dass sich fettfreie Masse während einer Gewichtsabnahme verändern kann?
 - Wie wird aus dem durchschnittlichen täglichen Kalorienziel ein Wochenbudget abgeleitet?
@@ -25,8 +26,7 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 
 ## Wissenschaft
 
-- Welcher Wert pro kg Fettmasse soll als Modellannahme für die Defizit-/Gewichtsverlustrechnung verwendet werden?
-- Welche Literatur unterstützt diesen Wert und welche Einschränkungen gibt es?
+- Welche Literatur und Einschränkungen sollen in der Entwicklerdokumentation zur gewählten V1-Modellannahme von 7.700 kcal pro kg Gewichtsverlust festgehalten werden?
 - Welche Proteinempfehlung ist bei Energiedefizit optimal?
 - Ist 1,2 g/kg für nicht trainierende Nutzer sinnvoll als Standard?
 - Ist 2,0 g/kg für Kraft-/Leistungssportler sinnvoll als MVP-Standard?
