@@ -10,11 +10,11 @@ Die Berechnung ist ausdrücklich eine Schätzung. Die App soll keine Genauigkeit
 
 Grundsätzlich soll der Rechenweg aus mehreren transparenten Komponenten bestehen:
 
-1. Ruheenergiebedarf / Grundumsatz
+1. Ruheenergiebedarf
 2. Alltagsaktivität
 3. Schritte
 4. geplantes Training / Sport
-5. thermischer Effekt der Nahrung, sofern im finalen Modell berücksichtigt
+5. thermischer Effekt der Nahrung
 6. Summe = geschätzter Erhaltungsbedarf
 7. Zielgewicht bestimmen: direkt aus Nutzereingabe oder, bei vorhandenem aktuellem KFA, modellhaft aus einem gewählten Ziel-KFA ableiten
 8. Bestimmung des für das Zielgewicht erforderlichen Gesamtdefizits
@@ -24,10 +24,10 @@ Grundsätzlich soll der Rechenweg aus mehreren transparenten Komponenten bestehe
 
 ## Ruheenergiebedarf
 
-Aktuell festgelegte Modellrichtung:
+Festgelegte Modellrichtung:
 
 - **ohne aktuellen KFA:** Mifflin-St.-Jeor
-- **mit aktuellem KFA:** Cunningham auf Basis der fettfreien Masse
+- **mit aktuellem KFA:** Cunningham 1980 auf Basis der fettfreien Masse
 
 Mifflin-St.-Jeor:
 
@@ -39,14 +39,14 @@ Frauen:
 RMR = 10 × Gewicht(kg) + 6,25 × Größe(cm) - 5 × Alter - 161
 ```
 
-Cunningham:
+Cunningham 1980:
 
 ```text
 fettfreie Masse = Gewicht × (1 - KFA)
 RMR = 500 + 22 × fettfreie Masse(kg)
 ```
 
-Die Wahl Cunningham bei vorhandenem KFA bedeutet, dass die Genauigkeit des eingegebenen bzw. geschätzten KFA direkt die RMR-Schätzung beeinflusst. Diese Unsicherheit muss transparent kommuniziert werden. Die wissenschaftliche Validierung dieser Produktentscheidung vor Hard-Coding bleibt erforderlich.
+Ein anhand der Referenzbilder geschätzter KFA darf für Cunningham verwendet werden. Die dadurch höhere Modellunsicherheit soll für Entwickler und spätere Validierung intern dokumentiert werden. Eine zusätzliche, gesonderte Warnung im User Interface ist allein deshalb nicht erforderlich. Allgemein bleibt die gesamte Erhaltungsbedarfsberechnung als Schätzung zu kennzeichnen.
 
 ## KFA-Eingabe und Bildstufen
 
@@ -54,28 +54,30 @@ Die Referenzbilder können beispielsweise in 5-Prozentpunkt-Schritten vorliegen,
 
 Der Nutzer ist **nicht auf diese Bildstufen beschränkt**. Er kann einen numerischen KFA-Wert zwischen den Referenzstufen eingeben, z. B. 17 % oder 22 %. Für sämtliche Berechnungen wird der tatsächlich eingegebene numerische Wert verwendet, nicht die nächstgelegene Bildstufe.
 
-Dasselbe Prinzip kann für den Ziel-KFA gelten: Bilder dienen als Orientierung, der numerische Zielwert kann feiner eingestellt werden.
+Dasselbe Prinzip gilt für den Ziel-KFA: Bilder dienen als Orientierung, der numerische Zielwert kann feiner eingestellt werden.
 
-## Vorläufiges Aktivitätsmodell
+## Erhaltungsbedarf: Komponentenmodell
 
 Für das MVP soll der Erhaltungsbedarf komponentenbasiert und transparent aufgebaut werden:
 
 ```text
 Ruheenergiebedarf
-+ Alltagskomponente
++ Alltagsaktivität (MET-basiert)
 + Schritt-Komponente
-+ Training
-+ ggf. thermischer Effekt der Nahrung
++ Training (MET-basiert)
+= Energieverbrauch vor TEF
+
++ thermischer Effekt der Nahrung
 = geschätzter Erhaltungsbedarf
 ```
 
 Ein klassischer pauschaler PAL-Faktor soll nicht gleichzeitig mit separat berechneten Schritten und Training verwendet werden, weil dadurch Aktivität leicht doppelt gezählt werden kann.
 
-### Schritte als Hauptsignal für Gehaktivität
+## Schritte
 
-Die aktuelle Richtung ist, aus Körpergröße und durchschnittlichen Schritten zunächst eine geschätzte Gehstrecke abzuleiten.
+Schritte werden separat als Gehaktivität modelliert.
 
-Vorläufige Produktparameter:
+Aktuelle V1-Richtung:
 
 ```text
 geschätzte Schrittlänge = Körpergröße × 0,414
@@ -83,47 +85,98 @@ Distanz(km) = Schritte × Schrittlänge(m) / 1.000
 Netto-Schritt-kcal = Distanz(km) × Körpergewicht(kg) × 0,57 kcal/kg/km
 ```
 
-Die Faktoren `0,414` und `0,57 kcal/kg/km` sind vorläufige Modellparameter und müssen vor finaler Implementierung wissenschaftlich validiert bzw. kalibriert werden.
+Einordnung der Parameter:
 
-Die Schritt-Komponente soll als **Netto-Zusatzverbrauch über den Ruheenergiebedarf hinaus** verstanden werden, damit der Ruheverbrauch nicht doppelt gezählt wird.
+- `0,57 kcal/kg/km` ist als Netto-Energiekosten des normalen Gehens wissenschaftlich gut begründbar und bleibt der aktuelle V1-Arbeitswert.
+- `0,414 × Körpergröße` ist nur eine grobe Schätzung der Schrittlänge und soll als Fallback behandelt werden, nicht als präziser physiologischer Parameter.
+- Sobald eine tatsächlich gemessene Distanz aus Smartphone oder Wearable verfügbar ist, ist diese der geschätzten Distanz vorzuziehen.
 
-### Alltags-/Berufskomponente
+Die Schritt-Komponente ist als **Netto-Zusatzverbrauch über den Ruheenergiebedarf hinaus** zu verstehen.
 
-Da Gehaktivität bereits über die Schritte abgebildet wird, soll der Alltagstyp primär Aktivität erfassen, die durch Schrittzahl allein schlecht beschrieben wird, z. B. langes Stehen, Heben, Tragen und manuelle Arbeit.
+## Alltagsaktivität: zeitbasiertes MET-Modell
 
-Aktuelle MVP-Richtung ist ein einfacher Zuschlag als Anteil des individuellen RMR:
+Die zuvor diskutierten pauschalen RMR-Zuschläge für Alltagstypen werden **nicht** als primäres Modell verwendet.
 
-| Alltagstyp | Beispiele | vorläufiger RMR-Zuschlag |
-| --- | --- | ---: |
-| überwiegend sitzend | Büro, Studium | 0,10 |
-| überwiegend stehend | Verkauf, Friseur | 0,15 |
-| leicht körperlich | Pflege, Lager, leichtes Handwerk | 0,25 |
-| stark körperlich | Bau, schwere manuelle Arbeit | 0,35 |
+Stattdessen wird die Alltagsaktivität über ein **zeitbasiertes MET-Modell** abgebildet. Relevante Tätigkeiten bzw. Aktivitätsprofile werden passenden MET-Werten zugeordnet und über ihre zeitliche Dauer gewichtet.
+
+Grundstruktur:
 
 ```text
-Alltags-kcal = RMR × Alltagsfaktor
+Brutto-Aktivitäts-kcal
+= MET × 3,5 × Körpergewicht(kg) / 200 × Minuten
+
+Netto-Aktivitäts-kcal
+= Brutto-Aktivitäts-kcal
+- Ruheenergie während derselben Zeit
+
+Ruheenergie während derselben Zeit
+= RMR / 1.440 × Minuten
 ```
 
-Diese Faktoren sind **vorläufige Produktparameter**, keine final validierten wissenschaftlichen Konstanten. Sie müssen gegen geeignete Aktivitäts-/PAL-/MET-Daten kalibriert werden.
+Die MET-Werte sollen aus einem wissenschaftlich etablierten Aktivitätskompendium stammen, insbesondere dem aktuellen Adult Compendium of Physical Activities.
 
-### Alternative: zeitbasiertes MET-Modell
+### Doppelzählungsregel
 
-Ein **zeitbasiertes MET-Modell wird ausdrücklich als Alternative hinterlegt** und soll nicht verworfen werden.
+Da Gehen bereits über die Schritt-Komponente erfasst wird, darf der MET-Alltagsblock Gehaktivität nicht vollständig ein zweites Mal addieren.
 
-Bei diesem Ansatz wird der Alltag anhand geschätzter bzw. später genauer verfügbarer Zeitanteile modelliert, z. B. Stunden sitzend, stehend, gehend oder körperlich arbeitend. Die Aktivitätsabschnitte werden mit passenden MET-Werten bewertet.
+Die Implementierung muss deshalb entweder:
 
-Vorteile:
+- nur nicht-lokomotorische bzw. nicht bereits durch Schritte erfasste Aktivität über MET hinzufügen, z. B. Stehen, Heben, Tragen oder manuelle Arbeit; oder
+- bei umfassenderen Aktivitätsprofilen den bereits über Schritte erfassten Anteil explizit herausrechnen.
 
-- feinere Abbildung verschiedener Tätigkeiten;
-- kann mit späteren Health-/Wearable-Daten oder detaillierteren Nutzereingaben deutlich genauer werden;
-- eignet sich als spätere Alternative oder Ausbau des vereinfachten RMR-Faktormodells.
+Welche Zeitanteile im Onboarding direkt abgefragt, aus Alltagstypen abgeleitet oder später aus Health-/Wearable-Daten übernommen werden, ist noch festzulegen.
 
-Nachteil für das aktuelle Onboarding:
+Die früher diskutierten RMR-Faktoren `0,10 / 0,15 / 0,25 / 0,35` sind damit **keine ausgewählten Produktparameter mehr**.
 
-- ohne zusätzliche Angaben zur Tätigkeitsdauer müssten viele Zeitanteile angenommen werden;
-- dadurch würde eine scheinbare Präzision entstehen und das Onboarding könnte deutlich länger werden.
+## Training / Sport
 
-Daher bleibt für die erste Version der einfache RMR-basierte Alltagszuschlag die aktuelle Richtung, während das zeitbasierte MET-Modell als dokumentierte Alternative für spätere Validierung und Weiterentwicklung erhalten bleibt.
+Training wird separat von Alltag und Schritten modelliert.
+
+V1-Richtung:
+
+```text
+Brutto-Training-kcal
+= MET × 3,5 × Körpergewicht(kg) / 200 × Minuten
+
+Netto-Training-kcal
+= Brutto-Training-kcal
+- RMR / 1.440 × Minuten
+```
+
+Für den durchschnittlichen Tagesplan wird der Wochenumfang auf einen Tagesdurchschnitt umgelegt:
+
+```text
+Training-kcal pro Tag
+= Summe Netto-Training-kcal pro Woche / 7
+```
+
+Dafür werden mindestens benötigt:
+
+- Trainings-/Sportart
+- Trainingshäufigkeit
+- typische Dauer pro Einheit
+
+Eine separate Intensitätsfrage soll im initialen Onboarding nicht zwingend erforderlich sein. Für V1 können sinnvolle Standard-MET-Werte pro Trainingsart verwendet werden; genauere Intensitätsangaben können später unter „Plan verfeinern“ ergänzt werden.
+
+Sportartspezifische Modelle oder Wearable-Daten können den generischen MET-Ansatz später ersetzen, wenn sie belastbarer sind, z. B. Distanz und Pace beim Laufen oder Leistung/Watt beim Radfahren.
+
+## Thermischer Effekt der Nahrung
+
+Für das MVP wird der thermische Effekt der Nahrung (TEF / diet-induced thermogenesis) mit einer **10-%-Näherung für gemischte Ernährung** berücksichtigt.
+
+Dabei gilt für die Erhaltungsrechnung:
+
+```text
+Basis = RMR + Netto-Alltag + Netto-Schritte + Netto-Training
+
+Erhaltungsbedarf = Basis / 0,90
+```
+
+Die Division durch `0,90` folgt daraus, dass bei Erhaltung ungefähr 10 % der aufgenommenen Energie wieder für Verarbeitung, Aufnahme, Transport und Speicherung der Nahrung aufgewendet werden.
+
+Die 10 % sind eine Modellnäherung und keine individuelle Messung. Später kann TEF makronährstoffabhängig berechnet werden, da Protein typischerweise einen höheren TEF als Kohlenhydrate und Fett verursacht.
+
+Wichtig für die spätere Defizitberechnung: Wenn die Energieaufnahme sinkt, sinkt auch der TEF. Das Defizitmodell darf daher nicht so tun, als bliebe der Erhaltungs-TEF bei reduzierter Kalorienzufuhr unverändert.
 
 ## Kostenrechnungs-ähnliche Darstellung
 
@@ -135,16 +188,19 @@ Ruheenergiebedarf                  1.650 kcal
 + Schritte                            250 kcal
 + Training (Tagesdurchschnitt)        150 kcal
 --------------------------------------------
-= geschätzter Erhaltungsbedarf      2.350 kcal
-
-- tägliches Defizit                   400 kcal
+= Basis vor TEF                     2.350 kcal
++ thermischer Effekt der Nahrung      XXX kcal
 --------------------------------------------
-= vorgeschlagenes Tagesziel         1.950 kcal
+= geschätzter Erhaltungsbedarf      XXXX kcal
+
+- geplantes Defizit                   XXX kcal
+--------------------------------------------
+= vorgeschlagenes Tagesziel         XXXX kcal
 ```
 
 Die Zahlen sind ausschließlich illustrative Beispiele.
 
-Der Nutzer soll beispielsweise erkennen können, dass eine Änderung von 5.000 auf 6.000 durchschnittliche Schritte den geschätzten Energieverbrauch verändert. Ebenso soll die App zeigen können, welchen ungefähren zusätzlichen Energieverbrauch regelmäßiges Krafttraining oder Joggen beiträgt.
+Der Nutzer soll erkennen können, welchen ungefähren Beitrag einzelne Eingaben zum Ergebnis leisten. Die interne Modellunsicherheit einzelner Komponenten muss jedoch nicht für jede Quelle separat im UI ausgewiesen werden.
 
 ## Wochenbudget und geplanter Cheat Day
 
@@ -191,20 +247,6 @@ Erhaltungsbedarf - tägliches Defizit
 
 Die App muss dabei erklären, dass diese Rechnung eine Vereinfachung ist: Gewichtsverlust besteht nicht ausschließlich aus Fettverlust, die Energiebilanz verändert sich während einer Gewichtsabnahme und die tatsächliche Gewichtsabnahme verläuft nicht zwingend linear.
 
-## Training / Sport
-
-Training soll separat von Alltag und Schritten modelliert werden. Die konkrete Berechnung wird als nächster Teil des Berechnungsmodells festgelegt. Wichtig ist auch hier, dass nur der zusätzliche Energieverbrauch über den bereits enthaltenen Ruhe-/Alltagsverbrauch hinaus addiert wird und Aktivitäten nicht doppelt über Schritte und Training erfasst werden.
-
-## Thermischer Effekt der Nahrung
-
-Ob und wie der thermische Effekt der Nahrung (TEF / diet-induced thermogenesis) explizit in die MVP-Berechnung aufgenommen wird, wird als nächster Teil des Berechnungsmodells festgelegt. Dabei muss berücksichtigt werden, dass TEF von Energieaufnahme und Makronährstoffzusammensetzung abhängt.
-
-## KFA und Energiebedarf
-
-Der KFA ist optional.
-
-Wenn der Nutzer einen aktuellen KFA angibt, wird nach aktueller Modellrichtung Cunningham zur Schätzung des Ruheenergiebedarfs genutzt. Der Hintergrund ist, dass zwei Personen mit gleichem Gewicht und gleicher Körpergröße aufgrund unterschiedlicher Körperzusammensetzung unterschiedliche Mengen an fettfreier Masse haben können und dadurch unterschiedliche Energiebedarfe plausibel sind.
-
 ## KFA als Projektion von Gewicht zu KFA
 
 Wenn ein aktueller KFA bekannt ist und der Nutzer ein Zielgewicht vorgibt, kann die App zusätzlich eine informative KFA-Projektion anbieten. Beispiel:
@@ -233,9 +275,7 @@ Aktueller Modellansatz:
 
 ```text
 fettfreie Masse = aktuelles Gewicht × (1 - aktueller KFA)
-
 Zielgewicht = fettfreie Masse ÷ (1 - Ziel-KFA)
-
 notwendige Gewichtsabnahme = aktuelles Gewicht - Zielgewicht
 ```
 
@@ -274,6 +314,19 @@ Nutzer passt an: 1.900 kcal
 
 Die App sollte den Nutzer dabei nicht daran hindern, einen anderen Wert zu wählen, kann aber bei wissenschaftlich bzw. sicherheitsrelevanten Grenzwerten Hinweise oder Warnungen anzeigen. Die konkrete Logik hierfür ist noch offen.
 
+## Wissenschaftliche Arbeitsgrundlagen
+
+Für die aktuell gewählten Parameter und Modelle sind insbesondere relevant:
+
+- Mifflin et al. (1990), Entwicklung der Mifflin-St.-Jeor-Gleichung — PubMed PMID 2305711
+- Cunningham (1980), RMR in Beziehung zu fettfreier Masse — PubMed PMID 7435418
+- 2024 Adult Compendium of Physical Activities — PubMed PMID 38242596
+- Meta-Analyse zu Netto-Energiekosten des Gehens — PubMed PMID 31292471
+- Review zur nahrungsinduzierten Thermogenese — PubMed PMID 15507147
+- Untersuchung zur Einschränkung des Standardwerts `1 MET = 3,5 ml O₂/kg/min` — PubMed PMID 15831804
+
+Diese Quellen begründen die Modellrichtung, ersetzen aber keine spätere End-to-End-Validierung des gesamten TDEE-Modells gegen reale Nutzerdaten.
+
 ## Wichtiger Grundsatz
 
-Alle Ergebnisse sind **Schätzwerte**. Die App soll diese Unsicherheit transparent kommunizieren und später idealerweise aus dem tatsächlichen Gewichtsverlauf lernen bzw. die Schätzung regelmäßig anpassen.
+Alle Ergebnisse sind **Schätzwerte**. Die App soll diese Unsicherheit grundsätzlich transparent kommunizieren und später idealerweise aus dem tatsächlichen Gewichtsverlauf lernen bzw. die Schätzung regelmäßig anpassen.
