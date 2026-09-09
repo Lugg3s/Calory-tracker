@@ -14,15 +14,11 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Wie wird mit stark variierender Trainingsdauer oder sehr unregelmäßigem Training umgegangen?
 - Wann sollen sportartspezifische Modelle, z. B. Pace/Distanz beim Laufen oder Watt beim Radfahren, den generischen MET-Ansatz ersetzen?
 - Soll TEF später im erweiterten Modus makronährstoffabhängig statt pauschal mit 10 % berechnet werden?
-- Welche Grenzen gelten für das empfohlene Defizit?
-- Wie wird der 10-%-TEF bei einem statischen täglichen Kalorienziel mathematisch sauber berücksichtigt, damit der sinkende TEF bei niedrigerer Energieaufnahme nicht doppelt oder falsch behandelt wird?
 - Wann soll ein bestehender Plan neu berechnet werden, wenn der Nutzer später ein neues aktuelles Gewicht eingibt?
 - Soll nach dem MVP ein dynamisches/adaptives Gewichtsverlaufsmodell ergänzt werden, das sinkenden Energiebedarf, metabolische Anpassungen und veränderte Körperzusammensetzung berücksichtigt?
 - Wie wissenschaftlich belastbar ist die Annahme konstanter fettfreier Masse für die Ableitung eines Zielgewichts aus aktuellem KFA und Ziel-KFA, und wie soll das Modell gegebenenfalls verbessert werden?
 - Wie gehen wir damit um, dass sich fettfreie Masse während einer Gewichtsabnahme verändern kann?
-- Wie wird aus dem durchschnittlichen täglichen Kalorienziel ein Wochenbudget abgeleitet?
-- Wie wird ein geplanter Cheat Day in das Wochenbudget eingerechnet, ohne das geplante durchschnittliche Defizit über die Woche unbeabsichtigt zu verändern?
-- Wie werden die Kalorien auf Cheat Day und übrige Wochentage verteilt, und welche Grenzen gelten für diese Umverteilung?
+- Wie soll mit mehreren flexiblen Tagen pro Woche in der UX umgegangen werden, obwohl die Berechnungsformel bereits mehrere Tage unterstützt?
 
 ## Wissenschaft
 
@@ -34,20 +30,22 @@ Diese Liste wird während der Produktentwicklung fortlaufend ergänzt.
 - Soll Protein bei vorhandenem KFA eher auf fettfreie Masse als auf Körpergewicht bezogen werden?
 - Welche Ziel-KFA-Bereiche sind für unterschiedliche Nutzergruppen sinnvoll bzw. sicher, und ab welchen Werten muss die App warnen oder Ziele ablehnen?
 - Wie soll das gesamte Erhaltungsbedarfsmodell später gegen reale Gewichts-/Energieverlaufsdaten kalibriert und validiert werden?
+- Müssen die vorläufigen automatischen Kalorien-Untergrenzen von 1.200 kcal/Tag für die weibliche und 1.500 kcal/Tag für die männliche Gleichungskategorie für bestimmte Zielgruppen angepasst werden?
+- Welche Sonderregeln brauchen wir für Nutzergruppen, für die eine allgemeine selbstgesteuerte Gewichtsverlustplanung nicht geeignet ist?
 
 ## Produkt / UX
 
 - Wie detailliert soll die Berechnung standardmäßig sichtbar sein?
 - Welche Werte dürfen Nutzer manuell überschreiben?
-- Wie stark soll die App Nutzer vor sehr aggressiven Zielen warnen?
+- Wie soll die App mit manuellen Kalorienwerten umgehen, die unter den automatischen Planungsgrenzen liegen?
 - Wie werden allgemeine Schätzungen und Unsicherheit dargestellt, ohne jede interne Modellunsicherheit separat im UI auszuweisen?
 - Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
 - Wie genau soll die Zieldefinition dargestellt werden, wenn ein aktueller KFA vorhanden ist: Zielgewicht direkt eingeben oder Ziel-KFA auswählen und daraus das Zielgewicht ableiten?
 - Soll der aus Ziel-KFA berechnete Zielgewichtswert dem Nutzer vor der Planerstellung noch einmal ausdrücklich zur Bestätigung gezeigt werden?
 - Wie zeigen wir dem Nutzer nach Auswahl eines Ziel-KFA verständlich, dass das daraus berechnete Zielgewicht und die notwendige Gewichtsabnahme nur Modellschätzungen sind?
-- Wie genau soll der geplante Cheat-Day-Screen im Onboarding aussehen?
-- Ist ein Cheat Day optional, welcher Wochentag wird gewählt und wie viel zusätzliches Kalorienbudget kann der Nutzer dafür einplanen?
-- Soll die App statt des Begriffs „Cheat Day“ eventuell eine neutralere Bezeichnung wie „flexibler Tag“ oder „höheres Tagesbudget“ verwenden?
+- Wie genau soll der geplante flexible-Tag-/höheres-Tagesbudget-Screen im Onboarding aussehen?
+- Wie wählt der Nutzer den Wochentag und die Höhe des flexiblen Tagesbudgets zwischen normalem Tagesziel und Erhaltungsbedarf aus?
+- Soll die App statt des Begriffs „Cheat Day“ eine neutralere Bezeichnung wie „flexibler Tag“, „Maintenance Day“ oder „höheres Tagesbudget“ verwenden?
 - Wie genau wird aus Größe und Gewicht die interne Körperform-/Referenzkategorie für KFA-Vergleichsbilder abgeleitet?
 - Wie viele Körperform-/Referenzkategorien brauchen wir, damit die Bildbibliothek klein bleibt und die Beispiele trotzdem hilfreich sind?
 - Welche Grenzwerte sollen diese Kategorien haben, und wie vermeiden wir irreführende Zuordnungen bei sehr muskulösen oder anderweitig atypischen Körperzusammensetzungen?
