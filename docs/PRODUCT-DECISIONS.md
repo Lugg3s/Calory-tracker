@@ -229,3 +229,20 @@ A typical training-duration input is therefore required when regular training is
 For the first version, the thermic effect of food (TEF) should be represented by an approximate **10 %** mixed-diet assumption. This is a planning approximation rather than an individual measurement.
 
 A later advanced model may make TEF dependent on macronutrient composition. The deficit model must account for the fact that TEF decreases when energy intake decreases.
+
+## D-029 — V1 uses a static 7,700 kcal/kg deficit model
+**Status:** decided
+
+For the first version, the required total energy deficit is calculated with a **static planning factor of 7,700 kcal per kilogram of intended body-weight loss**:
+
+```text
+required weight loss = current weight - target weight
+total required deficit = required weight loss(kg) × 7,700 kcal
+average daily deficit = total required deficit ÷ number of plan days
+```
+
+The target weight may be entered directly or derived from target KFA according to D-023.
+
+V1 does **not** dynamically simulate body weight, RMR, TDEE, metabolic adaptation, or changing body composition day by day over the plan period. The 7,700 kcal/kg factor is a deliberate product simplification for planning and must not be presented as an exact biological constant.
+
+A dynamic model, such as iterative recalculation or a more complete physiological body-weight model, can be considered later as an advanced/adaptive feature. If the user later updates their actual weight, the app may recalculate the plan from the new current state rather than requiring continuous weight entry.
