@@ -105,15 +105,7 @@ Die vollständige Berechnungs- und UX-Spezifikation steht in [`cheat-day-v1.md`]
 
 Der Cheat-Day-Screen soll wie andere erklärungsbedürftige Screens einen kleinen **Info-Button** bzw. eine optionale Hilfsansicht anbieten.
 
-Dort können typische Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B.:
-
-- Pizza
-- Bier
-- Kuchen
-- Burger
-- Pommes
-
-Die Werte sollen als Richtwerte bzw. Bereiche dargestellt werden, nicht als scheinbar exakte Werte. Konkrete Portionsdefinitionen und kcal-Bereiche sind noch als Content-Aufgabe festzulegen.
+Dort können typische Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B. Pizza, Bier, Kuchen, Burger und Pommes. Die Werte sollen als Richtwerte bzw. Bereiche dargestellt werden, nicht als scheinbar exakte Werte.
 
 ## Tracking-Präferenz
 
@@ -151,23 +143,60 @@ Die Budget-Vorschau vor dem Cheat-Day-Screen ist bewusst vorgesehen, damit der N
 
 ## KFA-Hilfe mit Referenzbildern
 
-Der aktuelle KFA ist optional. Wenn der Nutzer ihn nicht kennt, kann er aktiv Vergleichsbilder öffnen.
+Der aktuelle KFA ist optional. Der Nutzer kann jederzeit direkt einen numerischen KFA-Wert eingeben. Wenn er visuelle Orientierung möchte, kann er aktiv **„Beispiele anzeigen“** öffnen.
 
-Die Referenzbibliothek wird vorab erzeugt und ungefähr nach folgenden Merkmalen organisiert:
+Die Bilder sind nur Orientierungshilfen. Der Nutzer muss **kein Bild auswählen** und muss auch nicht angeben, welches Bild ihm am ähnlichsten sieht.
 
-- Geschlecht / biologische Kategorie
-- intern aus Größe und Gewicht abgeleitete Körperform-/Referenzkategorie
-- KFA-Stufe
+### V1-Bibliothek
 
-Die KFA-Bilder können ungefähr in **5-Prozentpunkt-Schritten** vorliegen. Diese Bildstufen sind nur visuelle Anker. Der Nutzer kann z. B. zwischen 15 % und 20 % einen Wert von 17 % eingeben. Für die Berechnung wird immer der tatsächliche numerische Wert verwendet.
+Die Referenzbibliothek wird vorab erzeugt und umfasst **80 Bilder**:
 
-Die Referenzbilder sind keine Messung. Eine erhöhte Unsicherheit bei visuell geschätztem KFA kann intern für Entwickler/Validierung markiert werden; eine separate User-Warnung nur deshalb ist nicht erforderlich.
+```text
+2 Geschlechts-/biologische Bildkategorien
+× 5 interne Körperform-/Referenzkategorien
+× 8 KFA-Stufen
+= 80 Bilder
+```
 
-Die genaue Bucket-Formel, Anzahl der Kategorien, Grenzwerte, KFA-Spanne und Bildansichten bleiben offen.
+Die acht KFA-Bildanker sind für männliche und weibliche Referenzen identisch:
+
+```text
+5 %, 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %
+```
+
+Die getrennten männlichen und weiblichen Bilder stellen dieselben Prozentwerte jeweils geschlechtsspezifisch dar.
+
+Die Bildstufen begrenzen den numerischen KFA nicht. Beispielsweise kann der Nutzer trotz Bildankern bei 15 % und 20 % direkt **18 %** eingeben. Für die Berechnung wird immer der tatsächliche numerische Wert verwendet.
+
+### Interne Auswahl der Körperform
+
+Die App fragt den Nutzer nicht nach seinem Körperbau. Für die Bildauswahl wird intern eine einfache BMI-basierte V1-Heuristik verwendet:
+
+```text
+BMI = Gewicht(kg) / Größe(m)^2
+
+Bucket A: BMI < 20
+Bucket B: 20 bis < 25
+Bucket C: 25 bis < 30
+Bucket D: 30 bis < 35
+Bucket E: >= 35
+```
+
+Die Bucket-Namen werden dem Nutzer nicht angezeigt. Sie sind **keine medizinische Klassifikation und keine KFA-Schätzung**, sondern ausschließlich ein Matching-Hilfsmittel für passendere Referenzbilder.
+
+Sehr muskulöse oder anderweitig atypische Körperzusammensetzungen können dadurch weniger passend zugeordnet werden. Diese Einschränkung wird für V1 akzeptiert.
+
+### Bildstandard
+
+V1 verwendet nur **eine standardisierte Frontansicht** pro Kombination. Wichtig sind über alle Bilder hinweg möglichst identische Pose, Ausschnitt, Perspektive, Kleidung, Hintergrund und Lichtsetzung. Die Bilder sollen funktional und vergleichbar sein, nicht dekorativ.
+
+Die gleiche Bibliothek wird für aktuellen KFA und Ziel-KFA verwendet.
+
+Die vollständige Spezifikation steht in [`kfa-reference-images-v1.md`](kfa-reference-images-v1.md).
 
 ## Ziel-KFA anhand von Bildern
 
-Wenn ein aktueller KFA vorhanden ist, kann dieselbe Bildlogik für einen Ziel-KFA genutzt werden. Auch der Ziel-KFA kann numerisch zwischen den Bildankern fein angepasst werden.
+Wenn ein aktueller KFA vorhanden ist, kann dieselbe Bildbibliothek als optionale Orientierung für einen Ziel-KFA genutzt werden. Auch hier muss kein Bild ausgewählt werden. Der Nutzer kann den Ziel-KFA frei numerisch eingeben, einschließlich Zwischenwerten zwischen den 5-Prozentpunkt-Bildankern.
 
 Das daraus abgeleitete Zielgewicht ist eine Modellschätzung unter der Annahme konstanter fettfreier Masse.
 
