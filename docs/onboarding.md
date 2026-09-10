@@ -62,34 +62,58 @@ Zielgewicht = fettfreie Masse ÷ (1 - Ziel-KFA)
 
 Ein Ziel-KFA wird nur angeboten, wenn ein aktueller KFA vorhanden ist.
 
-### Wochenbudget / flexibler Tag
+## Wochenbudget und Cheat Day
 
-Im Onboarding ist ein eigener Screen für einen geplanten **Cheat Day / flexiblen Tag / Tag mit höherem Kalorienbudget** vorgesehen.
-
-Die Berechnungsrichtung ist entschieden:
+Der Nutzer soll **zuerst** den ohne Cheat Day berechneten Ausgangsplan sehen: durchschnittliches Tagesziel und Wochenbudget.
 
 ```text
 Wochenbudget W = durchschnittliches Tagesziel C × 7
 ```
 
-Ein höherer Tag erhöht das Wochenbudget **nicht**, sondern verteilt dieselben Wochenkalorien anders.
+Erst danach wird optional gefragt, ob ein **Cheat Day** eingebaut werden soll. Für V1 ist bewusst der Begriff „Cheat Day“ vorgesehen.
 
-Für einen flexiblen Tag mit Budget `H`:
+V1 erlaubt **maximal einen Cheat Day pro Woche**.
+
+Wenn der Nutzer einen Cheat Day möchte:
+
+1. Montag bis Sonntag werden als auswählbare Tage angezeigt.
+2. Der Nutzer wählt genau einen Wochentag.
+3. Anschließend wählt er das gesamte Kalorienbudget dieses Cheat Days über einen Zahlenregler / Wheel / Slider.
+4. Die Auswahl erfolgt in **50-kcal-Schritten**.
+5. Während der Wert verändert wird, aktualisieren sich die Kalorienbudgets der übrigen sechs Tage **live**.
+6. Das Wochenbudget bleibt unverändert und soll gleichzeitig sichtbar bzw. nachvollziehbar bleiben.
+
+Berechnung:
 
 ```text
-normale Tage L = (W - H) / 6
+reguläres Tagesbudget L = (W - Cheat-Day-Budget H) / 6
 ```
 
-Für die automatische V1-Planung gilt:
+Die nominale Cheat-Day-Obergrenze beträgt:
 
-- flexibler Tag maximal bis zum geschätzten Erhaltungsbedarf;
-- kein automatisch geplanter Kalorienüberschuss;
-- die übrigen Tage müssen weiterhin die automatischen Planungsgrenzen einhalten;
-- andernfalls wird der flexible Tag reduziert oder ein längerer Zielzeitraum vorgeschlagen.
+```text
+H_max_nominal = C + 1.000 kcal
+```
 
-Im erweiterten Makro-Modus werden die Makroziele anschließend auf das jeweilige Tagesbudget angewendet: Protein bleibt bei unverändertem Gewicht/Sportstatus in Gramm gleich, Fett bleibt bei 30 % der Tageskalorien und Kohlenhydrate erhalten die verbleibenden Kalorien.
+Der Maximalwert wird auf das 50-kcal-Raster abgerundet. Zusätzlich gelten die automatischen Kalorien-/Defizitgrenzen für die übrigen sechs Tage. Falls diese früher erreicht werden, gilt die dadurch entstehende niedrigere Cheat-Day-Obergrenze.
 
-Noch offen sind vor allem UX-Fragen: konkrete Bezeichnung, Wochentagsauswahl, Control für die Höhe des flexiblen Tages und Umgang mit mehreren flexiblen Tagen.
+Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ gilt damit **nicht mehr**.
+
+Die vollständige Berechnungs- und UX-Spezifikation steht in [`cheat-day-v1.md`](cheat-day-v1.md).
+
+### Optionale Cheat-Day-Hilfe
+
+Der Cheat-Day-Screen soll wie andere erklärungsbedürftige Screens einen kleinen **Info-Button** bzw. eine optionale Hilfsansicht anbieten.
+
+Dort können typische Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B.:
+
+- Pizza
+- Bier
+- Kuchen
+- Burger
+- Pommes
+
+Die Werte sollen als Richtwerte bzw. Bereiche dargestellt werden, nicht als scheinbar exakte Werte. Konkrete Portionsdefinitionen und kcal-Bereiche sind noch als Content-Aufgabe festzulegen.
 
 ## Tracking-Präferenz
 
@@ -101,6 +125,8 @@ Der Nutzer kann wählen:
 Im Makro-Modus werden Protein, Fett und Kohlenhydrate automatisch nach `nutrition-and-macros.md` berechnet.
 
 ## Screen-Reihenfolge
+
+Der aktuelle Flow umfasst 18 Screens:
 
 1. Start
 2. Geschlecht / biologische Kategorie
@@ -116,9 +142,12 @@ Im Makro-Modus werden Protein, Fett und Kohlenhydrate automatisch nach `nutritio
 12. Zieldefinition
 13. Zielwert / abgeleitetes Zielgewicht
 14. gewünschter Zeitraum
-15. flexibler Tag / höheres Tagesbudget
-16. Tracking-Modus
-17. Plan-Ergebnis
+15. **Ausgangsplan / Budget-Vorschau ohne Cheat Day**
+16. **Cheat Day, optional**
+17. Tracking-Modus
+18. Plan-Ergebnis
+
+Die Budget-Vorschau vor dem Cheat-Day-Screen ist bewusst vorgesehen, damit der Nutzer zuerst sieht, wie hoch sein normales Tagesziel und Wochenbudget sind, bevor er Kalorien innerhalb der Woche umverteilt.
 
 ## KFA-Hilfe mit Referenzbildern
 
