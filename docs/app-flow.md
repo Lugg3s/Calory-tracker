@@ -52,6 +52,18 @@ Durchschnittliche tägliche Schritte.
 
 Trainings-/Sporthäufigkeit.
 
+Diese Eingabe hat in V1 zwei Funktionen:
+
+1. Sie ist Teil des Trainings-/Aktivitätsprofils.
+2. Sie bestimmt im erweiterten Makro-Modus den Protein-Tier:
+
+```text
+< 3 Sporteinheiten/Woche  → 1,4 g Protein/kg aktuelles Körpergewicht
+>= 3 Sporteinheiten/Woche → 2,0 g Protein/kg aktuelles Körpergewicht
+```
+
+Für diese Schwelle zählt jede regelmäßige Sportart. Es gibt im initialen MVP **keinen zusätzlichen Screen für Muskelaufbau oder Muskelerhalt**.
+
 ### Screen 10 — Trainingsart
 
 Nur wenn regelmäßiges Training angegeben wurde.
@@ -108,12 +120,16 @@ Automatische V1-Regeln:
 - die übrigen Tage müssen die automatischen Planungsgrenzen einhalten;
 - wenn nicht, wird `H` reduziert oder ein längerer Zielzeitraum vorgeschlagen.
 
+Im Makro-Modus wird danach jedes konkrete Tagesbudget separat auf Makros aufgeteilt: Protein bleibt in Gramm gleich, Fett bleibt bei 30 % der jeweiligen Tageskalorien, Kohlenhydrate erhalten den Rest.
+
 Offen bleiben insbesondere: Bezeichnung, Wochentags-Control, Budget-Control und UX für mehrere flexible Tage.
 
 ### Screen 16 — Tracking-Modus
 
 - nur Kalorien
 - Kalorien + Makronährstoffe
+
+Im Makro-Modus gelten die in `nutrition-and-macros.md` definierten V1-Regeln.
 
 ### Screen 17 — Plan-Ergebnis
 
@@ -125,6 +141,7 @@ Mindestens anzeigen:
 - geplantes durchschnittliches Defizit
 - Zielgewicht
 - ggf. Ziel-KFA und daraus abgeleitete notwendige Gewichtsabnahme
+- bei Makro-Modus: Protein-, Fett- und Kohlenhydratziele für die jeweiligen Tagesbudgets
 - kurze Einschätzung des Plans
 - Zugang zur detaillierten Berechnung
 
@@ -141,6 +158,8 @@ Zusätzliche Komplexität wird nachgelagert angeboten, z. B. über **„Plan ver
 
 ## Status
 
-Festgelegt sind der grundsätzliche 17-Screen-Flow, das Prinzip „ein Parameter pro Screen“, die bedingte Trainingsdauer, die KFA-Zielgewichtslogik und die Wochenbudget-/Flex-Day-Berechnungsrichtung.
+Festgelegt sind der grundsätzliche 17-Screen-Flow, das Prinzip „ein Parameter pro Screen“, die bedingte Trainingsdauer, die KFA-Zielgewichtslogik, die Wochenbudget-/Flex-Day-Berechnungsrichtung und die Tatsache, dass die bestehende Sporthäufigkeit für die Protein-Klassifizierung ausreicht.
+
+Eine zusätzliche Muskelaufbau-/Muskelerhalt-Frage ist für V1 nicht vorgesehen.
 
 Noch offen sind vor allem konkrete Controls/Microcopy, MET-Feinkalibrierung, KFA-Referenzbibliothek und die genaue UX des flexiblen Tages.
