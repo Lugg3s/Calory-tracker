@@ -1,5 +1,7 @@
 # KFA Reference Images V1
 
+Gespeicherte Produktionsbilder: [Bildbibliothek und Index](../assets/kfa-reference-images/README.md). Die dort erfassten Produktionsmetadaten ergänzen diese Spezifikation; bestehende Bucket- und Stufenentscheidungen werden dadurch nicht ersetzt.
+
 Dieses Dokument definiert die V1-Struktur der visuellen KFA-Referenzbibliothek.
 
 ## Zweck
