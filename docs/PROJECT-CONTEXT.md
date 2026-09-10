@@ -53,13 +53,16 @@ Current intended sequence:
 12. target definition: direct target weight or target KFA when current KFA is known
 13. target value / confirmation of derived target weight
 14. timeframe
-15. planned flexible / higher-calorie day
-16. tracking mode
-17. plan result
+15. initial daily-target / weekly-budget preview without Cheat Day
+16. optional Cheat Day configuration
+17. tracking mode
+18. final plan result
+
+The Cheat Day is intentionally configured **after** the baseline daily target and weekly budget have been shown, so the user can understand the redistribution.
 
 Sport/training frequency is also sufficient to select the V1 protein tier. The MVP does **not** add a separate mandatory question for muscle gain, muscle retention or a similar muscle-specific goal.
 
-The exact copy and controls remain a design task. Additional complexity belongs after the first plan under calculation details, settings or “refine plan”.
+Additional complexity belongs after the first plan under calculation details, settings or “refine plan”.
 
 ## KFA rules
 
@@ -219,27 +222,41 @@ Additional approximate automatic-plan floors remain:
 
 These are pragmatic product guardrails, not physiological minimums. Special populations and manual overrides remain open questions.
 
-## Weekly budget and flexible day
+## Weekly budget and Cheat Day
 
 ```text
 weekly budget W = average daily target C × 7
 ```
 
-A planned higher-calorie/flexible day redistributes the same weekly budget rather than adding calories on top.
+The user first sees this baseline weekly budget and normal daily target. Only afterwards can an optional Cheat Day be configured.
 
-For one flexible day with budget `H`:
+V1 uses the term **Cheat Day** and permits **one Cheat Day per week**.
 
-```text
-regular-day budget L = (W - H) / 6
-```
-
-For multiple flexible days:
+A Cheat Day redistributes the same weekly budget rather than adding calories on top:
 
 ```text
-L = (W - sum(H_i)) / (7 - n)
+regular-day budget L = (W - Cheat-Day budget H) / 6
 ```
 
-Automatic V1 planning uses estimated maintenance as the maximum flexible-day budget. If redistribution would push regular days below automatic-plan guardrails, reduce the flexible-day budget or propose a longer timeframe.
+The user selects one weekday and then chooses the **total Cheat-Day calories** with a numeric wheel/slider-style control in **50-kcal increments**. As the Cheat-Day value changes, the other six day budgets update live.
+
+The earlier direction that capped a Cheat Day at maintenance is superseded. The nominal V1 limit is:
+
+```text
+H_max_nominal = C + 1,000 kcal
+```
+
+The technical maximum is rounded down to the 50-kcal grid. The actual maximum can be lower if the six regular days would otherwise violate automatic-plan guardrails:
+
+```text
+H <= W - 6 × F
+```
+
+where `F` is the minimum allowed regular-day budget.
+
+The Cheat-Day screen also has an optional info/help control. It can show rough calorie ranges for typical foods such as pizza, beer, cake, burgers and fries so users can estimate a suitable budget. Exact foods, serving sizes and kcal ranges remain a content task.
+
+See [`cheat-day-v1.md`](cheat-day-v1.md) for the detailed specification.
 
 ## Tracking modes and V1 macros
 
@@ -247,7 +264,7 @@ Simple mode: calories only.
 
 Advanced mode: calories + protein + fat + carbohydrates.
 
-The V1 macro method is now decided:
+The V1 macro method is decided:
 
 ```text
 < 3 sport sessions/week:
@@ -267,9 +284,9 @@ For the threshold, every regularly performed sport counts; V1 does not require a
 
 Protein uses **current actual body weight** without a KFA/FFM correction, ideal-weight rule or target-weight cap in V1.
 
-On a flexible/higher-calorie day, protein grams stay unchanged if body weight and sport tier are unchanged, fat remains 30 % of that day's calories, and carbohydrates receive the remainder.
+On a Cheat Day, protein grams stay unchanged if body weight and sport tier are unchanged, fat remains 30 % of that day's calories, and carbohydrates receive the remainder.
 
-Protein and fat are displayed as whole grams; carbohydrates are calculated from the remaining calories and displayed as whole grams. Internal values can remain unrounded.
+Protein and fat are displayed as whole grams; carbohydrates are calculated from the remaining calories and displayed as whole grams. **Small visible kcal differences caused by rounding are accepted in V1.**
 
 If an unusually low calorie target makes the resulting macro allocation implausible, the app should review the calorie target/safety constraints rather than silently distort the macro rules.
 
@@ -295,8 +312,9 @@ Read in this order when working on the product:
 2. `PRODUCT-DECISIONS.md`
 3. `calorie-calculation.md`
 4. `activity-model-v1.md`
-5. `nutrition-and-macros.md`
-6. `onboarding.md` / `app-flow.md`
-7. `open-questions.md`
+5. `cheat-day-v1.md`
+6. `nutrition-and-macros.md`
+7. `onboarding.md` / `app-flow.md`
+8. `open-questions.md`
 
 Never convert provisional scientific assumptions into fixed requirements without an explicit decision.
