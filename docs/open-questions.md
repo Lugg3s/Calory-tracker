@@ -28,11 +28,10 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 - Müssen die vorläufigen automatischen Kalorien-Untergrenzen von 1.200 kcal/Tag für die weibliche und 1.500 kcal/Tag für die männliche Gleichungskategorie für bestimmte Zielgruppen angepasst werden?
 - Welche Sonderregeln brauchen wir für Nutzergruppen, für die eine allgemeine selbstgesteuerte Gewichtsverlustplanung nicht geeignet ist?
 - Welche Ziel-KFA-Bereiche sind für unterschiedliche Nutzergruppen sinnvoll bzw. sicher, und ab welchen Werten muss die App warnen oder Ziele ablehnen?
-- Welche Proteinempfehlung ist bei Energiedefizit optimal?
-- Ist 1,2 g/kg für nicht trainierende Nutzer sinnvoll als Standard?
-- Ist 2,0 g/kg für Kraft-/Leistungssportler sinnvoll als MVP-Standard?
-- Ist 0,8 g/kg Fett als Mindestwert für die App geeignet?
-- Soll Protein bei vorhandenem KFA eher auf fettfreie Masse als auf Körpergewicht bezogen werden?
+- Soll die V1-Proteinregel von 1,4 bzw. 2,0 g/kg später für unterschiedliche Sportarten, Trainingsvolumen, Energiedefizite oder Altersgruppen differenziert werden?
+- Ab welchem Körpergewicht/KFA wäre eine spätere Bezugsgewichtsregel für Protein sinnvoller als die aktuelle V1-Regel mit tatsächlichem Körpergewicht?
+- Soll der 30-%-Fettanteil später abhängig von Präferenzen, Kalorienhöhe oder individuellen Ernährungszielen flexibilisiert werden?
+- Braucht die App später explizite Mindest- oder Zielwerte für Kohlenhydrate bei bestimmten Sportarten/Trainingsumfängen?
 
 ## Produkt / UX
 
@@ -47,6 +46,7 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 - Wie genau soll der flexible-Tag-/höheres-Tagesbudget-Screen im Onboarding aussehen?
 - Wie wählt der Nutzer den Wochentag und die Höhe des flexiblen Tagesbudgets zwischen normalem Tagesziel und Erhaltungsbedarf aus?
 - Soll die App statt „Cheat Day“ eine neutralere Bezeichnung wie „flexibler Tag“, „Maintenance Day“ oder „höheres Tagesbudget“ verwenden?
+- Wie sollen manuell geänderte Makroziele dargestellt werden und wie verhält sich die App, wenn sie rechnerisch nicht mehr exakt zum Kalorienziel passen?
 - Wie genau wird aus Größe und Gewicht die interne Körperform-/Referenzkategorie für KFA-Vergleichsbilder abgeleitet?
 - Wie viele Körperform-/Referenzkategorien brauchen wir?
 - Welche Grenzwerte sollen diese Kategorien haben, insbesondere bei sehr muskulösen oder atypischen Körperzusammensetzungen?
