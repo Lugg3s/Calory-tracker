@@ -13,6 +13,8 @@
 - [ ] Wireframes erstellen
 - [ ] Wireframes mit Figma / Uizard / Motif bzw. geeignetem Tool iterieren
 - [x] Onboarding-Flow definieren
+- [x] Cheat-Day-/Wochenbudget-Interaktionslogik definieren
+- [ ] finale Cheat-Day-Microcopy und Lebensmittelbeispiele definieren
 - [ ] Berechnungsansicht definieren
 - [ ] Main Screen definieren
 
@@ -27,6 +29,7 @@
 - [ ] optionaler KFA
 - [ ] Tracking-Modus Kalorien-only / Makros
 - [ ] Protein-/Makroziele
+- [ ] Cheat-Day-/Wochenbudget-Logik
 - [ ] manuelle Anpassung des Kalorienziels in Einstellungen
 
 ## Phase 4 – Food Tracking
