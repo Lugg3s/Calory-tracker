@@ -9,9 +9,12 @@ Der maschinenlesbare [Index](index.json) enthält ausschließlich tatsächlich g
 
 | ID | Geschlecht | Produktionsbucket | KFA-Zielanker | Bild |
 | --- | --- | --- | --- | --- |
+| male_bucket3_kfa15 | male | bucket-3 | ca. 15 % | [Frontansicht](male/bucket-3/kfa-15/front.png) |
 | male_bucket3_kfa20 | male | bucket-3 | ca. 20 % | [Frontansicht](male/bucket-3/kfa-20/front.png) |
 
 ## Einordnung und Herkunft
+
+Die Variante `male_bucket3_kfa15` wurde mit Imagegen aus `male_bucket3_kfa20` erstellt und unverändert gespeichert. Ziel ist eine moderate Verringerung des sichtbaren Körperfetts bei gleichbleibender Person, Muskelmasse, Pose, Kleidung und Beleuchtung. Der [Generierungsprompt](male/bucket-3/kfa-15/prompt.txt) liegt beim Bild. Die 15-%-Einordnung ist ein visueller Zielanker; die finale Validierung bleibt offen.
 
 Das erste Bild ist der männliche Pilotserien-Anker aus dem Chat „main chat“, übernommen aus der vom Nutzer bereitgestellten PNG. Die Datei wurde unverändert kopiert.
 
