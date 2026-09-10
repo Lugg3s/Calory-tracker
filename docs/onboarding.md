@@ -33,6 +33,15 @@ Jeder relevante Screen kann eine kleine optionale Erklärung enthalten: warum di
 
 Die Alltagskomponente wird MET-basiert modelliert. Für V1 soll der Nutzer **keine einzelnen Stunden für Sitzen, Stehen, Heben usw. eingeben müssen**. Stattdessen wird die Auswahl eines groben Alltagstyps intern auf ein vorläufiges 8-Stunden-MET-Referenzprofil gemappt. Die aktuell verwendeten Profile und bekannten Grenzen stehen in [`activity-model-v1.md`](activity-model-v1.md).
 
+Die bereits abgefragte **Sporthäufigkeit** wird zusätzlich für die Makroberechnung verwendet:
+
+```text
+< 3 Sporteinheiten/Woche  → 1,4 g Protein/kg aktuelles Körpergewicht
+>= 3 Sporteinheiten/Woche → 2,0 g Protein/kg aktuelles Körpergewicht
+```
+
+Für diese V1-Grenze zählt jede regelmäßige Sportart. Eine zusätzliche Onboarding-Frage nach **Muskelaufbau, Muskelerhalt oder einem vergleichbaren Muskelziel** wird für den ersten MVP nicht ergänzt.
+
 ### Ziel
 
 Der Plan arbeitet letztlich immer mit einem **Zielgewicht**.
@@ -78,6 +87,8 @@ Für die automatische V1-Planung gilt:
 - die übrigen Tage müssen weiterhin die automatischen Planungsgrenzen einhalten;
 - andernfalls wird der flexible Tag reduziert oder ein längerer Zielzeitraum vorgeschlagen.
 
+Im erweiterten Makro-Modus werden die Makroziele anschließend auf das jeweilige Tagesbudget angewendet: Protein bleibt bei unverändertem Gewicht/Sportstatus in Gramm gleich, Fett bleibt bei 30 % der Tageskalorien und Kohlenhydrate erhalten die verbleibenden Kalorien.
+
 Noch offen sind vor allem UX-Fragen: konkrete Bezeichnung, Wochentagsauswahl, Control für die Höhe des flexiblen Tages und Umgang mit mehreren flexiblen Tagen.
 
 ## Tracking-Präferenz
@@ -86,6 +97,8 @@ Der Nutzer kann wählen:
 
 - **Nur Kalorien tracken**
 - **Kalorien + Makronährstoffe tracken**
+
+Im Makro-Modus werden Protein, Fett und Kohlenhydrate automatisch nach `nutrition-and-macros.md` berechnet.
 
 ## Screen-Reihenfolge
 
