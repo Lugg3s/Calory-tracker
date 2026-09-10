@@ -18,7 +18,6 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 - Soll nach dem MVP ein dynamisches/adaptives Gewichtsverlaufsmodell ergänzt werden, das sinkenden Energiebedarf, metabolische Anpassungen und veränderte Körperzusammensetzung berücksichtigt?
 - Wie wissenschaftlich belastbar ist die Annahme konstanter fettfreier Masse für die Ableitung eines Zielgewichts aus aktuellem KFA und Ziel-KFA, und wie soll das Modell gegebenenfalls verbessert werden?
 - Wie gehen wir damit um, dass sich fettfreie Masse während einer Gewichtsabnahme verändern kann?
-- Wie soll mit mehreren flexiblen Tagen pro Woche in der UX umgegangen werden, obwohl die Berechnungsformel bereits mehrere Tage unterstützt?
 
 ## Wissenschaft
 
@@ -43,9 +42,9 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 - Wie genau soll die Zieldefinition dargestellt werden, wenn ein aktueller KFA vorhanden ist: Zielgewicht direkt eingeben oder Ziel-KFA auswählen und daraus das Zielgewicht ableiten?
 - Soll der aus Ziel-KFA berechnete Zielgewichtswert dem Nutzer vor der Planerstellung noch einmal ausdrücklich zur Bestätigung gezeigt werden?
 - Wie zeigen wir dem Nutzer nach Auswahl eines Ziel-KFA verständlich, dass das daraus berechnete Zielgewicht und die notwendige Gewichtsabnahme nur Modellschätzungen sind?
-- Wie genau soll der flexible-Tag-/höheres-Tagesbudget-Screen im Onboarding aussehen?
-- Wie wählt der Nutzer den Wochentag und die Höhe des flexiblen Tagesbudgets zwischen normalem Tagesziel und Erhaltungsbedarf aus?
-- Soll die App statt „Cheat Day“ eine neutralere Bezeichnung wie „flexibler Tag“, „Maintenance Day“ oder „höheres Tagesbudget“ verwenden?
+- Welche konkrete Microcopy verwenden wir für die Frage und Hinweise auf dem Cheat-Day-Screen?
+- Welche konkrete UI-Komponente ist für die Cheat-Day-Kalorienauswahl am besten: Wheel, Slider oder vergleichbarer Zahlenregler? Die Schrittweite von 50 kcal ist bereits entschieden.
+- Welche konkreten Lebensmittel, Portionsgrößen und Kalorienbereiche werden im optionalen Cheat-Day-Info-Bereich gezeigt?
 - Wie sollen manuell geänderte Makroziele dargestellt werden und wie verhält sich die App, wenn sie rechnerisch nicht mehr exakt zum Kalorienziel passen?
 - Wie genau wird aus Größe und Gewicht die interne Körperform-/Referenzkategorie für KFA-Vergleichsbilder abgeleitet?
 - Wie viele Körperform-/Referenzkategorien brauchen wir?
