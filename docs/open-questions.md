@@ -43,14 +43,20 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 - Soll der aus Ziel-KFA berechnete Zielgewichtswert dem Nutzer vor der Planerstellung noch einmal ausdrücklich zur Bestätigung gezeigt werden?
 - Wie zeigen wir dem Nutzer nach Auswahl eines Ziel-KFA verständlich, dass das daraus berechnete Zielgewicht und die notwendige Gewichtsabnahme nur Modellschätzungen sind?
 - Welche konkrete Microcopy verwenden wir für die Frage und Hinweise auf dem Cheat-Day-Screen?
-- Welche konkrete UI-Komponente ist für die Cheat-Day-Kalorienauswahl am besten: Wheel, Slider oder vergleichbarer Zahlenregler? Die Schrittweite von 50 kcal ist bereits entschieden.
 - Welche konkreten Lebensmittel, Portionsgrößen und Kalorienbereiche werden im optionalen Cheat-Day-Info-Bereich gezeigt?
 - Wie sollen manuell geänderte Makroziele dargestellt werden und wie verhält sich die App, wenn sie rechnerisch nicht mehr exakt zum Kalorienziel passen?
-- Wie genau wird aus Größe und Gewicht die interne Körperform-/Referenzkategorie für KFA-Vergleichsbilder abgeleitet?
-- Wie viele Körperform-/Referenzkategorien brauchen wir?
-- Welche Grenzwerte sollen diese Kategorien haben, insbesondere bei sehr muskulösen oder atypischen Körperzusammensetzungen?
-- Welche KFA-Spanne soll die Referenzbibliothek abdecken und bleiben 5-Prozentpunkt-Schritte als visuelle Anker geeignet?
-- Reicht eine Frontansicht pro Referenzkombination oder brauchen wir zusätzliche Ansichten?
+
+## KFA-Referenzbilder
+
+Die V1-Struktur ist entschieden: 80 Bilder, 2 Geschlechts-/biologische Bildkategorien, 5 BMI-basierte interne Körperform-Buckets, 8 KFA-Anker von 5 % bis 40 % in 5er-Schritten und eine Frontansicht pro Kombination. Details stehen in `kfa-reference-images-v1.md`.
+
+Offen bleiben:
+
+- Welches Bildgenerierungsmodell bzw. Tool wird für die Produktion der 80 Bilder verwendet?
+- Welche konkrete Prompt-/Reference-Image-Strategie liefert über alle 80 Bilder die höchste Konsistenz?
+- Welche Kleidung, Hauttöne und Diversitätsstrategie soll die finale Bibliothek verwenden?
+- Wie wird die visuelle KFA-Plausibilität vor Veröffentlichung fachlich/qualitativ geprüft?
+- Sollen spätere Versionen Seiten- oder Rückansichten ergänzen?
 
 ## Food Tracking
 
