@@ -22,5 +22,6 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [AI & Voice](ai-and-voice.md)
 - [Zukünftige Features](future-features.md)
 - [Roadmap](roadmap.md)
+- [UI References](ui%20references/README.md)
 
 > **Hinweis:** Dieses Dokumentationsset ist ein lebendes Dokument. Noch nicht wissenschaftlich validierte oder endgültig entschiedene Punkte werden ausdrücklich als offen bzw. vorläufig gekennzeichnet.
