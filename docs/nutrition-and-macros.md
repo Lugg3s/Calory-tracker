@@ -126,17 +126,19 @@ Ergebnis:
 - Fett: **60 g**
 - Kohlenhydrate: **165 g**
 
-## Flexible Tage / höheres Tagesbudget
+## Cheat Day
 
-Die Makroregeln werden auf das jeweilige Tagesbudget angewendet.
+Die Makroregeln werden auf das jeweilige konkrete Tagesbudget angewendet.
 
-Für einen flexiblen Tag gilt:
+Für den einen in V1 erlaubten Cheat Day gilt:
 
 - die Proteinmenge in Gramm bleibt bei unverändertem Körpergewicht und Sportstatus gleich;
 - Fett bleibt bei **30 % der Kalorien dieses Tages**;
 - Kohlenhydrate erhalten anschließend die verbleibenden Kalorien.
 
 Dadurch steigt an einem höheren Kalorientag die Fettmenge proportional mit dem Tagesbudget; der verbleibende zusätzliche Spielraum landet bei den Kohlenhydraten.
+
+Die Berechnungs- und UI-Regeln für den Cheat Day stehen in `cheat-day-v1.md`.
 
 ## Rundung
 
@@ -147,6 +149,8 @@ V1 soll nutzerfreundlich auf ganze Gramm darstellen:
 3. Kohlenhydrate aus den danach verbleibenden Kalorien berechnen und auf ganze Gramm runden.
 
 Intern können ungerundete Werte weitergeführt werden. Durch die Darstellung in ganzen Gramm kann die sichtbare Makrosumme um wenige kcal vom exakten Tagesbudget abweichen.
+
+**Diese kleinen Rundungsabweichungen sind für V1 ausdrücklich akzeptiert und müssen nicht künstlich korrigiert werden.**
 
 ## Anpassbarkeit
 
