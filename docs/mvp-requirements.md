@@ -46,10 +46,11 @@ Die App berechnet:
 3. bei Ziel-KFA: modellhaftes Zielgewicht und notwendige Gewichtsabnahme
 4. notwendiges Energiedefizit auf Basis des Zielgewichts
 5. daraus abgeleitetes durchschnittliches Kalorienziel
-6. optional eine Wochenverteilung mit geplantem höherem Tagesbudget / flexiblem Tag
-7. im erweiterten Tracking-Modus zusätzlich Protein-, Fett- und Kohlenhydratziele
+6. Wochenbudget aus dem Tagesziel
+7. optional eine Umverteilung auf **genau einen Cheat Day** und sechs reguläre Tage
+8. im erweiterten Tracking-Modus zusätzlich Protein-, Fett- und Kohlenhydratziele
 
-Die Details der Kalorienberechnung stehen in `calorie-calculation.md`; die Makrologik in `nutrition-and-macros.md`.
+Die Details der Kalorienberechnung stehen in `calorie-calculation.md`, die Cheat-Day-Spezifikation in `cheat-day-v1.md` und die Makrologik in `nutrition-and-macros.md`.
 
 ## Transparenz-Ansicht
 
@@ -66,11 +67,32 @@ Ruheenergiebedarf                   XXXX kcal
 - geplantes Defizit                 XXX kcal
 --------------------------------------------
 = Kalorienziel                      XXXX kcal
+
+× 7
+= Wochenbudget                     XXXXX kcal
 ```
 
 Die einzelnen Positionen sollen erklärbar sein.
 
 Wenn Ziel-KFA zur Zieldefinition verwendet wird, soll zusätzlich nachvollziehbar dargestellt werden, wie aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA das modellhafte Zielgewicht und die erforderliche Gewichtsabnahme abgeleitet wurden.
+
+## Cheat Day
+
+Der Nutzer sieht zunächst sein normales Tagesziel und Wochenbudget. Erst danach kann er optional einen **Cheat Day** konfigurieren.
+
+V1-Anforderungen:
+
+- maximal **ein** Cheat Day pro Woche;
+- Auswahl eines Wochentags Montag bis Sonntag;
+- Auswahl des gesamten Cheat-Day-Kalorienbudgets über einen Zahlenregler / Wheel / Slider;
+- **50-kcal-Schritte**;
+- Live-Neuberechnung der übrigen sechs Tagesbudgets;
+- Wochenbudget bleibt unverändert;
+- nominale Obergrenze `normales Tagesziel + 1.000 kcal`, auf das 50-kcal-Raster nach unten gerundet;
+- tatsächliche Obergrenze kann niedriger sein, wenn die sechs regulären Tage sonst die automatischen Planungsgrenzen verletzen;
+- optionaler Info-Button mit groben Kalorienbeispielen typischer Cheat-Day-Lebensmittel.
+
+Die konkreten Lebensmittel, Portionsdefinitionen und kcal-Bereiche für den Info-Bereich sind noch nicht final festgelegt.
 
 ## Änderbare Werte
 
@@ -117,9 +139,9 @@ Fett = 30 % des jeweiligen Tageskalorienbudgets
 Kohlenhydrate = verbleibende Kalorien
 ```
 
-Auf flexiblen/höheren Kalorientagen bleibt die Proteinmenge bei unverändertem Gewicht/Sportstatus gleich, Fett bleibt bei 30 % des höheren Tagesbudgets, Kohlenhydrate erhalten den Rest.
+Auf dem Cheat Day bleibt die Proteinmenge bei unverändertem Gewicht/Sportstatus gleich, Fett bleibt bei 30 % des höheren Tagesbudgets, Kohlenhydrate erhalten den Rest.
 
-Protein und Fett werden in ganzen Gramm angezeigt; Kohlenhydrate werden aus den verbleibenden Kalorien berechnet und ebenfalls in ganzen Gramm dargestellt.
+Protein und Fett werden in ganzen Gramm angezeigt; Kohlenhydrate werden aus den verbleibenden Kalorien berechnet und ebenfalls in ganzen Gramm dargestellt. Kleine kcal-Abweichungen durch diese Rundung sind für V1 akzeptiert.
 
 Wenn ein sehr niedriges Kalorienziel zu einer offensichtlich unplausiblen Makroverteilung führt, soll primär das Kalorienziel bzw. die Sicherheitslogik geprüft werden, statt die Makroregeln still zu verändern.
 
