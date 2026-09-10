@@ -64,21 +64,47 @@ Sport/training frequency is also sufficient to select the V1 protein tier. The M
 
 Additional complexity belongs after the first plan under calculation details, settings or “refine plan”.
 
-## KFA rules
+## KFA rules and reference-image library
 
 Current KFA is optional. Target KFA is only available if current KFA is known.
 
-Reference images are pre-generated, shown only on request and selected by:
+The KFA reference images are optional orientation aids only. The user does **not** have to select the closest-looking image. Current KFA and target KFA remain free numeric inputs, and calculations always use the exact numeric value entered.
 
-- sex / biological category
-- an internal body-shape/reference bucket derived from height and weight
-- KFA level
+V1 uses a pre-generated library of **80 front-view images**:
 
-The images may use coarse anchors such as approximately 5-percentage-point steps, but **numeric KFA values are not constrained to those anchors**. A user can enter e.g. 17 % between 15 % and 20 %, and calculations use the exact entered value. The same applies to target KFA.
+```text
+2 sex/biological image categories × 5 internal body-shape buckets × 8 KFA anchors = 80 images
+```
 
-A KFA estimated from reference images may carry higher internal model uncertainty. That uncertainty can be documented for developers/model validation; no separate user warning is required solely because the KFA was visually estimated.
+The eight image anchors for both male and female libraries are:
 
-The reference images are orientation aids, not measurements.
+```text
+5%, 10%, 15%, 20%, 25%, 30%, 35%, 40%
+```
+
+The male and female libraries represent those same numeric anchors separately; the visual appearance of the same numeric KFA does not need to be identical across sexes.
+
+### Internal body-shape matching
+
+The user is not asked for a body-build category. The image-matching bucket is derived from height and weight using a simple BMI-based V1 heuristic:
+
+```text
+BMI = weight(kg) / height(m)^2
+
+A: BMI < 20
+B: 20 to < 25
+C: 25 to < 30
+D: 30 to < 35
+E: >= 35
+```
+
+These buckets are never shown as user classifications and are **not** KFA estimates or medical labels. They are only a visual-reference matching heuristic. V1 accepts that very muscular or otherwise atypical body compositions may be matched imperfectly.
+
+Reference images are shown only on request. V1 uses one standardized front view per combination, with consistent pose, framing, clothing, lighting and background. The same library is reused for current-KFA and target-KFA visual help.
+
+A KFA estimated with help from those images may carry higher internal model uncertainty. That uncertainty can be documented for developers/model validation; no separate user warning is required solely because the KFA was visually estimated.
+
+See `kfa-reference-images-v1.md` for the detailed specification.
 
 ## Resting-energy model
 
@@ -314,7 +340,8 @@ Read in this order when working on the product:
 4. `activity-model-v1.md`
 5. `cheat-day-v1.md`
 6. `nutrition-and-macros.md`
-7. `onboarding.md` / `app-flow.md`
-8. `open-questions.md`
+7. `kfa-reference-images-v1.md`
+8. `onboarding.md` / `app-flow.md`
+9. `open-questions.md`
 
 Never convert provisional scientific assumptions into fixed requirements without an explicit decision.
