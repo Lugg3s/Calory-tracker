@@ -132,11 +132,14 @@ Relevant screens can expose a short explanation of why an input is needed and wh
 12. target definition
 13. target value / derived target weight confirmation
 14. timeframe
-15. planned flexible / higher-calorie day
-16. tracking mode
-17. plan result
+15. initial calorie-plan / weekly-budget preview without Cheat Day
+16. optional Cheat Day configuration
+17. tracking mode
+18. final plan result
 
 If no current KFA is entered, target KFA is unavailable and target weight is entered directly.
+
+The Cheat Day decision is intentionally made **after** the user has seen the baseline daily target and weekly budget so the effect of redistributing calories is understandable.
 
 ## D-020 — Show the first plan before advanced refinement
 **Status:** decided
@@ -239,28 +242,24 @@ maximum body-energy deficit D_max = 0.225 × M
 
 Additional approximate automatic-plan floors remain 1,200 kcal/day for the female Mifflin equation category and 1,500 kcal/day for the male category. These are pragmatic product guardrails, not physiological minimums.
 
-## D-032 — Weekly budget redistributes calories rather than adding a cheat day on top
-**Status:** decided direction
+## D-032 — Weekly budget redistributes calories rather than adding a Cheat Day on top
+**Status:** decided
 
 ```text
 weekly budget W = average daily target C × 7
 ```
 
-A flexible/higher-calorie day redistributes the same weekly budget. For one flexible day `H`:
+A Cheat Day redistributes the same weekly budget rather than adding calories to it. V1 permits only **one Cheat Day per week**.
+
+For Cheat-Day budget `H`:
 
 ```text
 regular-day budget L = (W - H) / 6
 ```
 
-For `n` flexible days:
+The previous direction that automatically capped the Cheat Day at estimated maintenance is superseded by D-034.
 
-```text
-L = (W - sum(H_i)) / (7 - n)
-```
-
-Automatic V1 planning caps a flexible day at estimated maintenance. Redistribution must keep regular days within automatic-plan guardrails.
-
-## D-033 — V1 macro rounding, flexible-day behavior and scope
+## D-033 — V1 macro rounding, Cheat-Day behavior and scope
 **Status:** decided
 
 Macro rules are applied to each day's actual calorie budget.
@@ -268,7 +267,55 @@ Macro rules are applied to each day's actual calorie budget.
 - Protein grams remain fixed for unchanged current weight and sport-frequency tier.
 - Fat remains 30% of that day's calories.
 - Carbohydrates receive the remaining calories.
-- Protein and fat are displayed as whole grams; carbohydrates are calculated from the remaining calories and displayed as whole grams. Internal values may remain unrounded, so visible macro calories can differ by a few kcal from the exact budget.
+- Protein and fat are displayed as whole grams; carbohydrates are calculated from the remaining calories and displayed as whole grams.
+- Small visible kcal differences caused by whole-gram rounding are explicitly accepted for V1 and do not require artificial correction.
 - Fiber, saturated-fat targets, omega-3 targets and separate muscle-gain/muscle-retention macro logic are not part of the V1 macro engine.
 
 See `nutrition-and-macros.md` for formulas and examples.
+
+## D-034 — V1 Cheat Day amount, limit and live redistribution
+**Status:** decided
+
+The user can choose the **total calorie budget** for one Cheat Day rather than being forced to use maintenance calories.
+
+The baseline is the normal average daily target:
+
+```text
+C = W / 7
+nominal Cheat-Day maximum = C + 1,000 kcal
+```
+
+The Cheat-Day amount is selected in **50-kcal increments**. The technical maximum is rounded down to the allowed 50-kcal grid so the nominal +1,000-kcal limit is not exceeded.
+
+The six regular days must still satisfy the automatic-plan guardrails. Therefore the actual selectable maximum is the lower of:
+
+- the 50-kcal-grid value at or below `C + 1,000`; and
+- the highest value that still leaves all six regular days within the automatic-plan guardrails.
+
+If `F` is the minimum allowed regular-day budget:
+
+```text
+H <= W - 6 × F
+```
+
+As the user changes `H`, the six regular-day budgets update **live** while the weekly total stays unchanged.
+
+## D-035 — V1 Cheat Day screen interaction and optional food examples
+**Status:** decided direction
+
+The Cheat Day is configured after the user has seen the normal daily target and weekly budget.
+
+V1 interaction:
+
+1. ask whether the user wants a Cheat Day;
+2. if yes, show Monday through Sunday;
+3. allow exactly one day to be selected;
+4. show a numeric wheel/slider-style control for the Cheat-Day calorie total in 50-kcal steps;
+5. update the other six daily budgets live;
+6. keep the unchanged weekly budget visible/understandable.
+
+The final control implementation may be a wheel, slider or equivalent numeric selector; exact visual design remains a wireframe task.
+
+The screen should also offer the same kind of optional **Info button** used elsewhere in onboarding. It can show approximate calorie examples for typical Cheat-Day foods such as pizza, beer, cake, burgers and fries so users can estimate an appropriate budget. These values should be presented as rough ranges/benchmarks, not precise nutrition facts, because recipes and portions vary.
+
+The exact example foods, serving definitions and kcal ranges remain a content task. See `cheat-day-v1.md` for the detailed specification.
