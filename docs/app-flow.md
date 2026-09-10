@@ -97,46 +97,78 @@ Auch der Ziel-KFA kann numerisch zwischen visuellen Bildankern fein angepasst we
 
 Gewünschter Zeitraum bis zum Ziel.
 
-### Screen 15 — Flexibler Tag / höheres Tagesbudget
+### Screen 15 — Ausgangsplan / Budget-Vorschau
 
-Die Berechnungslogik ist festgelegt, die genaue UX noch nicht.
+Bevor der Nutzer einen Cheat Day auswählt, sieht er den zunächst berechneten Plan **ohne Umverteilung**.
+
+Mindestens sichtbar:
+
+- durchschnittliches Tagesziel `C`;
+- Wochenbudget `W = C × 7`;
+- normales Tagesbudget ohne Cheat Day.
+
+Diese Vorschau ist bewusst vor der Cheat-Day-Entscheidung platziert. Der Nutzer soll erst verstehen, wie viel er normalerweise pro Tag und pro Woche zur Verfügung hat, bevor er Kalorien auf einen einzelnen Tag verschiebt.
+
+### Screen 16 — Cheat Day
+
+V1 verwendet den Begriff **„Cheat Day“**.
+
+Zunächst wird gefragt, ob der Nutzer einen Cheat Day einbauen möchte. Die genaue Formulierung kann in der Wireframe-/Copy-Phase noch angepasst werden.
+
+Wenn der Nutzer „Nein“ wählt, bleibt die Budgetverteilung unverändert.
+
+Wenn der Nutzer „Ja“ wählt:
+
+1. **Montag bis Sonntag** werden als auswählbare Tage gezeigt.
+2. Der Nutzer wählt **genau einen** Tag. V1 erlaubt nur einen Cheat Day pro Woche.
+3. Danach erscheint ein Zahlenregler / Wheel / Slider für das **gesamte Kalorienbudget des Cheat Days**.
+4. Der Regler arbeitet in **50-kcal-Schritten**.
+5. Während der Nutzer den Wert verändert, werden die Kalorienbudgets der übrigen sechs Tage **live** neu berechnet.
+6. Das unveränderte Wochenbudget bleibt sichtbar bzw. nachvollziehbar.
+
+Berechnung:
 
 ```text
-Wochenbudget W = durchschnittliches Tagesziel C × 7
+Wochenbudget W = C × 7
+reguläres Tagesbudget L = (W - H) / 6
 ```
 
-Ein höherer Tag wird **innerhalb** desselben Wochenbudgets finanziert und nicht zusätzlich aufgeschlagen.
+Dabei ist `H` das ausgewählte Cheat-Day-Budget.
 
-Für einen flexiblen Tag mit Budget `H`:
+Nominale Obergrenze:
 
 ```text
-normale Tagesbudgets L = (W - H) / 6
+H_max_nominal = C + 1.000 kcal
 ```
 
-Automatische V1-Regeln:
+Der auswählbare Maximalwert liegt auf dem 50-kcal-Raster und wird nach unten gerundet. Zusätzlich darf die Umverteilung die automatischen Planungsgrenzen der sechs übrigen Tage nicht verletzen. Falls diese Grenze früher erreicht wird, begrenzt sie den Regler entsprechend.
 
-- `H` maximal bis zum geschätzten Erhaltungsbedarf;
-- kein automatisch geplanter Überschuss;
-- die übrigen Tage müssen die automatischen Planungsgrenzen einhalten;
-- wenn nicht, wird `H` reduziert oder ein längerer Zielzeitraum vorgeschlagen.
+Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ gilt nicht mehr.
 
-Im Makro-Modus wird danach jedes konkrete Tagesbudget separat auf Makros aufgeteilt: Protein bleibt in Gramm gleich, Fett bleibt bei 30 % der jeweiligen Tageskalorien, Kohlenhydrate erhalten den Rest.
+#### Info-Button
 
-Offen bleiben insbesondere: Bezeichnung, Wochentags-Control, Budget-Control und UX für mehrere flexible Tage.
+Der Screen soll einen optionalen Info-Button bzw. eine Hilfe analog zu anderen Onboarding-Screens anbieten.
 
-### Screen 16 — Tracking-Modus
+Dort können typische Cheat-Day-Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B. Pizza, Bier, Kuchen, Burger oder Pommes. Die Angaben sollen als Richtwerte/Bereiche erscheinen, weil Portionen und Rezepte stark variieren.
+
+Die konkreten Portionsbeispiele und kcal-Werte sind noch als Content-Aufgabe offen.
+
+Die vollständige Spezifikation steht in [`cheat-day-v1.md`](cheat-day-v1.md).
+
+### Screen 17 — Tracking-Modus
 
 - nur Kalorien
 - Kalorien + Makronährstoffe
 
 Im Makro-Modus gelten die in `nutrition-and-macros.md` definierten V1-Regeln.
 
-### Screen 17 — Plan-Ergebnis
+### Screen 18 — Plan-Ergebnis
 
 Mindestens anzeigen:
 
 - durchschnittliches Tagesziel
-- ggf. Wochenverteilung mit flexiblem Tag
+- Wochenbudget
+- ggf. Cheat-Day-Budget und sechs angepasste reguläre Tagesbudgets
 - geschätzten Erhaltungsbedarf
 - geplantes durchschnittliches Defizit
 - Zielgewicht
@@ -158,8 +190,10 @@ Zusätzliche Komplexität wird nachgelagert angeboten, z. B. über **„Plan ver
 
 ## Status
 
-Festgelegt sind der grundsätzliche 17-Screen-Flow, das Prinzip „ein Parameter pro Screen“, die bedingte Trainingsdauer, die KFA-Zielgewichtslogik, die Wochenbudget-/Flex-Day-Berechnungsrichtung und die Tatsache, dass die bestehende Sporthäufigkeit für die Protein-Klassifizierung ausreicht.
+Festgelegt sind der grundsätzliche **18-Screen-Flow**, das Prinzip „ein Parameter pro Screen“, die bedingte Trainingsdauer, die KFA-Zielgewichtslogik, die Protein-Klassifizierung aus der vorhandenen Sporthäufigkeit und die Cheat-Day-Berechnungs-/Interaktionsrichtung.
 
 Eine zusätzliche Muskelaufbau-/Muskelerhalt-Frage ist für V1 nicht vorgesehen.
 
-Noch offen sind vor allem konkrete Controls/Microcopy, MET-Feinkalibrierung, KFA-Referenzbibliothek und die genaue UX des flexiblen Tages.
+Für den Cheat Day sind jetzt insbesondere entschieden: genau ein Tag pro Woche, Auswahl des Wochentags, gesamtes Cheat-Day-Budget über einen Zahlenregler in 50-kcal-Schritten, Live-Neuberechnung der anderen sechs Tage, nominale Obergrenze `C + 1.000 kcal` sowie ein optionaler Info-Bereich mit groben Lebensmittelbeispielen.
+
+Noch offen sind vor allem konkrete Microcopy/visuelles Design, die finalen Lebensmittelbeispiele und deren Portions-/Kalorienbereiche, MET-Feinkalibrierung und Details der KFA-Referenzbibliothek.
