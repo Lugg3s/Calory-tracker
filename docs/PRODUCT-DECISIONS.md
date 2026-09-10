@@ -319,3 +319,36 @@ The final control implementation may be a wheel, slider or equivalent numeric se
 The screen should also offer the same kind of optional **Info button** used elsewhere in onboarding. It can show approximate calorie examples for typical Cheat-Day foods such as pizza, beer, cake, burgers and fries so users can estimate an appropriate budget. These values should be presented as rough ranges/benchmarks, not precise nutrition facts, because recipes and portions vary.
 
 The exact example foods, serving definitions and kcal ranges remain a content task. See `cheat-day-v1.md` for the detailed specification.
+
+## D-036 — V1 KFA reference-image library structure
+**Status:** decided
+
+The V1 KFA visual-help library uses a fixed pre-generated set of **80 images**:
+
+```text
+2 sex/biological image categories × 5 internal body-shape buckets × 8 KFA anchors = 80 images
+```
+
+For both male and female image libraries the eight KFA anchors are:
+
+```text
+5%, 10%, 15%, 20%, 25%, 30%, 35%, 40%
+```
+
+The images are optional orientation aids only. The user does **not** have to select a closest-looking image. They can enter any numeric KFA value directly, including values between image anchors, and calculations use that exact numeric value.
+
+The five internal body-shape buckets are derived from current height and weight with a simple BMI-based V1 heuristic:
+
+```text
+BMI = weight(kg) / height(m)^2
+
+A: BMI < 20
+B: 20 to < 25
+C: 25 to < 30
+D: 30 to < 35
+E: >= 35
+```
+
+These bucket labels are never shown to the user and are **not** a health classification or KFA estimate. They are only a visual-reference matching heuristic. V1 accepts that very muscular or otherwise atypical body compositions may be matched imperfectly.
+
+V1 uses a single standardized **front view** per combination. The same library is reused for current-KFA and target-KFA visual help. Consistent pose, framing, clothing, lighting and background are required across the library. See `kfa-reference-images-v1.md` for the detailed specification.
