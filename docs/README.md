@@ -16,6 +16,7 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [App Flow](app-flow.md)
 - [Kalorienberechnung](calorie-calculation.md)
 - [Aktivitätsmodell V1](activity-model-v1.md)
+- [Cheat Day V1](cheat-day-v1.md)
 - [Ernährung & Makronährstoffe](nutrition-and-macros.md)
 - [Food Tracking](food-tracking.md)
 - [AI & Voice](ai-and-voice.md)
