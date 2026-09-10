@@ -21,8 +21,9 @@ Alle Werte sind Schätzungen. Das Modell soll keine Genauigkeit suggerieren, die
 11. tägliches Kalorienziel unter Berücksichtigung des niedrigeren TEF bestimmen
 12. Sicherheitsgrenzen prüfen
 13. Wochenbudget ableiten
-14. optional einen flexiblen/höheren Kalorientag innerhalb des Wochenbudgets verteilen
-15. konkrete Tagesbudgets ausgeben
+14. Ausgangsplan ohne Cheat Day anzeigen
+15. optional einen Cheat Day innerhalb desselben Wochenbudgets konfigurieren
+16. konkrete Tagesbudgets ausgeben
 
 ## Ruheenergiebedarf
 
@@ -48,8 +49,6 @@ Ein anhand der Referenzbilder geschätzter KFA darf für Cunningham verwendet we
 ## KFA-Eingabe und Referenzbilder
 
 Die Referenzbilder können beispielsweise in 5-Prozentpunkt-Schritten vorliegen. Der Nutzer ist **nicht auf diese Bildstufen beschränkt**.
-
-Beispiel:
 
 ```text
 Bilder: 10 %, 15 %, 20 %, 25 %
@@ -105,6 +104,8 @@ Netto-Aktivitäts-kcal
 ```
 
 Die MET-Werte sollen aus einem wissenschaftlich etablierten Aktivitätskompendium stammen, insbesondere dem aktuellen Adult Compendium of Physical Activities.
+
+Die derzeitigen fünf vorläufigen 8-Stunden-Referenzprofile und bekannte Modellgrenzen sind in [`activity-model-v1.md`](activity-model-v1.md) dokumentiert.
 
 ### Doppelzählungsregel
 
@@ -196,15 +197,10 @@ gilt:
 ```text
 D = B + 0,10 × C - C
 D = B - 0,90 × C
-```
-
-Daraus folgt:
-
-```text
 C = (B - D) / 0,90
 ```
 
-Da `M = B / 0,90`, kann dieselbe Formel auch so geschrieben werden:
+Da `M = B / 0,90`, gilt äquivalent:
 
 ```text
 C = M - D / 0,90
@@ -221,8 +217,6 @@ C = (2.223 - 385) / 0,90
 C ≈ 2.042 kcal/Tag
 ```
 
-Das ist weiterhin eine vereinfachte Planung, aber mathematisch konsistent mit der 10-%-TEF-Annahme.
-
 ## Sicherheits- und Plausibilitätsgrenzen für automatisch erzeugte Pläne
 
 Für normale automatisch erzeugte Erwachsenen-Pläne wird die obere Defizitgrenze **vom geschätzten Erhaltungsbedarf abhängig gemacht** und nicht als fixer kcal-Wert definiert.
@@ -234,7 +228,7 @@ maximale Kalorienreduktion R_max = 0,25 × Erhaltungsbedarf M
 minimales Tagesziel aus dieser Grenze C_min = 0,75 × M
 ```
 
-Da der 10-%-TEF im Defizitmodell separat berücksichtigt wird, entspricht dies intern einem maximalen geplanten Körperenergie-Defizit von:
+Da der 10-%-TEF separat berücksichtigt wird:
 
 ```text
 D_max = 0,90 × R_max
@@ -250,13 +244,9 @@ M = 3.000 kcal → max. Kalorienreduktion 750 kcal → C >= 2.250 kcal
 M = 3.500 kcal → max. Kalorienreduktion 875 kcal → C >= 2.625 kcal
 ```
 
-Die 25-%-Grenze ist eine konservative Produktentscheidung innerhalb des in etablierten Gewichtsmanagement-Leitlinien verwendeten Bereichs von ungefähr 15–30 % reduzierter Energieaufnahme. Sie ist keine individuelle physiologische Grenze.
-
 Zusätzlich soll die automatisch empfohlene Energieaufnahme ungefähr nicht unter **1.200 kcal/Tag** für die weibliche Mifflin-Kategorie und **1.500 kcal/Tag** für die männliche Mifflin-Kategorie fallen. Diese Werte sind pragmatische Planungsgrenzen und keine individuellen physiologischen Mindestwerte.
 
 Wenn Ziel und Zeitraum entweder die maintenance-relative 25-%-Grenze oder die absolute Kalorien-Untergrenze verletzen, soll die App primär einen längeren Zeitraum bzw. eine Anpassung des Ziels vorschlagen.
-
-Sehr niedrige Energiezufuhren um 800–1.000 kcal/Tag oder darunter gehören in medizinisch betreute Kontexte und sind nicht Teil der normalen automatischen MVP-Empfehlung.
 
 ## Wochenbudget
 
@@ -266,112 +256,118 @@ Das Wochenbudget wird aus dem durchschnittlichen täglichen Kalorienziel abgelei
 Wochenbudget W = C × 7
 ```
 
-Ohne flexiblen Tag gilt:
+Ohne Cheat Day gilt:
 
 ```text
 Montag bis Sonntag ≈ C kcal/Tag
 ```
 
-Die interne Berechnung kann Dezimalwerte enthalten; die UI zeigt ganze kcal-Werte. Rundungsreste werden so auf einzelne Tage verteilt, dass das Wochenbudget insgesamt exakt erhalten bleibt.
+Die interne Berechnung kann Dezimalwerte enthalten; die UI zeigt ganze kcal-Werte. Rundungsreste werden so auf einzelne Tage verteilt, dass das Wochenbudget insgesamt erhalten bleibt.
 
-## Flexibler Tag / höheres Tagesbudget
+## Cheat Day V1
 
-Ein flexibler Tag **erhöht das Wochenbudget nicht**. Er verteilt dieselben Wochenkalorien anders.
+V1 erlaubt **maximal einen Cheat Day pro Woche**.
 
-### Ein flexibler Tag
+Ein Cheat Day erhöht das Wochenbudget **nicht**. Er verteilt dieselben Wochenkalorien anders.
 
 Mit:
 
 - `W` = Wochenbudget
-- `H` = Kalorienbudget des flexiblen Tages
-- `L` = Kalorienbudget der sechs normalen Tage
+- `H` = Kalorienbudget des Cheat Days
+- `L` = Kalorienbudget der sechs regulären Tage
 
 ```text
 L = (W - H) / 6
 ```
 
-### Mehrere flexible Tage
+### Position im Nutzer-Flow
 
-Für `n` flexible Tage:
+Der Nutzer sieht zuerst den normalen Ausgangsplan ohne Cheat Day:
 
-```text
-L = (W - Summe(H_i)) / (7 - n)
-```
+- durchschnittliches Tagesziel `C`;
+- Wochenbudget `W`;
+- normales Tagesbudget.
 
-### V1-Grenze des flexiblen Tages
+Erst danach entscheidet er, ob er einen Cheat Day nutzen möchte. Dadurch ist die Umverteilung nachvollziehbar.
 
-Die automatische Planung setzt den **Erhaltungsbedarf als maximales Budget des flexiblen Tages**.
+### Cheat-Day-Obergrenze
 
-Damit kann ein Tag bis auf Maintenance-Niveau angehoben werden, aber die App plant in V1 keinen absichtlichen Kalorienüberschuss als Cheat Day ein.
+Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ ist **ersetzt**.
 
-Der Nutzer kann einen höheren Tag zwischen normalem Tagesziel und Erhaltungsbedarf wählen.
-
-Wenn die dadurch erforderliche Reduktion der übrigen Tage gegen die automatischen Kalorien-Untergrenzen verstößt, muss die App:
-
-1. den flexiblen Tag reduzieren oder
-2. den Gesamtzeitraum verlängern.
-
-## Beispiel: Tagesbudgets mit flexiblem Tag
-
-Annahme:
+Nominale Obergrenze:
 
 ```text
-Erhaltungsbedarf M = 2.470 kcal
-Ziel: 5 kg Gewichtsverlust
-Zeitraum: 100 Tage
+Basis = W / 7 = C
+H_max_nominal = C + 1.000 kcal
 ```
 
-Statisches Gesamtdefizit:
+Die Auswahl erfolgt in **50-kcal-Schritten**. Da es sich um eine Obergrenze handelt, wird der technische Maximalwert auf das 50-kcal-Raster nach unten gerundet.
+
+Zusätzlich müssen die sechs regulären Tage weiterhin die automatischen Planungsgrenzen einhalten. Sei `F` das niedrigste zulässige reguläre Tagesbudget, dann gilt:
 
 ```text
-5 × 7.700 = 38.500 kcal
-D = 38.500 / 100 = 385 kcal/Tag
+H <= W - 6 × F
 ```
 
-Mit TEF:
+Damit ist die tatsächlich auswählbare Obergrenze konzeptionell:
 
 ```text
-B = 2.470 × 0,90 = 2.223 kcal
-C = (2.223 - 385) / 0,90
-C ≈ 2.042 kcal/Tag
+H_max = min(
+  floor_to_50(C + 1.000),
+  floor_to_50(W - 6 × F)
+)
 ```
 
-Wochenbudget:
+Wenn dadurch kein sinnvoll höherer Cheat-Day-Wert möglich ist, soll die App dies transparent anzeigen bzw. einen längeren Zielzeitraum vorschlagen.
 
-```text
-W ≈ 2.042,22 × 7
-W ≈ 14.295,56 kcal
-```
+### Cheat-Day-UI
 
-Ohne flexiblen Tag:
+Wenn der Nutzer einen Cheat Day aktiviert:
 
-```text
-≈ 2.042 kcal pro Tag
-```
+1. Montag bis Sonntag werden angezeigt.
+2. Genau ein Wochentag kann ausgewählt werden.
+3. Danach wählt der Nutzer das **gesamte Cheat-Day-Kalorienbudget** über einen Zahlenregler / Wheel / Slider.
+4. Der Regler arbeitet in **50-kcal-Schritten**.
+5. Während der Nutzer den Wert verändert, werden die sechs anderen Tagesbudgets **live** aktualisiert.
+6. Das unveränderte Wochenbudget bleibt sichtbar bzw. nachvollziehbar.
 
-Mit einem flexiblen Tag auf Erhaltungsniveau:
+Die konkrete UI-Komponente kann in der Wireframe-Phase optimiert werden.
 
-```text
-H = 2.470 kcal
-L = (14.295,56 - 2.470) / 6
-L ≈ 1.971 kcal
-```
+### Info-Hilfe mit Lebensmittelbeispielen
 
-Eine mögliche gerundete Woche:
+Der Cheat-Day-Screen soll einen optionalen Info-Button analog zu anderen erklärungsbedürftigen Screens erhalten.
 
-```text
-Montag       1.971 kcal
-Dienstag     1.971 kcal
-Mittwoch     1.971 kcal
-Donnerstag   1.971 kcal
-Freitag      1.971 kcal
-Samstag      2.470 kcal  ← flexibler Tag
-Sonntag      1.971 kcal
---------------------------------
-Woche       14.296 kcal
-```
+Dort können typische Cheat-Day-Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B.:
 
-Die gerundete Wochenzahl kann um wenige kcal von der ungerundeten internen Rechnung abweichen. Die Implementierung soll den Rundungsrest deterministisch verteilen.
+- Pizza
+- Bier
+- Kuchen
+- Burger
+- Pommes
+
+Die Werte sollen als grobe Richtwerte/Bereiche und nicht als scheinbar exakte Nährwerte dargestellt werden. Konkrete Portionsdefinitionen und kcal-Bereiche sind noch als Content-Aufgabe festzulegen.
+
+Weitere Details stehen in [`cheat-day-v1.md`](cheat-day-v1.md).
+
+## Makros und Rundung am Cheat Day
+
+Im erweiterten Makro-Modus gelten für jedes konkrete Tagesbudget die allgemeinen V1-Regeln:
+
+- Protein bleibt bei unverändertem Gewicht und Sport-Tier in Gramm gleich;
+- Fett = 30 % der jeweiligen Tageskalorien;
+- Kohlenhydrate = verbleibende Kalorien.
+
+Protein und Fett werden als ganze Gramm dargestellt; Kohlenhydrate werden aus den verbleibenden Kalorien berechnet und ebenfalls auf ganze Gramm dargestellt.
+
+**Kleine Rundungsabweichungen der sichtbaren Makro-kcal vom exakten Tagesbudget sind für V1 akzeptiert und kein Fehlerzustand.**
+
+## Manuelle Plausibilitätschecks
+
+Mehrere manuelle End-to-End-Rechenbeispiele wurden für normale Aktivitäts-/Sportprofile, beide Protein-Tiers, die 25-%-Defizitgrenze, absolute Kalorien-Untergrenzen und die Wochenumverteilung geprüft.
+
+Die Kernlogik verhielt sich dabei grundsätzlich wie vorgesehen. Als relevanter Sonderfall zeigte sich, dass ein Cheat Day ohne eigene Obergrenze mathematisch sehr hoch werden könnte, solange die sechs anderen Tage noch innerhalb der Sicherheitsgrenzen bleiben. Daraus wurde die zusätzliche Obergrenze `C + 1.000 kcal` abgeleitet.
+
+Diese Rechenchecks sind **keine wissenschaftliche End-to-End-Validierung** des gesamten TDEE-Modells.
 
 ## Transparente Darstellung
 
@@ -396,12 +392,12 @@ Ruheenergiebedarf                     XXXX kcal
 × 7
 = Wochenbudget                        XXXXX kcal
 
-→ Verteilung auf normale und flexible Tage
+→ optional: Umverteilung auf 1 Cheat Day + 6 reguläre Tage
 ```
 
 ## Manuelle Anpassung
 
-Das automatisch berechnete Kalorienziel kann vom Nutzer in Einstellungen bzw. einem erweiterten Bereich manuell überschrieben werden. Diese Funktion bleibt getrennt von der automatischen Wochenbudget- und Flex-Day-Logik.
+Das automatisch berechnete Kalorienziel kann vom Nutzer in Einstellungen bzw. einem erweiterten Bereich manuell überschrieben werden. Diese Funktion bleibt getrennt von der automatischen Wochenbudget- und Cheat-Day-Logik.
 
 Wie aggressive manuelle Unterschreitungen der automatischen Planungsgrenzen behandelt werden, bleibt als UX-/Safety-Frage offen.
 
