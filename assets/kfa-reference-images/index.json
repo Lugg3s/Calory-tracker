@@ -2,6 +2,23 @@
   "schemaVersion": 1,
   "images": [
     {
+      "id": "male_bucket3_kfa10",
+      "sex": "male",
+      "bucket": "bucket-3",
+      "kfa": "kfa-10",
+      "targetBodyFatPercent": 10,
+      "view": "front",
+      "path": "male/bucket-3/kfa-10/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "referenceImageId": "male_bucket3_kfa15",
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "male/bucket-3/kfa-10/prompt.txt"
+      }
+    },
+    {
       "id": "male_bucket3_kfa15",
       "sex": "male",
       "bucket": "bucket-3",
