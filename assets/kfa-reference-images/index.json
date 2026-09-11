@@ -50,6 +50,235 @@
         "originalFilename": "Codex-Bild 10. Sept. 2026, 22_56_33.png",
         "type": "user-provided-generated-image"
       }
+    },
+    {
+      "id": "male_bucket3_kfa25",
+      "sex": "male",
+      "bucket": "bucket-3",
+      "kfa": "kfa-25",
+      "targetBodyFatPercent": 25,
+      "view": "front",
+      "path": "male/bucket-3/kfa-25/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "male/bucket-3/kfa-25/prompt.txt",
+        "referenceImageId": "male_bucket3_kfa20"
+      }
+    },
+    {
+      "id": "male_bucket3_kfa30",
+      "sex": "male",
+      "bucket": "bucket-3",
+      "kfa": "kfa-30",
+      "targetBodyFatPercent": 30,
+      "view": "front",
+      "path": "male/bucket-3/kfa-30/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "male/bucket-3/kfa-30/prompt.txt",
+        "referenceImageId": "male_bucket3_kfa20"
+      }
+    },
+    {
+      "id": "male_bucket3_kfa35",
+      "sex": "male",
+      "bucket": "bucket-3",
+      "kfa": "kfa-35",
+      "targetBodyFatPercent": 35,
+      "view": "front",
+      "path": "male/bucket-3/kfa-35/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "male/bucket-3/kfa-35/prompt.txt",
+        "referenceImageId": "male_bucket3_kfa20"
+      }
+    },
+    {
+      "id": "male_bucket3_kfa40",
+      "sex": "male",
+      "bucket": "bucket-3",
+      "kfa": "kfa-40",
+      "targetBodyFatPercent": 40,
+      "view": "front",
+      "path": "male/bucket-3/kfa-40/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "male/bucket-3/kfa-40/prompt.txt",
+        "referenceImageId": "male_bucket3_kfa20"
+      }
+    },
+    {
+      "id": "male_bucket3_kfa45",
+      "sex": "male",
+      "bucket": "bucket-3",
+      "kfa": "kfa-45",
+      "targetBodyFatPercent": 45,
+      "view": "front",
+      "path": "male/bucket-3/kfa-45/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "male/bucket-3/kfa-45/prompt.txt",
+        "referenceImageId": "male_bucket3_kfa20"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa15",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-15",
+      "targetBodyFatPercent": 15,
+      "view": "front",
+      "path": "female/bucket-3/kfa-15/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-15/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa20",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-20",
+      "targetBodyFatPercent": 20,
+      "view": "front",
+      "path": "female/bucket-3/kfa-20/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-20/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa25",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-25",
+      "targetBodyFatPercent": 25,
+      "view": "front",
+      "path": "female/bucket-3/kfa-25/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-25/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa30",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-30",
+      "targetBodyFatPercent": 30,
+      "view": "front",
+      "path": "female/bucket-3/kfa-30/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-30/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa35",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-35",
+      "targetBodyFatPercent": 35,
+      "view": "front",
+      "path": "female/bucket-3/kfa-35/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-35/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa40",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-40",
+      "targetBodyFatPercent": 40,
+      "view": "front",
+      "path": "female/bucket-3/kfa-40/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-40/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa45",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-45",
+      "targetBodyFatPercent": 45,
+      "view": "front",
+      "path": "female/bucket-3/kfa-45/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-45/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
+    },
+    {
+      "id": "female_bucket3_kfa50",
+      "sex": "female",
+      "bucket": "bucket-3",
+      "kfa": "kfa-50",
+      "targetBodyFatPercent": 50,
+      "view": "front",
+      "path": "female/bucket-3/kfa-50/front.png",
+      "role": "pilot-series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "promptPath": "female/bucket-3/kfa-50/prompt.txt",
+        "referencePath": "masters/bucket-3/joint-master.png",
+        "referenceSubject": "woman on right"
+      }
     }
   ]
 }
