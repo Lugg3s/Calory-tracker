@@ -49,11 +49,11 @@ Netto-Aktivitäts-kcal
 
 MET-Werte sollen aus dem aktuellen Adult Compendium of Physical Activities oder einer vergleichbar belastbaren Quelle stammen.
 
-### Vorläufige interne 8-Stunden-Referenzprofile
+### Interne 8-Stunden-Referenzprofile
 
-Damit das Onboarding nicht nach einzelnen Stunden Sitzen, Stehen, Heben usw. fragen muss, wird aktuell mit fünf groben Alltagstypen als internen Referenzprofilen gearbeitet:
+Damit das Onboarding nicht nach einzelnen Stunden Sitzen, Stehen, Heben usw. fragen muss, wird mit fünf groben Alltagstypen als internen Referenzprofilen gearbeitet:
 
-| Alltagstyp | Vorläufiges internes 8-h-Profil |
+| Alltagstyp | Internes 8-h-Profil |
 | --- | --- |
 | überwiegend sitzend | 7 h × 1,3 MET + 1 h × 1,8 MET |
 | Sitzen & Stehen gemischt | 4 h × 1,3 MET + 4 h × 1,8 MET |
@@ -61,7 +61,18 @@ Damit das Onboarding nicht nach einzelnen Stunden Sitzen, Stehen, Heben usw. fra
 | körperlich aktiv | 2 h × 1,3 MET + 4 h × 1,8 MET + 1,5 h × 3,3 MET + 0,5 h × 4,5 MET |
 | schwere körperliche Arbeit | 1 h × 1,3 MET + 3 h × 1,8 MET + 2,5 h × 3,3 MET + 1,5 h × 4,5 MET |
 
-Diese Profile sind **vorläufige Produktparameter**, keine wissenschaftlich exakt gemessenen Tagesabläufe. Sie sollen eine kurze Onboarding-Auswahl auf ein reproduzierbares internes Modell abbilden.
+Diese Profile sind **V1-Produktparameter**, keine wissenschaftlich exakt gemessenen Tagesabläufe. Sie sollen eine kurze Onboarding-Auswahl auf ein reproduzierbares internes Modell abbilden.
+
+### Wochenmittel der Alltagsprofile
+
+Für V1 werden diese 8-Stunden-Profile als typischer **5-Tage-Arbeitswochen-Anteil** interpretiert und anschließend auf sieben Tage gemittelt:
+
+```text
+Netto-Alltagsaktivität pro Tag im Plan
+= Netto-Energie des gewählten 8-h-Profils × 5 / 7
+```
+
+Damit wird das gleiche 8-Stunden-Arbeitsprofil nicht automatisch an allen sieben Wochentagen angesetzt.
 
 ## Kalibrierung und Plausibilitätscheck
 
@@ -76,11 +87,13 @@ Die aktuelle V1-Struktur hat zwei bekannte Schwachstellen:
 1. **Niedrige Aktivität kann unterschätzt werden.** Ein Modell aus RMR + 8-h-Berufsprofil + Schritte + Training bildet nicht automatisch alle übrigen NEAT-Komponenten des Tages ab, z. B. Haushalt, Kochen, Duschen, Stehen, Fidgeting oder sonstige nicht sauber durch Schritte erfasste Aktivität.
 2. **Hohe Aktivität kann teilweise doppelt gezählt werden.** Bei körperlichen Berufen entstehen viele Schritte während derselben Arbeit, die bereits über MET-Anteile abgebildet wird.
 
-Für V1 wird das Modell trotzdem zunächst in dieser Form weiterverfolgt. Diese Punkte sind als **bekannte Entwickler-/Validierungsrisiken** festzuhalten und sollen später gegen reale Nutzerdaten bzw. bessere Aktivitätsdaten kalibriert werden.
+Für V1 werden diese Grenzen bewusst akzeptiert. Es wird **kein zusätzlicher pauschaler NEAT-Korrekturfaktor** ergänzt. Diese Punkte bleiben Entwickler-/Validierungsrisiken und sollen später gegen reale Nutzerdaten bzw. bessere Aktivitätsdaten kalibriert werden.
 
 ## Doppelzählungsregel
 
 Da Gehen separat über Schritte erfasst wird, soll das Alltags-MET-Profil möglichst nur den nicht bereits durch Schritte erfassten Zusatzverbrauch abbilden. Wo ein Profil Gehanteile implizit enthält, muss die spätere Implementierung darauf achten, dass dieselbe Bewegung nicht vollständig ein zweites Mal addiert wird.
+
+Die genaue technische Entflechtung ist noch ein Validierungs-/Implementierungsthema; die V1-Komponentenarchitektur bleibt trotzdem bestehen.
 
 ## Training
 
@@ -102,7 +115,26 @@ Training-kcal pro Tag
 = Summe Netto-Training-kcal pro Woche / 7
 ```
 
-Dafür werden Trainingsart, Häufigkeit und typische Dauer pro Einheit benötigt. Eine zusätzliche Intensitätsfrage ist für das initiale Onboarding nicht zwingend; Standard-MET-Werte pro Sportart können in V1 verwendet werden.
+Dafür werden Trainingsart, Häufigkeit und typische Dauer pro Einheit benötigt. Eine zusätzliche Intensitätsfrage ist für das initiale Onboarding nicht zwingend.
+
+### V1-Standard-MET-Werte pro Trainingskategorie
+
+Für die erste Implementierung werden folgende **Produkt-Defaults** verwendet:
+
+| Trainingskategorie | V1-Standard-MET |
+| --- | ---: |
+| Krafttraining | 3,5 |
+| Laufen / Joggen | 7,5 |
+| Radfahren | 7,0 |
+| Schwimmen | 5,8 |
+| HIIT / Circuit | 7,0 |
+| Team- / Rückschlagsport | 7,0 |
+| Yoga / Pilates / Mobility | 2,5 |
+| Sonstiger Sport | 5,0 |
+
+Diese Werte sind bewusst grobe V1-Kategorien und keine Aussage, dass jede konkrete Einheit exakt diesen Energieaufwand hat. Genauere Intensitäts- oder sportartspezifische Modelle können später folgen.
+
+**Zumba / Dance-Fitness** wird in aktuellen manuellen V1-Beispielen zunächst unter `Sonstiger Sport = 5,0 MET` abgebildet, solange keine eigene Kategorie eingeführt wird.
 
 ## Spätere Verbesserungen
 
@@ -112,4 +144,5 @@ Mögliche spätere Verbesserungen sind:
 - Wearable-/Health-Daten;
 - sportartspezifische Modelle, z. B. Pace/Distanz beim Laufen oder Watt beim Radfahren;
 - bessere Abbildung allgemeiner NEAT-Komponenten;
+- feinere Trainingsintensität;
 - End-to-End-Kalibrierung gegen tatsächliche Gewichts- und Energieverlaufsdaten.
