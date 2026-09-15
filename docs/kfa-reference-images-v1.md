@@ -1,12 +1,14 @@
 # KFA Reference Images V1
 
-Gespeicherte Produktionsbilder: [Bildbibliothek und Index](../assets/kfa-reference-images/README.md). Die dort erfassten Produktionsmetadaten ergänzen diese Spezifikation; bestehende Bucket- und Stufenentscheidungen werden dadurch nicht ersetzt.
+Gespeicherte Produktionsbilder: [Bildbibliothek und Index](../assets/kfa-reference-images/README.md). Die dort erfassten Produktionsmetadaten ergänzen diese Spezifikation.
 
 Dieses Dokument definiert die V1-Struktur der visuellen KFA-Referenzbibliothek.
 
 ## Zweck
 
 Die Bilder dienen ausschließlich als **optionale visuelle Orientierung** für aktuellen KFA und Ziel-KFA. Sie sind keine Messung und keine Diagnose.
+
+Gleichzeitig ist **physiologische/medizinische Plausibilität ausdrücklich wichtig**. Ziel ist nicht nur eine gleichmäßige optische Staffelung, sondern eine möglichst realistische Darstellung typischer sichtbarer Veränderungen des Körperfettanteils. Die Bilder dürfen dennoch nicht als exakte medizinische KFA-Bestimmung verstanden werden, weil sichtbare Ausprägung u. a. von Fettverteilung, Muskelmasse, Genetik und Alter abhängt.
 
 Der Nutzer muss **kein Bild auswählen**, das seiner Meinung nach am besten passt. Die Bilder sind nur Hilfsmittel. Die eigentliche KFA-Eingabe bleibt ein frei eingegebener numerischer Wert.
 
@@ -27,7 +29,7 @@ V1 verwendet:
 - 8 KFA-Bildstufen pro Geschlecht;
 - 1 Frontansicht pro Kombination.
 
-Damit ergibt sich:
+Damit ergibt sich weiterhin:
 
 ```text
 2 × 5 × 8 = 80 Referenzbilder
@@ -35,13 +37,23 @@ Damit ergibt sich:
 
 ## KFA-Bildstufen
 
-Die acht Bildanker liegen für beide Geschlechter in 5-Prozentpunkt-Schritten:
+Die acht Bildanker liegen in 5-Prozentpunkt-Schritten, aber **nicht mehr identisch für beide Geschlechter**.
+
+### Männlich
 
 ```text
-5 %, 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %
+10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %
 ```
 
-Die getrennten männlichen und weiblichen Bildbibliotheken stellen dieselben numerischen KFA-Anker jeweils geschlechtsspezifisch dar. Ein identischer Prozentwert muss daher optisch nicht gleich aussehen.
+### Weiblich
+
+```text
+15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %, 50 %
+```
+
+Diese Entscheidung ersetzt die frühere gemeinsame Reihe `5 %, 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %`.
+
+Grund: Die unteren weiblichen Werte der alten Reihe wären als visuelle Alltagsreferenz physiologisch deutlich extremer und weniger sinnvoll. Die geschlechtsspezifisch verschobenen Reihen sollen die visuelle Skala plausibler machen, während jede Bibliothek weiterhin acht Stufen besitzt.
 
 Die Bildstufen begrenzen die Nutzereingabe nicht. Zwischenwerte bleiben zulässig.
 
@@ -95,35 +107,93 @@ Für Vergleichbarkeit sollten alle 80 Bilder möglichst standardisiert sein:
 - neutrale Mimik;
 - identische Kamera-/Brennweitenwirkung;
 - gleiche Distanz und Ausschnitt;
-- einheitlicher neutraler Hintergrund;
+- einheitlicher neutraler Off-White-Hintergrund;
 - funktionale, körpernahe, nicht sexualisierte Kleidung;
 - möglichst gleiche Lichtsetzung;
 - keine Fitness-Posen, Pump-Effekte oder dramatische Beleuchtung;
-- keine dekorativen Objekte.
+- keine dekorativen Objekte;
+- Gesicht eher generalisiert als portraitartig;
+- keine unnötige Veränderung von Muskelmasse, Knochenstruktur oder Grundproportionen zwischen den KFA-Stufen.
 
-Der Zweck ist Vergleichbarkeit, nicht Fotorealismus um jeden Preis.
+Der Zweck ist Vergleichbarkeit und physiologische Plausibilität, nicht Fotorealismus um jeden Preis.
+
+### Geschlechtsspezifische Fettverteilung
+
+Die Staffelung darf nicht nur durch ein pauschales „dicker/dünner“ entstehen.
+
+Bei männlichen Referenzen sollen Veränderungen insbesondere plausibel an Bauch, Unterbauch, Taille/Flanken, Brust und später Armen/Beinen sichtbar werden.
+
+Bei weiblichen Referenzen sollen Veränderungen plausibel u. a. an Hüfte, Gesäß, Oberschenkeln, Bauch, Armen und Brust auftreten.
+
+Jede höhere Stufe muss visuell monoton nach mehr Körperfett wirken als die darunterliegende Stufe.
+
+## Bucket-3-Pilotserie
+
+Vor der vollständigen 80-Bilder-Produktion wird die mittlere Körperform-Kategorie als Pilotserie verwendet.
+
+Aktueller Pilotumfang:
+
+```text
+Mann / Bucket 3: 10, 15, 20, 25, 30, 35, 40, 45 %
+Frau / Bucket 3: 15, 20, 25, 30, 35, 40, 45, 50 %
+```
+
+Damit umfasst die Pilotserie **16 Bilder**.
+
+Die aktuellen männlichen und weiblichen Basisfiguren werden als Bucket-3-Stil-/Charakterreferenzen behandelt. Bucket 3 steht dabei für die mittlere Körperform-Kategorie; die endgültige technische Zuordnung zu den internen BMI-Buckets muss konsistent in der Implementierung erfolgen.
+
+### Produktionsregeln der Pilotserie
+
+Zwischen Stufen sollen gleich bleiben:
+
+- Person/visuelle Identität;
+- Pose und Blickrichtung;
+- Kleidung;
+- Haarstil;
+- Licht und Hintergrund;
+- Kamerawinkel und Bildausschnitt;
+- Körpergröße/Knochenstruktur;
+- grundlegende Muskelmasse.
+
+Verändert werden darf im Wesentlichen nur:
+
+- sichtbare Fettmenge;
+- plausible Fettverteilung;
+- daraus folgende Weichheit/Definition der Körperkontur.
+
+## Qualitätsprüfung
+
+Jede Reihe wird mindestens auf folgende Punkte geprüft:
+
+1. **Monotonie:** jede höhere KFA-Stufe wirkt sichtbar fettreicher als die vorherige.
+2. **Identitätskonsistenz:** dieselbe Person bleibt erkennbar.
+3. **Anatomie:** keine groben Fehler an Händen, Füßen, Gelenken oder Proportionen.
+4. **Fettverteilung:** geschlechtsspezifisch plausibel statt rein skaliert.
+5. **Keine Muskelverwechslung:** höhere KFA-Stufen dürfen nicht primär wie mehr Muskelmasse wirken.
+6. **Keine Lichttäuschung:** Definition darf nicht nur durch dramatischeres Licht entstehen.
+7. **Produktnutzen:** Silhouette und Unterschiede müssen als Referenz klar lesbar sein.
+
+Die bereits gespeicherte Pilotserie trägt derzeit weiterhin den Validierungsstatus `pending`, bis die visuelle KFA-Plausibilität fachlich/qualitativ ausreichend geprüft und problematische Stufen gegebenenfalls neu generiert wurden.
 
 ## Produktionsstrategie
 
 Die 80 Bilder werden **vorab erzeugt und kuratiert**. Sie werden nicht live pro Nutzer generiert.
 
-Für die Produktion sollte zunächst ein kleiner Pilot erstellt werden, bevor alle 80 Bilder generiert werden. Empfehlenswert ist:
+Vorgehen:
 
-1. einen männlichen und einen weiblichen Basischarakter definieren;
-2. je einen mittleren Körperform-Bucket auswählen;
-3. zunächst die acht KFA-Stufen für diese zwei Basisreihen erzeugen;
-4. Konsistenz und visuelle Plausibilität prüfen;
-5. Prompt/Workflow einfrieren;
-6. erst danach die restlichen Buckets erzeugen.
-
-Dadurch werden unnötige Generierungen vermieden und Stil-/Anatomiefehler früh erkannt.
+1. Bucket-3-Master/Stilreferenzen festlegen;
+2. 16er-Pilotserie erzeugen;
+3. Monotonie, Anatomie, Identitätsdrift und physiologische Plausibilität prüfen;
+4. problematische Einzelstufen gezielt regenerieren;
+5. Prompt-/Reference-Workflow einfrieren;
+6. anschließend Bucket 1, 2, 4 und 5 für beide Geschlechter erzeugen;
+7. vollständige 80er-Bibliothek final prüfen und indexieren.
 
 ## Noch offen
 
 Nicht abschließend entschieden sind:
 
-- welches Bildgenerierungsmodell bzw. Tool verwendet wird;
-- ob für maximale Konsistenz ein Referenzbild-/Character-Reference-Workflow oder ein kontrollierteres lokales Modell verwendet wird;
-- konkrete Kleidung, Hauttöne und Diversitätsstrategie;
-- finale Qualitätsprüfung der visuellen KFA-Plausibilität;
+- finale fachliche Kalibrierung/Validierung der sichtbaren KFA-Stufen;
+- konkrete Hauttöne und Diversitätsstrategie für die vollständige Bibliothek;
+- endgültige Zuordnung/Benennung von `bucket-3` zu A–E in der technischen Implementierung;
 - ob später zusätzliche Seiten-/Rückansichten ergänzt werden.
