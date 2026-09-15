@@ -257,7 +257,7 @@ For Cheat-Day budget `H`:
 regular-day budget L = (W - H) / 6
 ```
 
-The previous direction that automatically capped the Cheat Day at estimated maintenance is superseded by D-034.
+The previous direction that automatically capped the Cheat Day at estimated maintenance is superseded by D-034 and later D-038.
 
 ## D-033 — V1 macro rounding, Cheat-Day behavior and scope
 **Status:** decided
@@ -274,74 +274,24 @@ Macro rules are applied to each day's actual calorie budget.
 See `nutrition-and-macros.md` for formulas and examples.
 
 ## D-034 — V1 Cheat Day amount, limit and live redistribution
-**Status:** decided
+**Status:** superseded by D-038
 
-The user can choose the **total calorie budget** for one Cheat Day rather than being forced to use maintenance calories.
-
-The baseline is the normal average daily target:
-
-```text
-C = W / 7
-nominal Cheat-Day maximum = C + 1,000 kcal
-```
-
-The Cheat-Day amount is selected in **50-kcal increments**. The technical maximum is rounded down to the allowed 50-kcal grid so the nominal +1,000-kcal limit is not exceeded.
-
-The six regular days must still satisfy the automatic-plan guardrails. Therefore the actual selectable maximum is the lower of:
-
-- the 50-kcal-grid value at or below `C + 1,000`; and
-- the highest value that still leaves all six regular days within the automatic-plan guardrails.
-
-If `F` is the minimum allowed regular-day budget:
-
-```text
-H <= W - 6 × F
-```
-
-As the user changes `H`, the six regular-day budgets update **live** while the weekly total stays unchanged.
+The former decision used a nominal `C + 1,000 kcal` Cheat-Day maximum and hard-limited the actual selectable maximum by the six regular-day guardrails. This historical decision is retained for traceability but is superseded by D-038.
 
 ## D-035 — V1 Cheat Day screen interaction and optional food examples
-**Status:** decided direction
+**Status:** partially superseded by D-039
 
-The Cheat Day is configured after the user has seen the normal daily target and weekly budget.
-
-V1 interaction:
-
-1. ask whether the user wants a Cheat Day;
-2. if yes, show Monday through Sunday;
-3. allow exactly one day to be selected;
-4. show a numeric wheel/slider-style control for the Cheat-Day calorie total in 50-kcal steps;
-5. update the other six daily budgets live;
-6. keep the unchanged weekly budget visible/understandable.
-
-The final control implementation may be a wheel, slider or equivalent numeric selector; exact visual design remains a wireframe task.
-
-The screen should also offer the same kind of optional **Info button** used elsewhere in onboarding. It can show approximate calorie examples for typical Cheat-Day foods such as pizza, beer, cake, burgers and fries so users can estimate an appropriate budget. These values should be presented as rough ranges/benchmarks, not precise nutrition facts, because recipes and portions vary.
-
-The exact example foods, serving definitions and kcal ranges remain a content task. See `cheat-day-v1.md` for the detailed specification.
+The Cheat Day is configured after the user has seen the normal daily target and weekly budget. The screen offers one weekday, a numeric calorie control in 50-kcal steps, live redistribution and optional food examples. The earlier freedom to use wheel, slider or equivalent is superseded by D-039.
 
 ## D-036 — V1 KFA reference-image library structure
-**Status:** decided
+**Status:** partially superseded by D-042
 
-The V1 KFA visual-help library uses a fixed pre-generated set of **80 images**:
+The V1 library remains fixed at **80 images** with 2 sex/biological image categories × 5 internal body-shape buckets × 8 KFA anchors and one standardized front view per combination. The earlier identical 5–40% anchor series for both sexes is superseded by D-042.
 
-```text
-2 sex/biological image categories × 5 internal body-shape buckets × 8 KFA anchors = 80 images
-```
-
-For both male and female image libraries the eight KFA anchors are:
-
-```text
-5%, 10%, 15%, 20%, 25%, 30%, 35%, 40%
-```
-
-The images are optional orientation aids only. The user does **not** have to select a closest-looking image. They can enter any numeric KFA value directly, including values between image anchors, and calculations use that exact numeric value.
-
-The five internal body-shape buckets are derived from current height and weight with a simple BMI-based V1 heuristic:
+The BMI-based V1 matching heuristic remains:
 
 ```text
 BMI = weight(kg) / height(m)^2
-
 A: BMI < 20
 B: 20 to < 25
 C: 25 to < 30
@@ -349,6 +299,93 @@ D: 30 to < 35
 E: >= 35
 ```
 
-These bucket labels are never shown to the user and are **not** a health classification or KFA estimate. They are only a visual-reference matching heuristic. V1 accepts that very muscular or otherwise atypical body compositions may be matched imperfectly.
+The buckets are internal visual-reference matching aids only, not health classifications or KFA estimates.
 
-V1 uses a single standardized **front view** per combination. The same library is reused for current-KFA and target-KFA visual help. Consistent pose, framing, clothing, lighting and background are required across the library. See `kfa-reference-images-v1.md` for the detailed specification.
+## D-037 — V1 activity profiles are averaged as a 5-day workweek
+**Status:** decided
+
+The five 8-hour everyday-activity profiles in `activity-model-v1.md` are treated as typical **5-day workweek profiles** and averaged across the full week:
+
+```text
+net everyday activity per plan day
+= net energy of selected 8-h profile × 5 / 7
+```
+
+Steps remain separate. V1 adds **no additional generic NEAT correction**. Known undercounting of non-step NEAT and possible activity/step overlap are accepted V1 model limitations to be validated later.
+
+## D-038 — Cheat Day nominal limit is C + 1,500 kcal
+**Status:** decided
+
+The Cheat-Day nominal upper limit is now:
+
+```text
+H_max_nominal = C + 1,500 kcal
+```
+
+The value is selected in 50-kcal increments and the technical maximum is rounded down to the 50-kcal grid.
+
+This supersedes the former `C + 1,000 kcal` limit.
+
+If a high Cheat Day causes the six regular days to fall below automatic planning guardrails, the implementation must detect and treat that state transparently. **Whether it hard-blocks, warns or uses a soft recommendation is intentionally not pre-decided** and may be chosen during implementation.
+
+## D-039 — Cheat Day uses a vertical wheel/number picker
+**Status:** decided direction
+
+The V1 Cheat-Day calorie control should use a **vertical wheel / number picker** in the style of the provided UI reference: the selected number is large and centered, adjacent values appear above and below with reduced emphasis, and the user scrolls vertically.
+
+The control moves in **50-kcal increments** and the other six day budgets update live. Exact typography, spacing and animation remain implementation details.
+
+## D-040 — Calculation explanations must be understandable to a seventh grader
+**Status:** decided
+
+The exact visual layout of the calculation/result explanation is intentionally left to implementation/design.
+
+The hard requirement is understandability: the calculation must be explained step by step in normal language so that a typical seventh grader can follow it. Unexplained abbreviations and unnecessary jargon should be avoided. Formal equations may be available as optional deeper detail.
+
+## D-041 — Manual calorie and macro overrides are allowed
+**Status:** decided direction
+
+Automatic guardrails control **automatically proposed plans**, but they do not silently overwrite a value the user intentionally enters manually.
+
+- A manually entered calorie target may be saved even below the automatic guardrail.
+- The app should mark the value as manually changed and preferably show a clear **non-blocking** warning/plausibility note for aggressive values.
+- Manually set macro targets may remain even if their kcal total does not exactly match the calorie target.
+- Any mismatch may be shown, but the app should not force an automatic correction.
+
+Exact warning copy remains an implementation/content detail.
+
+## D-042 — Sex-specific V1 KFA anchor ranges
+**Status:** decided
+
+The V1 KFA library still contains 8 anchors per sex and 80 total images, but the anchor ranges are now:
+
+```text
+male:   10%, 15%, 20%, 25%, 30%, 35%, 40%, 45%
+female: 15%, 20%, 25%, 30%, 35%, 40%, 45%, 50%
+```
+
+This supersedes the earlier identical 5–40% range.
+
+The goal is not merely an evenly spaced visual scale; **physiological/medical plausibility is important**. The generated images should model plausible sex-specific fat-distribution changes while remaining clearly labeled as visual orientation anchors rather than medical measurements.
+
+Bucket 3 is used as the 16-image pilot series before scaling the workflow to all 80 images. See `kfa-reference-images-v1.md` and `assets/kfa-reference-images/README.md`.
+
+## D-043 — V1 training-category MET defaults
+**Status:** decided direction
+
+For the first implementation, training categories use these product defaults:
+
+```text
+strength training                3.5 MET
+running / jogging                7.5 MET
+cycling                          7.0 MET
+swimming                         5.8 MET
+HIIT / circuit                   7.0 MET
+team / racket sports             7.0 MET
+yoga / Pilates / mobility        2.5 MET
+other sport                      5.0 MET
+```
+
+Zumba / dance fitness is currently mapped to `other sport = 5.0 MET` in manual V1 examples unless a dedicated category is added later.
+
+These are pragmatic category defaults based on the Compendium-style MET approach, not exact energy costs for every individual session.
