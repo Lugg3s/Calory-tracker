@@ -15,6 +15,7 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [Onboarding](onboarding.md)
 - [App Flow](app-flow.md)
 - [Kalorienberechnung](calorie-calculation.md)
+- [Manuelle Rechenbeispiele](calculation-examples.md)
 - [Aktivitätsmodell V1](activity-model-v1.md)
 - [Cheat Day V1](cheat-day-v1.md)
 - [KFA Reference Images V1](kfa-reference-images-v1.md)
