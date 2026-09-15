@@ -156,6 +156,12 @@ Intern können ungerundete Werte weitergeführt werden. Durch die Darstellung in
 
 Der Nutzer soll Makronährstoffziele grundsätzlich manuell anpassen können. Diese Einstellung soll nicht prominent auf dem Main Screen liegen, sondern in Einstellungen oder einem erweiterten Bereich.
 
+Manuell eingegebene Makroziele werden **nicht automatisch zurückgesetzt**, nur weil sie nicht mehr exakt zur automatisch berechneten Verteilung passen.
+
+Wenn die kcal-Summe der manuell gesetzten Makros vom Kalorienziel abweicht, darf diese Abweichung bestehen bleiben. Die App kann die Differenz sichtbar machen bzw. einen Plausibilitätshinweis geben, soll den Nutzer aber nicht zu einer automatischen Korrektur zwingen.
+
+Dasselbe Grundprinzip gilt für ein manuell gesetztes Kalorienziel: Automatische Planungsgrenzen steuern die von der App vorgeschlagenen Werte; ein bewusst manuell gesetzter Wert darf gespeichert werden. Bei besonders aggressiven Werten ist eine klare, nicht blockierende Warnung bzw. Kennzeichnung als manuelle Abweichung die bevorzugte V1-Richtung.
+
 ## Nicht Teil der V1-Makro-Engine
 
 Für V1 werden keine zusätzlichen Zielgrößen in die eigentliche Makroberechnung aufgenommen, insbesondere nicht:
