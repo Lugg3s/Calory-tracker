@@ -4,15 +4,15 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 
 ## Berechnung
 
-- Wie stark müssen die vorläufigen 8-Stunden-MET-Profile aus `activity-model-v1.md` vor dem Hard-Coding weiter kalibriert werden?
-- Wie soll allgemeines NEAT außerhalb des 8-Stunden-Alltagsprofils berücksichtigt werden, damit besonders niedrige Aktivitätsstufen nicht systematisch unterschätzt werden?
-- Wie wird bei körperlichen Berufen zuverlässig verhindert, dass Aktivität über MET-Profil und Schritte doppelt gezählt wird?
+- Wie stark müssen die fünf 8-Stunden-MET-Profile aus `activity-model-v1.md` vor bzw. nach der ersten Implementierung gegen reale Daten kalibriert werden?
+- Wie soll allgemeines NEAT außerhalb des 8-Stunden-Alltagsprofils in einer späteren Version besser berücksichtigt werden? V1 ergänzt bewusst **keinen** pauschalen NEAT-Korrekturfaktor.
+- Wie wird bei körperlichen Berufen technisch zuverlässig verhindert bzw. reduziert, dass Aktivität über MET-Profil und Schritte doppelt gezählt wird?
 - Soll `0,414 × Körpergröße` als Fallback für die Schrittlänge bestehen bleiben oder durch eine besser validierte Schätzung ersetzt werden?
 - Wie werden gemessene Distanzdaten aus Smartphone/Health/Wearables priorisiert und in das Schrittmodell übernommen?
-- Welche Standard-MET-Werte verwenden wir für die einzelnen Trainingsarten?
-- Wie werden unterschiedliche Trainingsintensitäten modelliert, ohne das initiale Onboarding unnötig zu verlängern?
+- Wie werden unterschiedliche Trainingsintensitäten später modelliert, ohne das initiale Onboarding unnötig zu verlängern?
 - Wie wird mit stark variierender Trainingsdauer oder sehr unregelmäßigem Training umgegangen?
-- Wann sollen sportartspezifische Modelle, z. B. Pace/Distanz beim Laufen oder Watt beim Radfahren, den generischen MET-Ansatz ersetzen?
+- Wann sollen sportartspezifische Modelle, z. B. Pace/Distanz beim Laufen oder Watt beim Radfahren, die aktuellen V1-Standard-MET-Werte ersetzen?
+- Soll Zumba/Dance-Fitness später eine eigene Trainingskategorie erhalten statt vorläufig als `Sonstiger Sport = 5,0 MET` behandelt zu werden?
 - Soll TEF später im erweiterten Modus makronährstoffabhängig statt pauschal mit 10 % berechnet werden?
 - Wann soll ein bestehender Plan neu berechnet werden, wenn der Nutzer später ein neues aktuelles Gewicht eingibt?
 - Soll nach dem MVP ein dynamisches/adaptives Gewichtsverlaufsmodell ergänzt werden, das sinkenden Energiebedarf, metabolische Anpassungen und veränderte Körperzusammensetzung berücksichtigt?
@@ -34,28 +34,43 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 
 ## Produkt / UX
 
-- Wie detailliert soll die Berechnung standardmäßig sichtbar sein?
-- Welche Werte dürfen Nutzer manuell überschreiben?
-- Wie soll die App mit manuellen Kalorienwerten umgehen, die unter den automatischen Planungsgrenzen liegen?
-- Wie werden allgemeine Schätzungen und Unsicherheit dargestellt, ohne jede interne Modellunsicherheit separat im UI auszuweisen?
-- Wie genau soll der einfache vs. erweiterte Tracking-Modus aussehen?
+- Wie genau soll der einfache vs. erweiterte Tracking-Modus visuell aussehen?
 - Wie genau soll die Zieldefinition dargestellt werden, wenn ein aktueller KFA vorhanden ist: Zielgewicht direkt eingeben oder Ziel-KFA auswählen und daraus das Zielgewicht ableiten?
 - Soll der aus Ziel-KFA berechnete Zielgewichtswert dem Nutzer vor der Planerstellung noch einmal ausdrücklich zur Bestätigung gezeigt werden?
 - Wie zeigen wir dem Nutzer nach Auswahl eines Ziel-KFA verständlich, dass das daraus berechnete Zielgewicht und die notwendige Gewichtsabnahme nur Modellschätzungen sind?
 - Welche konkrete Microcopy verwenden wir für die Frage und Hinweise auf dem Cheat-Day-Screen?
 - Welche konkreten Lebensmittel, Portionsgrößen und Kalorienbereiche werden im optionalen Cheat-Day-Info-Bereich gezeigt?
-- Wie sollen manuell geänderte Makroziele dargestellt werden und wie verhält sich die App, wenn sie rechnerisch nicht mehr exakt zum Kalorienziel passen?
+- Wenn ein Cheat Day die übrigen sechs Tage unter automatische Planungs-Guardrails drückt: soll die App die Auswahl hart begrenzen, eine nicht blockierende Warnung zeigen oder nur eine weiche Empfehlung aussprechen? Diese Entscheidung ist bewusst an die Implementierungsphase delegiert.
+- Wie genau soll die bevorzugte nicht blockierende Warnung bei **direkt manuell** gesetzten Kalorienwerten unter dem automatischen Guardrail formuliert und dargestellt werden?
+- Wie wird eine kcal-Abweichung zwischen manuell geänderten Makros und Kalorienziel am verständlichsten dargestellt, ohne automatische Korrektur zu erzwingen?
+- Das exakte Layout der Berechnungserklärung ist offen. Fest ist nur die Verständlichkeitsregel: schrittweise, normale Sprache, auch für einen Siebtklässler nachvollziehbar.
+
+## Marke / Positionierung
+
+- Der aktuelle Projektname **Calory Tracker** ist ein Arbeitsname und noch nicht als finale Marke entschieden.
+- In der Marktanalyse wurde bereits ein bestehendes Produkt namens **Calory / Calory AI** in derselben Kategorie gefunden. Vor finalem Branding muss deshalb ein eigenständiger Name gewählt und anschließend systematisch auf App-Store-, Domain- und Markenüberschneidungen geprüft werden.
+- Bisher diskutierte Namen sind nur Brainstorming und **keine Produktentscheidung**.
+- Logo und visuelle Markenrichtung sollen erst auf Basis des finalen Namens festgelegt werden.
 
 ## KFA-Referenzbilder
 
-Die V1-Struktur ist entschieden: 80 Bilder, 2 Geschlechts-/biologische Bildkategorien, 5 BMI-basierte interne Körperform-Buckets, 8 KFA-Anker von 5 % bis 40 % in 5er-Schritten und eine Frontansicht pro Kombination. Details stehen in `kfa-reference-images-v1.md`.
+Die V1-Struktur ist entschieden: 80 Bilder, 2 Geschlechts-/biologische Bildkategorien, 5 BMI-basierte interne Körperform-Buckets, 8 KFA-Anker pro Geschlecht und eine Frontansicht pro Kombination.
+
+Aktuelle Anker:
+
+```text
+männlich: 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %
+weiblich: 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %, 50 %
+```
+
+Die Bucket-3-Pilotserie mit 16 Bildern ist bereits im Repo abgelegt. Details stehen in `kfa-reference-images-v1.md` und `assets/kfa-reference-images/README.md`.
 
 Offen bleiben:
 
-- Welches Bildgenerierungsmodell bzw. Tool wird für die Produktion der 80 Bilder verwendet?
-- Welche konkrete Prompt-/Reference-Image-Strategie liefert über alle 80 Bilder die höchste Konsistenz?
-- Welche Kleidung, Hauttöne und Diversitätsstrategie soll die finale Bibliothek verwenden?
-- Wie wird die visuelle KFA-Plausibilität vor Veröffentlichung fachlich/qualitativ geprüft?
+- Wie wird die visuelle KFA-Plausibilität vor Veröffentlichung fachlich/qualitativ kalibriert und validiert?
+- Welche der aktuell markierten Pilotstufen müssen wegen zu kleiner Abstände oder Character-/Pose-Drift neu generiert werden?
+- Welche Hauttöne und Diversitätsstrategie soll die finale 80-Bilder-Bibliothek verwenden?
+- Wie wird `bucket-3` technisch eindeutig auf die A–E-Bucket-Nomenklatur gemappt?
 - Sollen spätere Versionen Seiten- oder Rückansichten ergänzen?
 
 ## Food Tracking
