@@ -4,19 +4,42 @@
 
 - [x] Produktidee definieren
 - [x] MVP-Funktionsumfang grob definieren
-- [ ] wissenschaftliche Grundlagen und Formeln recherchieren
-- [ ] Berechnungsmodell festlegen
+- [x] V1-Berechnungsarchitektur festlegen
+- [x] RMR-, Aktivitäts-, Schritt-, Trainings-, TEF-, Defizit- und Wochenbudget-Logik dokumentieren
+- [x] V1-Training-MET-Defaults festlegen
+- [x] manuelle Rechenbeispiele für die aktuelle V1-Logik dokumentieren
+- [ ] wissenschaftliche End-to-End-Validierung / Kalibrierung der Modellannahmen durchführen
+- [ ] 7.700-kcal/kg-Annahme und Guardrails fachlich weiter dokumentieren/validieren
+- [ ] Doppelzählung Alltagsschritte vs. Alltags-MET technisch sauber lösen bzw. kalibrieren
 - [ ] Tech Stack festlegen
 
-## Phase 2 – UX / Design
+## Phase 2 – Marke / UX / Design
 
+- [ ] finalen Produktnamen auswählen; `Calory Tracker` bleibt bis dahin Arbeitsname
+- [ ] Favoriten auf App-Store-, Domain- und Markenüberschneidungen prüfen
+- [ ] visuelle Markenrichtung und Logo auf Basis des finalen Namens entwickeln
 - [ ] Wireframes erstellen
 - [ ] Wireframes mit Figma / Uizard / Motif bzw. geeignetem Tool iterieren
-- [x] Onboarding-Flow definieren
+- [x] grundlegenden 18-Screen-Onboarding-Flow definieren
 - [x] Cheat-Day-/Wochenbudget-Interaktionslogik definieren
-- [ ] finale Cheat-Day-Microcopy und Lebensmittelbeispiele definieren
-- [ ] Berechnungsansicht definieren
+- [x] Cheat-Day-Vertical-Wheel-/Number-Picker als V1-Richtung festlegen
+- [ ] Verhalten festlegen/implementieren, wenn ein hoher Cheat Day die übrigen sechs Tage unter automatische Guardrails drückt (Blockierung vs. Warnung vs. weiche Empfehlung)
+- [ ] finale Cheat-Day-Microcopy und Lebensmittel-/Portionsbeispiele definieren
+- [x] Verständlichkeitsregel für Berechnungsansicht festlegen: auch für Siebtklässler nachvollziehbar
+- [ ] konkrete visuelle Berechnungsansicht definieren/implementieren
 - [ ] Main Screen definieren
+
+## Phase 2b – KFA-Referenzbibliothek
+
+- [x] Bibliotheksstruktur definieren: 2 Bildkategorien × 5 Buckets × 8 KFA-Anker = 80 Bilder
+- [x] geschlechtsspezifische KFA-Anker festlegen: Männer 10–45 %, Frauen 15–50 %
+- [x] Bucket-3-Pilotserie mit 16 Bildern im Repo ablegen
+- [ ] Pilotserie fachlich/visuell kalibrieren; insbesondere markierte enge Stufenabstände prüfen
+- [ ] problematische Pilotbilder neu generieren
+- [ ] finalen Character-/Prompt-/Reference-Workflow einfrieren
+- [ ] Bucket 1, 2, 4 und 5 produzieren
+- [ ] vollständige 80-Bilder-Bibliothek QAen und freigeben
+- [ ] Hauttöne/Diversitätsstrategie finalisieren
 
 ## Phase 3 – MVP-Entwicklung
 
@@ -26,11 +49,13 @@
 - [ ] Zielgewicht + Zeitraum
 - [ ] Defizitberechnung
 - [ ] Aktivitäts-/Trainingskomponenten
-- [ ] optionaler KFA
+- [ ] optionaler KFA + Referenzbilder
 - [ ] Tracking-Modus Kalorien-only / Makros
 - [ ] Protein-/Makroziele
 - [ ] Cheat-Day-/Wochenbudget-Logik
 - [ ] manuelle Anpassung des Kalorienziels in Einstellungen
+- [ ] manuelle Makro-Overrides inklusive sichtbarer Abweichung ohne Zwangskorrektur
+- [ ] Kennzeichnung / nicht blockierende Plausibilitätseinordnung für aggressive manuelle Kalorien-Overrides
 
 ## Phase 4 – Food Tracking
 
@@ -50,6 +75,7 @@
 
 ## Phase 6 – Zukunft
 
-- [ ] KFA-Visualisierung
-- [ ] adaptive Zielanpassung
+- [ ] adaptive Ziel-/Kalorienanpassung aus tatsächlichem Gewichtsverlauf
 - [ ] weitergehende Personalisierung
+- [ ] optional zusätzliche KFA-Seiten-/Rückansichten
+- [ ] spätere Körper-/Zielvisualisierungen klar getrennt von KFA-Messung
