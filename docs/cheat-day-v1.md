@@ -53,32 +53,18 @@ Die nutzerseitige Cheat-Day-Obergrenze basiert auf dem normalen durchschnittlich
 
 ```text
 Basis = W / 7 = C
-nominale Cheat-Day-Obergrenze = C + 1.000 kcal
+nominale Cheat-Day-Obergrenze = C + 1.500 kcal
 ```
 
-Der auswählbare Wert liegt auf einem **50-kcal-Raster**. Da es sich um eine Obergrenze handelt, soll der technische Maximalwert auf den nächsten zulässigen 50-kcal-Wert **abgerundet** werden, damit die +1.000-kcal-Grenze nicht überschritten wird.
+Der auswählbare Wert liegt auf einem **50-kcal-Raster**. Da es sich um eine Obergrenze handelt, soll der technische Maximalwert auf den nächsten zulässigen 50-kcal-Wert **abgerundet** werden, damit die +1.500-kcal-Grenze nicht überschritten wird.
 
-Zusätzlich bleiben die automatischen Sicherheitsgrenzen für die sechs regulären Tage aktiv. Die tatsächlich auswählbare Obergrenze ist deshalb der kleinere Wert aus:
+Diese `+1.500 kcal` ersetzen die frühere Produktgrenze von `+1.000 kcal`.
 
-1. `C + 1.000 kcal` auf dem 50-kcal-Raster;
-2. dem höchsten Cheat-Day-Wert, bei dem die sechs übrigen Tage die automatischen Planungsgrenzen noch einhalten.
+### Umgang mit sehr niedrigen regulären Tagen
 
-Formal mit `F` als niedrigstem zulässigem regulären Tagesbudget:
+Durch einen hohen Cheat Day können die sechs übrigen Tage unter die automatischen Planungsgrenzen fallen. Dass dieser Zustand erkannt und im UI nachvollziehbar behandelt werden muss, ist klar. **Noch nicht als Produktregel festgelegt** ist jedoch, ob die Auswahl dann hart blockiert, nur gewarnt oder als weiche Empfehlung behandelt wird.
 
-```text
-H <= W - 6 × F
-```
-
-Damit ergibt sich konzeptionell:
-
-```text
-H_max = min(
-  floor_to_50(C + 1.000),
-  floor_to_50(W - 6 × F)
-)
-```
-
-Wenn kein sinnvoll höherer Cheat-Day-Wert möglich ist, soll die App dies transparent anzeigen bzw. einen längeren Zielzeitraum vorschlagen.
+Diese konkrete UX-/Safety-Entscheidung darf in der Implementierungsphase getroffen werden. Die allgemeine automatische Planungslogik und deren Guardrails bleiben davon getrennt bestehen.
 
 ## UI-Interaktion
 
@@ -87,12 +73,13 @@ Die genaue Microcopy kann später verfeinert werden. Die V1-Interaktion ist jedo
 1. Frage, ob der Nutzer einen Cheat Day einbauen möchte.
 2. Bei „Ja“ werden **Montag bis Sonntag** als auswählbare Tage angezeigt.
 3. Der Nutzer kann **genau einen** Wochentag auswählen.
-4. Danach erscheint ein Zahlenregler / Wheel / Slider für das gewünschte **gesamte Kalorienbudget des Cheat Days**.
-5. Der Regler arbeitet in **50-kcal-Schritten**.
-6. Während der Nutzer den Cheat-Day-Wert verändert, aktualisieren sich die Kalorienbudgets der sechs anderen Tage **live**.
-7. Das unveränderte Wochenbudget soll gleichzeitig sichtbar bzw. verständlich nachvollziehbar bleiben.
+4. Danach erscheint ein **vertikaler Wheel-/Number-Picker** für das gewünschte **gesamte Kalorienbudget des Cheat Days**.
+5. Der ausgewählte Wert steht groß und zentriert; benachbarte Werte sind darüber und darunter sichtbar und optisch zurückgenommen.
+6. Der Picker arbeitet in **50-kcal-Schritten**.
+7. Während der Nutzer den Cheat-Day-Wert verändert, aktualisieren sich die Kalorienbudgets der sechs anderen Tage **live**.
+8. Das unveränderte Wochenbudget soll gleichzeitig sichtbar bzw. verständlich nachvollziehbar bleiben.
 
-Die konkrete UI-Komponente (Wheel, Slider oder vergleichbarer Zahlenregler) darf in der Wireframe-Phase noch optimiert werden; die 50-kcal-Schrittweite und Live-Neuberechnung sind entschieden.
+Die genaue visuelle Ausgestaltung des Wheel Pickers kann in der Wireframe-/Implementierungsphase optimiert werden; die vertikale Wheel-/Number-Picker-Interaktion, 50-kcal-Schrittweite und Live-Neuberechnung sind entschieden.
 
 ## Info-Button mit Lebensmittelbeispielen
 
@@ -101,10 +88,12 @@ Analog zu den optionalen Erklärungen auf anderen Onboarding-Screens soll der Ch
 Diese Hilfe soll typische Cheat-Day-Lebensmittel und grobe Kaloriengrößenordnungen zeigen, damit Nutzer besser einschätzen können, welches Tagesbudget zu ihrem geplanten Essen passt. Beispiele können sein:
 
 - Pizza;
-- Bier;
+- Bier bzw. Alkohol;
 - Kuchen;
 - Burger;
-- Pommes.
+- Pommes;
+- Snacks wie Flips;
+- Schokolade.
 
 Die Angaben sollen als **ungefähre Richtwerte bzw. Bereiche** dargestellt werden und keine falsche Präzision suggerieren, da Rezept, Portion und Produkt stark variieren können.
 
@@ -122,6 +111,8 @@ Kleine Rundungsabweichungen der sichtbaren Makro-kcal gegenüber dem Tagesbudget
 
 ## Manuelle Plausibilitätschecks
 
-Bei mehreren manuellen End-to-End-Beispielen funktionierten die Kernlogik, die Wochenumverteilung und die bestehenden Defizit-/Kalorien-Guardrails grundsätzlich wie vorgesehen. Dabei wurde als relevanter Sonderfall erkannt, dass ein nur durch die sechs übrigen Tage begrenzter Cheat Day mathematisch sehr hoch werden kann. Daraus entstand die zusätzliche Produktgrenze `C + 1.000 kcal`.
+Bei mehreren manuellen End-to-End-Beispielen funktionierten Kernlogik und Wochenumverteilung grundsätzlich wie vorgesehen. Dabei wurde als relevanter Sonderfall erkannt, dass hohe Cheat-Day-Budgets die sechs übrigen Tage stark absenken können.
+
+Die aktuelle Produktentscheidung setzt deshalb eine eigenständige nominale Obergrenze von `C + 1.500 kcal`. Wie zusätzlich mit einer Unterschreitung der automatischen Tages-Guardrails an den übrigen sechs Tagen umgegangen wird, bleibt bewusst Implementierungsentscheidung.
 
 Diese manuellen Rechenchecks sind **keine wissenschaftliche End-to-End-Validierung** des gesamten Energieverbrauchsmodells.
