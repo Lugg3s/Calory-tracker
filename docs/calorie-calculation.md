@@ -6,6 +6,8 @@ Die Berechnung des Kalorienbedarfs soll für den Nutzer nachvollziehbar sein. Di
 
 Alle Werte sind Schätzungen. Das Modell soll keine Genauigkeit suggerieren, die die zugrunde liegenden Formeln und Nutzerdaten nicht hergeben.
 
+Die **exakte visuelle Darstellung** der Berechnung ist nicht vorab festgelegt. Harte UX-Anforderung ist jedoch: Die Erklärung muss in normaler Sprache so verständlich sein, dass sie auch ein Siebtklässler nachvollziehen kann. Unnötiger Fachjargon und nicht erklärte Abkürzungen sollen vermieden werden; formale Gleichungen können optional vertieft werden.
+
 ## V1-Rechenweg
 
 1. Ruheenergiebedarf bestimmen
@@ -48,12 +50,19 @@ Ein anhand der Referenzbilder geschätzter KFA darf für Cunningham verwendet we
 
 ## KFA-Eingabe und Referenzbilder
 
-Die Referenzbilder können beispielsweise in 5-Prozentpunkt-Schritten vorliegen. Der Nutzer ist **nicht auf diese Bildstufen beschränkt**.
+Die Referenzbilder liegen in 5-Prozentpunkt-Schritten vor, geschlechtsspezifisch verschoben:
 
 ```text
-Bilder: 10 %, 15 %, 20 %, 25 %
-Nutzereingabe: 17 %
-Berechnung verwendet: 17 %
+männlich: 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %
+weiblich: 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %, 50 %
+```
+
+Der Nutzer ist **nicht auf diese Bildstufen beschränkt**.
+
+```text
+Bilder: 15 %, 20 %, 25 %
+Nutzereingabe: 18 %
+Berechnung verwendet: 18 %
 ```
 
 Dasselbe Prinzip gilt für den Ziel-KFA.
@@ -105,13 +114,22 @@ Netto-Aktivitäts-kcal
 
 Die MET-Werte sollen aus einem wissenschaftlich etablierten Aktivitätskompendium stammen, insbesondere dem aktuellen Adult Compendium of Physical Activities.
 
-Die derzeitigen fünf vorläufigen 8-Stunden-Referenzprofile und bekannte Modellgrenzen sind in [`activity-model-v1.md`](activity-model-v1.md) dokumentiert.
+Die fünf V1-Referenzprofile und bekannte Modellgrenzen sind in [`activity-model-v1.md`](activity-model-v1.md) dokumentiert.
+
+Für V1 werden die 8-Stunden-Alltagsprofile als typischer **5-Tage-Arbeitswochen-Anteil** interpretiert und auf sieben Tage gemittelt:
+
+```text
+Netto-Alltagsaktivität pro Plan-Tag
+= Netto-Energie des 8-h-Profils × 5 / 7
+```
+
+Es wird kein zusätzlicher pauschaler NEAT-Korrekturfaktor ergänzt. Die bekannte mögliche Untererfassung außerhalb des 8-Stunden-Profils wird für V1 akzeptiert und später validiert.
 
 ### Doppelzählungsregel
 
 Da Gehen bereits über die Schritt-Komponente berechnet wird, darf Gehaktivität nicht vollständig ein zweites Mal im Alltags-MET-Modell auftauchen.
 
-Die Implementierung muss deshalb entweder nur nicht-lokomotorische Zusatzaktivität erfassen oder einen bereits über Schritte erfassten Gehanteil aus umfassenderen MET-Profilen herausrechnen.
+Die genaue technische Entflechtung bei körperlich aktiven Berufen bleibt ein Implementierungs-/Validierungsthema; die V1-Komponentenarchitektur wird dadurch nicht verändert.
 
 ## Training / Sport
 
@@ -139,7 +157,24 @@ Benötigte Eingaben:
 - Trainingshäufigkeit
 - typische Dauer pro Einheit
 
-Eine separate Intensitätsfrage ist für V1 nicht zwingend. Genauere sportartspezifische Modelle können später den generischen MET-Ansatz ersetzen.
+Eine separate Intensitätsfrage ist für V1 nicht zwingend.
+
+### V1-Standard-MET-Werte
+
+| Trainingskategorie | Standard-MET |
+| --- | ---: |
+| Krafttraining | 3,5 |
+| Laufen / Joggen | 7,5 |
+| Radfahren | 7,0 |
+| Schwimmen | 5,8 |
+| HIIT / Circuit | 7,0 |
+| Team- / Rückschlagsport | 7,0 |
+| Yoga / Pilates / Mobility | 2,5 |
+| Sonstiger Sport | 5,0 |
+
+Zumba / Dance-Fitness wird in aktuellen V1-Beispielen zunächst als `Sonstiger Sport = 5,0 MET` behandelt.
+
+Diese Werte sind Produkt-Defaults und keine exakten Messwerte für jede konkrete Einheit. Genauere sportartspezifische Modelle können später den generischen MET-Ansatz ersetzen.
 
 ## Thermischer Effekt der Nahrung (TEF)
 
@@ -292,33 +327,20 @@ Erst danach entscheidet er, ob er einen Cheat Day nutzen möchte. Dadurch ist di
 
 ### Cheat-Day-Obergrenze
 
-Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ ist **ersetzt**.
+Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ ist ersetzt.
 
-Nominale Obergrenze:
+Aktuelle nominale Obergrenze:
 
 ```text
 Basis = W / 7 = C
-H_max_nominal = C + 1.000 kcal
+H_max_nominal = C + 1.500 kcal
 ```
 
 Die Auswahl erfolgt in **50-kcal-Schritten**. Da es sich um eine Obergrenze handelt, wird der technische Maximalwert auf das 50-kcal-Raster nach unten gerundet.
 
-Zusätzlich müssen die sechs regulären Tage weiterhin die automatischen Planungsgrenzen einhalten. Sei `F` das niedrigste zulässige reguläre Tagesbudget, dann gilt:
+Die frühere Produktgrenze `C + 1.000 kcal` ist damit ersetzt.
 
-```text
-H <= W - 6 × F
-```
-
-Damit ist die tatsächlich auswählbare Obergrenze konzeptionell:
-
-```text
-H_max = min(
-  floor_to_50(C + 1.000),
-  floor_to_50(W - 6 × F)
-)
-```
-
-Wenn dadurch kein sinnvoll höherer Cheat-Day-Wert möglich ist, soll die App dies transparent anzeigen bzw. einen längeren Zielzeitraum vorschlagen.
+Wenn die sechs regulären Tage durch die Umverteilung unter automatische Planungsgrenzen fallen, muss die Implementierung diesen Zustand erkennen und nachvollziehbar behandeln. **Noch nicht festgelegt** ist, ob die Auswahl dann hart blockiert, nur mit Warnung zugelassen oder als weiche Empfehlung behandelt wird. Diese konkrete UX-/Safety-Entscheidung darf in der Implementierungsphase getroffen werden.
 
 ### Cheat-Day-UI
 
@@ -326,12 +348,11 @@ Wenn der Nutzer einen Cheat Day aktiviert:
 
 1. Montag bis Sonntag werden angezeigt.
 2. Genau ein Wochentag kann ausgewählt werden.
-3. Danach wählt der Nutzer das **gesamte Cheat-Day-Kalorienbudget** über einen Zahlenregler / Wheel / Slider.
-4. Der Regler arbeitet in **50-kcal-Schritten**.
-5. Während der Nutzer den Wert verändert, werden die sechs anderen Tagesbudgets **live** aktualisiert.
-6. Das unveränderte Wochenbudget bleibt sichtbar bzw. nachvollziehbar.
-
-Die konkrete UI-Komponente kann in der Wireframe-Phase optimiert werden.
+3. Danach wählt der Nutzer das **gesamte Cheat-Day-Kalorienbudget** über einen **vertikalen Wheel-/Number-Picker**.
+4. Der ausgewählte Wert steht groß in der Mitte; benachbarte Werte erscheinen darüber und darunter zurückgenommen.
+5. Der Picker arbeitet in **50-kcal-Schritten**.
+6. Während der Nutzer den Wert verändert, werden die sechs anderen Tagesbudgets **live** aktualisiert.
+7. Das unveränderte Wochenbudget bleibt sichtbar bzw. nachvollziehbar.
 
 ### Info-Hilfe mit Lebensmittelbeispielen
 
@@ -340,10 +361,12 @@ Der Cheat-Day-Screen soll einen optionalen Info-Button analog zu anderen erklär
 Dort können typische Cheat-Day-Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B.:
 
 - Pizza
-- Bier
+- Bier / Alkohol
 - Kuchen
 - Burger
 - Pommes
+- Flips / Snacks
+- Schokolade
 
 Die Werte sollen als grobe Richtwerte/Bereiche und nicht als scheinbar exakte Nährwerte dargestellt werden. Konkrete Portionsdefinitionen und kcal-Bereiche sind noch als Content-Aufgabe festzulegen.
 
@@ -363,15 +386,15 @@ Protein und Fett werden als ganze Gramm dargestellt; Kohlenhydrate werden aus de
 
 ## Manuelle Plausibilitätschecks
 
-Mehrere manuelle End-to-End-Rechenbeispiele wurden für normale Aktivitäts-/Sportprofile, beide Protein-Tiers, die 25-%-Defizitgrenze, absolute Kalorien-Untergrenzen und die Wochenumverteilung geprüft.
+Mehrere manuelle End-to-End-Rechenbeispiele wurden für normale Aktivitäts-/Sportprofile, beide Protein-Tiers, Defizitgrenzen und die Wochenumverteilung geprüft.
 
-Die Kernlogik verhielt sich dabei grundsätzlich wie vorgesehen. Als relevanter Sonderfall zeigte sich, dass ein Cheat Day ohne eigene Obergrenze mathematisch sehr hoch werden könnte, solange die sechs anderen Tage noch innerhalb der Sicherheitsgrenzen bleiben. Daraus wurde die zusätzliche Obergrenze `C + 1.000 kcal` abgeleitet.
+Ein aktuelles ausführlicheres Beispiel steht in [`calculation-examples.md`](calculation-examples.md).
 
 Diese Rechenchecks sind **keine wissenschaftliche End-to-End-Validierung** des gesamten TDEE-Modells.
 
 ## Transparente Darstellung
 
-Die UI soll die Berechnung kostenrechnungsartig zeigen können:
+Die UI soll die Berechnung kostenrechnungsartig und schrittweise erklären können:
 
 ```text
 Ruheenergiebedarf                     XXXX kcal
@@ -395,11 +418,19 @@ Ruheenergiebedarf                     XXXX kcal
 → optional: Umverteilung auf 1 Cheat Day + 6 reguläre Tage
 ```
 
+Die konkrete visuelle Umsetzung darf der Implementierungs-AI bzw. späteren UI-Arbeit überlassen werden. Inhaltliche Pflicht ist die verständliche, schrittweise Erklärung ohne vorausgesetztes Fachwissen.
+
 ## Manuelle Anpassung
 
-Das automatisch berechnete Kalorienziel kann vom Nutzer in Einstellungen bzw. einem erweiterten Bereich manuell überschrieben werden. Diese Funktion bleibt getrennt von der automatischen Wochenbudget- und Cheat-Day-Logik.
+Das automatisch berechnete Kalorienziel kann vom Nutzer in Einstellungen bzw. einem erweiterten Bereich manuell überschrieben werden.
 
-Wie aggressive manuelle Unterschreitungen der automatischen Planungsgrenzen behandelt werden, bleibt als UX-/Safety-Frage offen.
+Für manuell eingegebene Werte gilt die automatische Planungsgrenze **nicht als harter Zwang**: Der Nutzer darf einen selbst gewählten Kalorienwert auch dann speichern, wenn er unter dem automatisch empfohlenen Guardrail liegt. Der Wert wird nicht stillschweigend zurückgesetzt.
+
+Die App soll in diesem Fall mindestens kenntlich machen, dass der Wert **manuell geändert** wurde. Eine klare, nicht blockierende Warnung bzw. Plausibilitätseinordnung ist die bevorzugte V1-Richtung; die genaue Microcopy kann später festgelegt werden.
+
+Manuell geänderte Makroziele dürfen ebenfalls gespeichert werden, auch wenn ihre rechnerische kcal-Summe nicht exakt zum Kalorienziel passt. Eine Abweichung kann angezeigt werden, soll aber nicht automatisch erzwungen korrigiert werden.
+
+Diese direkte manuelle Override-Regel ist von der noch offenen Frage zu unterscheiden, wie ein hoher Cheat Day behandelt wird, wenn dadurch die sechs anderen Tage unter automatische Tages-Guardrails fallen.
 
 ## Wissenschaftliche Arbeitsgrundlagen
 
