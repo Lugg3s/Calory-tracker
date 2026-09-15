@@ -4,9 +4,11 @@
 
 ## Product
 
-Calory Tracker is a mobile weight-loss planning app focused on **transparent, deterministic calorie calculations**. The user enters body data, everyday activity, exercise habits and a goal. The app estimates maintenance energy expenditure, derives a calorie target for the requested timeframe and shows the calculation line by line.
+Calory Tracker is the current **working title** for a mobile weight-loss planning app focused on **transparent, deterministic calorie calculations**. The user enters body data, everyday activity, exercise habits and a goal. The app estimates maintenance energy expenditure, derives a calorie target for the requested timeframe and shows the calculation line by line.
 
 The MVP must work without an LLM. AI, voice food logging and advanced personalization are later layers.
+
+The working title is **not yet a final brand decision**. Market research found an existing product called `Calory / Calory AI` in the same category, so naming/brand clearance remains open.
 
 ## Core UX principle
 
@@ -32,6 +34,8 @@ Resting energy requirement           XXXX kcal
 ```
 
 Every major component should be explainable. All outputs are estimates; the UI should avoid false precision.
+
+The exact visual presentation is intentionally not fixed yet. The hard rule is **understandability**: the calculation must be explainable step by step in normal language so that a typical seventh grader can follow it. Unexplained abbreviations and unnecessary jargon should be avoided; formulas may be optional deeper detail.
 
 ## Current onboarding UX
 
@@ -76,13 +80,14 @@ V1 uses a pre-generated library of **80 front-view images**:
 2 sex/biological image categories × 5 internal body-shape buckets × 8 KFA anchors = 80 images
 ```
 
-The eight image anchors for both male and female libraries are:
+The current sex-specific image anchors are:
 
 ```text
-5%, 10%, 15%, 20%, 25%, 30%, 35%, 40%
+male:   10%, 15%, 20%, 25%, 30%, 35%, 40%, 45%
+female: 15%, 20%, 25%, 30%, 35%, 40%, 45%, 50%
 ```
 
-The male and female libraries represent those same numeric anchors separately; the visual appearance of the same numeric KFA does not need to be identical across sexes.
+This supersedes the earlier identical 5–40% anchor range.
 
 ### Internal body-shape matching
 
@@ -102,7 +107,18 @@ These buckets are never shown as user classifications and are **not** KFA estima
 
 Reference images are shown only on request. V1 uses one standardized front view per combination, with consistent pose, framing, clothing, lighting and background. The same library is reused for current-KFA and target-KFA visual help.
 
-A KFA estimated with help from those images may carry higher internal model uncertainty. That uncertainty can be documented for developers/model validation; no separate user warning is required solely because the KFA was visually estimated.
+Physiological/medical plausibility of the visual scale is an explicit quality target. The images should model plausible sex-specific fat-distribution changes, but they remain orientation anchors rather than medically exact KFA measurements.
+
+### Current production status
+
+Bucket 3 is the 16-image pilot series:
+
+```text
+male:   10–45% in 5-point steps
+female: 15–50% in 5-point steps
+```
+
+The pilot images and production metadata are stored under `assets/kfa-reference-images/`. Their validation status remains pending until the visual KFA spacing and consistency are sufficiently reviewed.
 
 See `kfa-reference-images-v1.md` for the detailed specification.
 
@@ -148,11 +164,18 @@ maintenance M = B / 0.90
 
 ### Everyday activity
 
-Everyday activity uses a **time-based MET model**, not the previously discussed fixed RMR percentage add-ons.
+Everyday activity uses a **time-based MET model**, not fixed RMR percentage add-ons.
 
-To keep onboarding short, one coarse everyday-activity choice maps to an internal 8-hour reference profile. Five provisional profiles are documented in [`activity-model-v1.md`](activity-model-v1.md): predominantly seated, mixed sitting/standing, predominantly standing, physically active and heavy physical work.
+One coarse everyday-activity choice maps to an internal 8-hour reference profile. Five V1 profiles are documented in [`activity-model-v1.md`](activity-model-v1.md): predominantly seated, mixed sitting/standing, predominantly standing, physically active and heavy physical work.
 
-Known limitations: low-activity users may have some NEAT undercounted, while high occupational activity can partly overlap with step energy. V1 proceeds with this model for now and should be calibrated later against real data.
+For V1 these profiles are treated as typical **5-day workweek profiles** and averaged across all seven plan days:
+
+```text
+net everyday activity per plan day
+= net energy of selected 8-h profile × 5 / 7
+```
+
+Steps remain separate. V1 adds **no additional generic NEAT correction**. Known limitations are accepted for V1: some non-step NEAT may be undercounted, while high occupational activity can partly overlap with step energy. These points should be validated later against real data.
 
 ### Steps
 
@@ -175,7 +198,22 @@ gross training kcal = MET × 3.5 × weight(kg) / 200 × minutes
 net training kcal = gross training kcal - RMR / 1,440 × minutes
 ```
 
-Weekly training energy is divided by 7 for the daily-average plan. Typical training duration is therefore a conditional onboarding input. A separate intensity question is not required for V1; standard MET values per sport can be used initially.
+Weekly training energy is divided by 7 for the daily-average plan. Typical training duration is therefore a conditional onboarding input. A separate intensity question is not required for V1.
+
+Current V1 category defaults:
+
+```text
+strength training                3.5 MET
+running / jogging                7.5 MET
+cycling                          7.0 MET
+swimming                         5.8 MET
+HIIT / circuit                   7.0 MET
+team / racket sports             7.0 MET
+yoga / Pilates / mobility        2.5 MET
+other sport                      5.0 MET
+```
+
+Zumba / dance fitness is currently mapped to `other sport = 5.0 MET` in manual V1 examples.
 
 ### TEF
 
@@ -246,7 +284,7 @@ Additional approximate automatic-plan floors remain:
 - 1,200 kcal/day for the female Mifflin equation category
 - 1,500 kcal/day for the male Mifflin equation category
 
-These are pragmatic product guardrails, not physiological minimums. Special populations and manual overrides remain open questions.
+These are pragmatic product guardrails, not physiological minimums.
 
 ## Weekly budget and Cheat Day
 
@@ -264,23 +302,19 @@ A Cheat Day redistributes the same weekly budget rather than adding calories on 
 regular-day budget L = (W - Cheat-Day budget H) / 6
 ```
 
-The user selects one weekday and then chooses the **total Cheat-Day calories** with a numeric wheel/slider-style control in **50-kcal increments**. As the Cheat-Day value changes, the other six day budgets update live.
+The user selects one weekday and then chooses the **total Cheat-Day calories** with a **vertical wheel / number picker** in **50-kcal increments**. The selected number is centered and emphasized, adjacent values appear above and below with lower emphasis, and the other six day budgets update live.
 
-The earlier direction that capped a Cheat Day at maintenance is superseded. The nominal V1 limit is:
-
-```text
-H_max_nominal = C + 1,000 kcal
-```
-
-The technical maximum is rounded down to the 50-kcal grid. The actual maximum can be lower if the six regular days would otherwise violate automatic-plan guardrails:
+The nominal V1 limit is:
 
 ```text
-H <= W - 6 × F
+H_max_nominal = C + 1,500 kcal
 ```
 
-where `F` is the minimum allowed regular-day budget.
+The technical maximum is rounded down to the 50-kcal grid. This supersedes the former `C + 1,000 kcal` limit.
 
-The Cheat-Day screen also has an optional info/help control. It can show rough calorie ranges for typical foods such as pizza, beer, cake, burgers and fries so users can estimate a suitable budget. Exact foods, serving sizes and kcal ranges remain a content task.
+A high Cheat Day can push the six regular days below automatic-plan guardrails. The implementation must recognize and surface that state, but **whether it hard-blocks, warns or uses a soft recommendation is intentionally left open for implementation**.
+
+The Cheat-Day screen also has an optional info/help control. It can show rough calorie ranges for typical foods such as pizza, beer/alcohol, cake, burgers, fries, snacks such as Flips and chocolate. Exact foods, serving sizes and kcal ranges remain a content task.
 
 See [`cheat-day-v1.md`](cheat-day-v1.md) for the detailed specification.
 
@@ -314,15 +348,25 @@ On a Cheat Day, protein grams stay unchanged if body weight and sport tier are u
 
 Protein and fat are displayed as whole grams; carbohydrates are calculated from the remaining calories and displayed as whole grams. **Small visible kcal differences caused by rounding are accepted in V1.**
 
-If an unusually low calorie target makes the resulting macro allocation implausible, the app should review the calorie target/safety constraints rather than silently distort the macro rules.
-
 Fiber, saturated-fat targets, omega-3 targets and separate muscle-goal macro logic are not part of the V1 macro engine.
 
 See `nutrition-and-macros.md` for formulas, examples and rationale.
 
 ## Manual calorie/macro override
 
-The automatically calculated calorie target is editable in settings/an advanced area, not prominently on the main screen. Macro targets may also be manually adjusted there. How to handle manual values below automatic-plan guardrails remains open.
+The automatically calculated calorie target is editable in settings/an advanced area, not prominently on the main screen. Macro targets may also be manually adjusted there.
+
+Automatic guardrails apply to **automatically proposed plans**. A user may intentionally enter and save a calorie value below the automatic guardrail; the app should not silently reset it. The value should be marked as manually changed and a clear **non-blocking** warning/plausibility note is the preferred V1 direction.
+
+Manual macro values may likewise remain even when their kcal total no longer exactly matches the calorie target. The mismatch may be displayed but should not be force-corrected.
+
+This direct manual-override behavior is separate from the still-open implementation decision for Cheat-Day redistribution that drives the six other days below automatic guardrails.
+
+## Manual calculation example
+
+A dated V1 example for a 25-year-old, 162-cm, 66-kg female-category user with 5,000 steps/day, predominantly seated activity, one weekly Zumba session and one weekly strength session is documented in [`calculation-examples.md`](calculation-examples.md).
+
+The example is a reproducibility check, not a product requirement or scientific validation.
 
 ## AI / future direction
 
@@ -341,7 +385,8 @@ Read in this order when working on the product:
 5. `cheat-day-v1.md`
 6. `nutrition-and-macros.md`
 7. `kfa-reference-images-v1.md`
-8. `onboarding.md` / `app-flow.md`
-9. `open-questions.md`
+8. `calculation-examples.md`
+9. `onboarding.md` / `app-flow.md`
+10. `open-questions.md`
 
 Never convert provisional scientific assumptions into fixed requirements without an explicit decision.
