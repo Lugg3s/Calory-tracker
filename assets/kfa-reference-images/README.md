@@ -30,18 +30,22 @@ Der maschinenlesbare [Index](index.json) enthält ausschließlich tatsächlich g
 
 ### Bucket-3-Pilotserie, ergänzt am 11. September 2026
 
-Die Pilotserie enthält jetzt 16 Einzelbilder: Männer 10/15/20/25/30/35/40/45 %, Frauen 15/20/25/30/35/40/45/50 %. Diese Produktionsstufen folgen der im begleitenden Chat konkretisierten Pilotplanung. Die ältere V1-Spezifikation bleibt als bisheriger Entscheidungsstand erhalten; eine globale Umstellung der App-Bildauswahl erfolgt hier nicht.
+Die Pilotserie enthält 16 Einzelbilder: Männer 10/15/20/25/30/35/40/45 %, Frauen 15/20/25/30/35/40/45/50 %.
+
+Diese Stufen sind inzwischen auch die **aktuell beschlossenen V1-KFA-Anker** für die jeweilige Geschlechts-/Bildkategorie. Sie ersetzen die frühere gemeinsame Reihe 5–40 %. Die vollständige Bibliothek soll weiterhin 5 Körperform-Buckets × 8 Anker × 2 Bildkategorien = 80 Bilder enthalten.
 
 Die fünf neuen Männerbilder wurden direkt vom gespeicherten 20-%-Anker abgeleitet. Alle acht Frauenbilder verwenden die Frau rechts im [gemeinsamen Masterbild](masters/bucket-3/joint-master.png). Dieses vom Nutzer bereitgestellte Original (`Codex-Bild 11. Sept. 2026, 12_56_05.png`) wird unverändert aufbewahrt und bekommt keinen nachträglich geschätzten KFA-Wert. Alle neuen Bilder wurden mit dem eingebauten Imagegen-Werkzeug erzeugt; der jeweilige vollständige Prompt liegt neben `front.png` und ist im JSON-Index verlinkt.
 
 **Prüfstatus:** Die Bilder wurden visuell auf vollständige Frontansicht, grundlegende Anatomie, Kleidung, Hintergrund und Wiedererkennbarkeit geprüft. Sie sind Produktionsentwürfe, keine validierte KFA-Skala. Besonders die Abstände der Frauenstufen 15/20 und 40/45 sowie der Männerstufen 30/35 sollten gemeinsam kalibriert werden. Kleine Abweichungen in Stand, Bildmaßstab und Kleidungsdetails sind vorhanden; eine pixelgenau identische Pose oder konstante Muskelmasse ist durch die Generierung nicht nachgewiesen. Alle Indexeinträge behalten deshalb `validationStatus: pending`.
 
+Physiologische/medizinische Plausibilität ist für die finale Abnahme wichtig. Die Zielanker sollen typische sichtbare Fettverteilungsänderungen möglichst glaubwürdig abbilden, bleiben aber visuelle Orientierungshilfen und keine medizinisch gemessenen KFA-Werte.
+
 Die Variante `male_bucket3_kfa10` wurde mit Imagegen aus `male_bucket3_kfa15` erstellt und unverändert gespeichert. Ziel ist eine weitere Verringerung des sichtbaren Körperfetts bei gleichbleibender Person, Muskelmasse, Pose, Kleidung und Beleuchtung. Der [Generierungsprompt](male/bucket-3/kfa-10/prompt.txt) liegt beim Bild. Die 10-%-Einordnung ist ein visueller Zielanker; die finale Validierung bleibt offen.
 
 Die Variante `male_bucket3_kfa15` wurde mit Imagegen aus `male_bucket3_kfa20` erstellt und unverändert gespeichert. Ziel ist eine moderate Verringerung des sichtbaren Körperfetts bei gleichbleibender Person, Muskelmasse, Pose, Kleidung und Beleuchtung. Der [Generierungsprompt](male/bucket-3/kfa-15/prompt.txt) liegt beim Bild. Die 15-%-Einordnung ist ein visueller Zielanker; die finale Validierung bleibt offen.
 
-Das erste Bild ist der männliche Pilotserien-Anker aus dem Chat „main chat“, übernommen aus der vom Nutzer bereitgestellten PNG. Die Datei wurde unverändert kopiert.
+Das erste gespeicherte Einzelbild war der männliche Pilotserien-Anker `male_bucket3_kfa20` aus dem Chat „main chat“, übernommen aus der vom Nutzer bereitgestellten PNG. Die Datei wurde unverändert kopiert.
 
-`male`, `bucket-3` und `kfa-20` sind die vom Nutzer vorgegebenen Produktionsmetadaten. Der KFA-Wert ist ein beabsichtigter visueller Anker, kein am Bild gemessener oder medizinisch validierter Wert. Die finale Qualitätsprüfung bleibt offen.
+`male`, `bucket-3` und `kfa-20` waren die für diesen Anker vorgegebenen Produktionsmetadaten. Der KFA-Wert ist ein beabsichtigter visueller Anker, kein am Bild gemessener Wert.
 
-Die bestehende V1-Spezifikation verwendet A–E für die BMI-basierte Bildauswahl. Eine verbindliche Zuordnung von `bucket-3` zu diesen BMI-Buckets wird hier nicht neu festgelegt. Auch die dokumentierte KFA-Stufenreihe und bestehende Master-Entscheidungen bleiben unverändert. Dieses Einzelbild ersetzt kein gemeinsames Master-/Stilreferenzbild.
+Die V1-Spezifikation verwendet A–E für die BMI-basierte automatische Bildauswahl. Eine verbindliche technische Zuordnung des Produktionsnamens `bucket-3` zu dieser A–E-Nomenklatur ist weiterhin offen. Die Pilotserie ersetzt außerdem nicht das gemeinsame Master-/Stilreferenzbild.
