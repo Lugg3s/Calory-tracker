@@ -74,6 +74,8 @@ Ruheenergiebedarf                   XXXX kcal
 
 Die einzelnen Positionen sollen erklärbar sein.
 
+Die exakte visuelle Darstellung ist bewusst nicht festgelegt. Verbindlich ist, dass die Erklärung **schrittweise und in normaler Sprache auch für einen Siebtklässler verständlich** sein muss. Unnötiger Fachjargon und unerklärte Abkürzungen sollen vermieden werden.
+
 Wenn Ziel-KFA zur Zieldefinition verwendet wird, soll zusätzlich nachvollziehbar dargestellt werden, wie aus aktuellem Gewicht, aktuellem KFA und Ziel-KFA das modellhafte Zielgewicht und die erforderliche Gewichtsabnahme abgeleitet wurden.
 
 ## Cheat Day
@@ -84,13 +86,14 @@ V1-Anforderungen:
 
 - maximal **ein** Cheat Day pro Woche;
 - Auswahl eines Wochentags Montag bis Sonntag;
-- Auswahl des gesamten Cheat-Day-Kalorienbudgets über einen Zahlenregler / Wheel / Slider;
+- Auswahl des gesamten Cheat-Day-Kalorienbudgets über einen **vertikalen Wheel-/Number-Picker**;
+- ausgewählter Wert groß/zentriert, benachbarte Werte darüber und darunter zurückgenommen;
 - **50-kcal-Schritte**;
 - Live-Neuberechnung der übrigen sechs Tagesbudgets;
 - Wochenbudget bleibt unverändert;
-- nominale Obergrenze `normales Tagesziel + 1.000 kcal`, auf das 50-kcal-Raster nach unten gerundet;
-- tatsächliche Obergrenze kann niedriger sein, wenn die sechs regulären Tage sonst die automatischen Planungsgrenzen verletzen;
-- optionaler Info-Button mit groben Kalorienbeispielen typischer Cheat-Day-Lebensmittel.
+- nominale Obergrenze `normales Tagesziel + 1.500 kcal`, auf das 50-kcal-Raster nach unten gerundet;
+- wenn die sechs regulären Tage dadurch unter automatische Planungsgrenzen fallen, muss der Zustand erkannt und nachvollziehbar behandelt werden; ob Blockierung, Warnung oder weiche Empfehlung verwendet wird, ist bewusst an die Implementierungsphase delegiert;
+- optionaler Info-Button mit groben Kalorienbeispielen typischer Cheat-Day-Lebensmittel wie Pizza, Alkohol/Bier, Kuchen, Burger, Pommes, Flips/Snacks oder Schokolade.
 
 Die konkreten Lebensmittel, Portionsdefinitionen und kcal-Bereiche für den Info-Bereich sind noch nicht final festgelegt.
 
@@ -98,7 +101,9 @@ Die konkreten Lebensmittel, Portionsdefinitionen und kcal-Bereiche für den Info
 
 Der Nutzer darf das vorgeschlagene Kalorienziel manuell anpassen. Diese Einstellung soll **nicht prominent auf dem Main Screen** erscheinen, sondern beispielsweise in Einstellungen oder einem erweiterten Bereich.
 
-Das gleiche Prinzip gilt für manuell anpassbare Makronährstoffziele.
+Automatische Guardrails steuern die automatisch vorgeschlagenen Pläne. Ein bewusst manuell eingegebener Kalorienwert darf gespeichert werden, auch wenn er unter dem automatischen Guardrail liegt. Die App soll ihn nicht still zurücksetzen. Kennzeichnung als manuelle Änderung und eine klare **nicht blockierende Warnung/Plausibilitätseinordnung** sind die bevorzugte V1-Richtung.
+
+Das gleiche Prinzip gilt für manuell anpassbare Makronährstoffziele. Manuelle Makros dürfen von der automatischen Verteilung abweichen und auch eine kcal-Summe ergeben, die nicht exakt zum Kalorienziel passt. Die Differenz kann angezeigt werden, aber es soll keine erzwungene automatische Korrektur geben.
 
 ## Trainingsprofil und Protein-Klassifizierung
 
@@ -112,6 +117,25 @@ weniger als 3 Sporteinheiten/Woche → 1,4 g Protein/kg aktuelles Körpergewicht
 ```
 
 Für diese V1-Grenze zählt jede regelmäßige Sportart. Das aktuelle tatsächliche Körpergewicht wird direkt verwendet; eine KFA-/FFM- oder Idealgewichts-Korrektur ist nicht Teil des MVP.
+
+Die V1-Trainingsenergie verwendet die Standard-MET-Kategorien aus `activity-model-v1.md`.
+
+## KFA-Referenzbilder
+
+Die KFA-Hilfe ist optional und verwendet eine vorab generierte Bibliothek mit **80 Frontbildern**:
+
+```text
+2 Geschlechts-/biologische Bildkategorien × 5 interne Körperform-Buckets × 8 KFA-Anker
+```
+
+Aktuelle Anker:
+
+```text
+männlich: 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %
+weiblich: 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %, 50 %
+```
+
+Die Bilder sind Orientierungshilfen, keine Messung. Physiologische/medizinische Plausibilität ist ein Qualitätsziel; die eigentliche KFA-Eingabe bleibt frei numerisch.
 
 ## Tracking-Modi
 
