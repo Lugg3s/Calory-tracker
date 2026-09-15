@@ -78,10 +78,11 @@ Wenn der Nutzer einen Cheat Day möchte:
 
 1. Montag bis Sonntag werden als auswählbare Tage angezeigt.
 2. Der Nutzer wählt genau einen Wochentag.
-3. Anschließend wählt er das gesamte Kalorienbudget dieses Cheat Days über einen Zahlenregler / Wheel / Slider.
-4. Die Auswahl erfolgt in **50-kcal-Schritten**.
-5. Während der Wert verändert wird, aktualisieren sich die Kalorienbudgets der übrigen sechs Tage **live**.
-6. Das Wochenbudget bleibt unverändert und soll gleichzeitig sichtbar bzw. nachvollziehbar bleiben.
+3. Anschließend wählt er das gesamte Kalorienbudget dieses Cheat Days über einen **vertikalen Wheel-/Number-Picker**.
+4. Der ausgewählte Wert steht groß und zentriert; benachbarte Werte erscheinen darüber und darunter zurückgenommen.
+5. Die Auswahl erfolgt in **50-kcal-Schritten**.
+6. Während der Wert verändert wird, aktualisieren sich die Kalorienbudgets der übrigen sechs Tage **live**.
+7. Das Wochenbudget bleibt unverändert und soll gleichzeitig sichtbar bzw. nachvollziehbar bleiben.
 
 Berechnung:
 
@@ -92,12 +93,14 @@ reguläres Tagesbudget L = (W - Cheat-Day-Budget H) / 6
 Die nominale Cheat-Day-Obergrenze beträgt:
 
 ```text
-H_max_nominal = C + 1.000 kcal
+H_max_nominal = C + 1.500 kcal
 ```
 
-Der Maximalwert wird auf das 50-kcal-Raster abgerundet. Zusätzlich gelten die automatischen Kalorien-/Defizitgrenzen für die übrigen sechs Tage. Falls diese früher erreicht werden, gilt die dadurch entstehende niedrigere Cheat-Day-Obergrenze.
+Der Maximalwert wird auf das 50-kcal-Raster abgerundet. Die frühere `+1.000-kcal`-Grenze ist damit ersetzt.
 
-Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ gilt damit **nicht mehr**.
+Wenn durch die Umverteilung die sechs übrigen Tage unter automatische Planungsgrenzen fallen, muss die Implementierung diesen Zustand erkennen und nachvollziehbar behandeln. Ob dann hart blockiert, gewarnt oder nur eine weiche Empfehlung gezeigt wird, ist bewusst **nicht vorab festgelegt** und darf in der Implementierungsphase entschieden werden.
+
+Die frühere Richtung „Cheat Day maximal bis zum Erhaltungsbedarf“ gilt weiterhin **nicht mehr**.
 
 Die vollständige Berechnungs- und UX-Spezifikation steht in [`cheat-day-v1.md`](cheat-day-v1.md).
 
@@ -105,7 +108,7 @@ Die vollständige Berechnungs- und UX-Spezifikation steht in [`cheat-day-v1.md`]
 
 Der Cheat-Day-Screen soll wie andere erklärungsbedürftige Screens einen kleinen **Info-Button** bzw. eine optionale Hilfsansicht anbieten.
 
-Dort können typische Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B. Pizza, Bier, Kuchen, Burger und Pommes. Die Werte sollen als Richtwerte bzw. Bereiche dargestellt werden, nicht als scheinbar exakte Werte.
+Dort können typische Lebensmittel mit groben Kaloriengrößenordnungen gezeigt werden, z. B. Pizza, Bier/Alkohol, Kuchen, Burger, Pommes, Flips oder Schokolade. Die Werte sollen als Richtwerte bzw. Bereiche dargestellt werden, nicht als scheinbar exakte Werte.
 
 ## Tracking-Präferenz
 
@@ -149,7 +152,7 @@ Die Bilder sind nur Orientierungshilfen. Der Nutzer muss **kein Bild auswählen*
 
 ### V1-Bibliothek
 
-Die Referenzbibliothek wird vorab erzeugt und umfasst **80 Bilder**:
+Die Referenzbibliothek wird vorab erzeugt und umfasst weiterhin **80 Bilder**:
 
 ```text
 2 Geschlechts-/biologische Bildkategorien
@@ -158,13 +161,14 @@ Die Referenzbibliothek wird vorab erzeugt und umfasst **80 Bilder**:
 = 80 Bilder
 ```
 
-Die acht KFA-Bildanker sind für männliche und weibliche Referenzen identisch:
+Die acht Bildanker sind jetzt geschlechtsspezifisch verschoben:
 
 ```text
-5 %, 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %
+männlich: 10 %, 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %
+weiblich: 15 %, 20 %, 25 %, 30 %, 35 %, 40 %, 45 %, 50 %
 ```
 
-Die getrennten männlichen und weiblichen Bilder stellen dieselben Prozentwerte jeweils geschlechtsspezifisch dar.
+Die Änderung ersetzt die frühere gemeinsame Reihe `5–40 %`. Ziel ist eine physiologisch plausiblere visuelle Skala, insbesondere im unteren weiblichen KFA-Bereich.
 
 Die Bildstufen begrenzen den numerischen KFA nicht. Beispielsweise kann der Nutzer trotz Bildankern bei 15 % und 20 % direkt **18 %** eingeben. Für die Berechnung wird immer der tatsächliche numerische Wert verwendet.
 
@@ -190,9 +194,11 @@ Sehr muskulöse oder anderweitig atypische Körperzusammensetzungen können dadu
 
 V1 verwendet nur **eine standardisierte Frontansicht** pro Kombination. Wichtig sind über alle Bilder hinweg möglichst identische Pose, Ausschnitt, Perspektive, Kleidung, Hintergrund und Lichtsetzung. Die Bilder sollen funktional und vergleichbar sein, nicht dekorativ.
 
+Die Bilder sollen nicht nur gleichmäßig abgestuft, sondern **physiologisch/medizinisch möglichst plausibel** wirken. Sie bleiben dennoch visuelle Referenzanker und keine medizinische KFA-Messung.
+
 Die gleiche Bibliothek wird für aktuellen KFA und Ziel-KFA verwendet.
 
-Die vollständige Spezifikation steht in [`kfa-reference-images-v1.md`](kfa-reference-images-v1.md).
+Die vollständige Spezifikation und der Status der Pilotserie stehen in [`kfa-reference-images-v1.md`](kfa-reference-images-v1.md).
 
 ## Ziel-KFA anhand von Bildern
 
@@ -204,7 +210,7 @@ Das daraus abgeleitete Zielgewicht ist eine Modellschätzung unter der Annahme k
 
 Da Training in V1 mit MET, Körpergewicht und Zeit berechnet wird, wird bei Training zusätzlich die typische Dauer einer Einheit benötigt.
 
-Eine separate Intensitätsfrage ist für das initiale Onboarding nicht zwingend. V1 kann zunächst Standard-MET-Werte pro Trainingsart verwenden; genauere Intensität kann später unter „Plan verfeinern“ ergänzt werden.
+Eine separate Intensitätsfrage ist für das initiale Onboarding nicht zwingend. V1 verwendet zunächst die in `activity-model-v1.md` festgelegten Standard-MET-Werte pro Trainingsart; genauere Intensität kann später unter „Plan verfeinern“ ergänzt werden.
 
 ## Nach dem ersten Plan
 
