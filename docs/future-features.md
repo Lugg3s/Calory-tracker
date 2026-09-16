@@ -17,16 +17,17 @@ Eine solche Visualisierung wäre eine Schätzung bzw. Visualisierung und keine z
 
 Nach der normalen Berechnung und Ergebnisanzeige soll V2 optional einen zusätzlichen Screen anbieten, sinngemäß z. B. **„Passt dein Plan so oder möchtest du noch etwas anpassen?“**.
 
-Der Nutzer verändert dort **keine statischen Körperdaten** wie Größe, Alter oder aktuelles Gewicht. Stattdessen kann er gezielt veränderbare Verhaltensparameter ausprobieren, insbesondere:
+Der Nutzer verändert dort **keine statischen Körperdaten** wie Größe, Alter oder aktuelles Gewicht. Stattdessen kann er gezielt veränderbare Verhaltens- und Planparameter ausprobieren, insbesondere:
 
 - mehr oder weniger durchschnittliche Schritte pro Tag;
 - mehr oder weniger Sporteinheiten pro Woche;
 - andere Sportarten;
-- längere oder kürzere Trainingsdauer.
+- längere oder kürzere Trainingsdauer;
+- ein früheres oder späteres Zieldatum.
 
 Die Oberfläche soll als interaktiver **Was-wäre-wenn-Rechner** funktionieren. Änderungen werden unmittelbar mit der bestehenden deterministischen Berechnungslogik neu bewertet.
 
-Wichtig ist, dass die App nicht nur das vollständig neu berechnete Kalorienziel zeigt, sondern vor allem den **direkten Kalorien-Effekt der Änderung als Delta**. Beispiel:
+Wichtig ist, dass die App nicht nur das vollständig neu berechnete Kalorienziel zeigt, sondern bei Verhaltensänderungen vor allem den **direkten Kalorien-Effekt der Änderung als Delta**. Beispiel:
 
 ```text
 + 1.000 Schritte/Tag
@@ -37,9 +38,61 @@ Der konkrete Wert wird aus den aktuellen Körperdaten und dem bestehenden Schrit
 
 Analog soll die App bei zusätzlichen Sporteinheiten oder längerer Trainingsdauer direkt zeigen, wie viel zusätzlicher täglicher bzw. auf die Woche gemittelter Kalorienspielraum daraus nach dem aktuellen Modell entsteht.
 
-Ziel des Features ist, dem Nutzer konkrete **Verhaltenshebel** zu zeigen, mit denen er seinen Plan beeinflussen kann, statt nur einen statischen Zielwert zu präsentieren.
+Bei einer Veränderung des Zieldatums soll die App unmittelbar zeigen, wie sich das erforderliche tägliche Defizit und damit das Kalorienziel verändern.
+
+Ziel des Features ist, dem Nutzer konkrete **Verhaltens- und Planhebel** zu zeigen, mit denen er seinen Plan beeinflussen kann, statt nur einen statischen Zielwert zu präsentieren.
 
 **Scope:** ausdrücklich **Version 2**, nicht Teil des MVP/V1-Onboardings.
+
+## V2 — flexible Zielplanung mit drei Größen
+
+Version 2 soll die Zielplanung flexibler machen. Die drei zentralen Planungsgrößen sind:
+
+1. **Zielgewicht**
+2. **Zieldatum / Zeitraum**
+3. **gewünschte tägliche Kalorienaufnahme**
+
+Der Nutzer soll jeweils **zwei dieser drei Größen vorgeben** können. Die App berechnet daraus deterministisch die dritte Größe.
+
+### Modus A — Zielgewicht + Zieldatum
+
+Dies entspricht der bisherigen V1-Logik:
+
+```text
+Zielgewicht + Zieldatum
+→ erforderliches Defizit
+→ tägliches Kalorienziel
+```
+
+### Modus B — Kalorienaufnahme + Zielgewicht
+
+Der Nutzer gibt vor, wie viele Kalorien er durchschnittlich pro Tag essen möchte, und welches Zielgewicht er erreichen möchte.
+
+Die App berechnet daraus den voraussichtlichen Zeitraum bzw. das Zieldatum:
+
+```text
+tägliche Kalorienaufnahme + Zielgewicht
+→ erwartbares tägliches Defizit
+→ benötigte Dauer
+→ voraussichtliches Zieldatum
+```
+
+### Modus C — Kalorienaufnahme + Zieldatum
+
+Der Nutzer gibt seine gewünschte tägliche Kalorienaufnahme und ein Zieldatum vor.
+
+Die App berechnet daraus das modellhaft erreichbare Zielgewicht:
+
+```text
+tägliche Kalorienaufnahme + Zieldatum
+→ erwartbares Gesamtdefizit
+→ modellhaft erreichbarer Gewichtsverlust
+→ Zielgewicht zum gewählten Datum
+```
+
+Alle drei Modi verwenden dieselbe transparente, deterministische Berechnungsbasis. Die Ergebnisse bleiben Modellschätzungen und unterliegen denselben Plausibilitäts-/Sicherheitsregeln wie die übrige Planungslogik.
+
+Auch diese flexible Drei-Größen-Planung ist ausdrücklich **Version 2** und nicht Teil des MVP/V1-Onboardings.
 
 ## Weitere mögliche Entwicklungen
 
