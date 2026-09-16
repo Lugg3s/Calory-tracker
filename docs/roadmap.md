@@ -73,8 +73,12 @@
 - [ ] Alternativvorschläge
 - [ ] personalisierte Empfehlungen
 
-## Phase 6 – Zukunft
+## Phase 6 – Version 2 / Zukunft
 
+- [ ] interaktiven Plan-Anpassungs-/Was-wäre-wenn-Screen nach der Ergebnisanzeige entwickeln
+- [ ] direkte Deltawerte für Verhaltensänderungen anzeigen, z. B. `+1.000 Schritte/Tag → +XX kcal/Tag`
+- [ ] Schritte, Sporthäufigkeit, Sportart und Trainingsdauer als veränderbare Planhebel simulieren
+- [ ] Änderungen mit derselben deterministischen V1/V2-Berechnungslogik live neu bewerten; statische Körperdaten bleiben in diesem Screen unverändert
 - [ ] adaptive Ziel-/Kalorienanpassung aus tatsächlichem Gewichtsverlauf
 - [ ] weitergehende Personalisierung
 - [ ] optional zusätzliche KFA-Seiten-/Rückansichten
