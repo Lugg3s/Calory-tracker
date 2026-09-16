@@ -78,7 +78,12 @@
 - [ ] interaktiven Plan-Anpassungs-/Was-wäre-wenn-Screen nach der Ergebnisanzeige entwickeln
 - [ ] direkte Deltawerte für Verhaltensänderungen anzeigen, z. B. `+1.000 Schritte/Tag → +XX kcal/Tag`
 - [ ] Schritte, Sporthäufigkeit, Sportart und Trainingsdauer als veränderbare Planhebel simulieren
+- [ ] Zieldatum im Was-wäre-wenn-Screen variierbar machen und Auswirkung auf Defizit/Kalorienziel live anzeigen
 - [ ] Änderungen mit derselben deterministischen V1/V2-Berechnungslogik live neu bewerten; statische Körperdaten bleiben in diesem Screen unverändert
+- [ ] flexible Zielplanung mit drei Größen umsetzen: Zielgewicht, Zieldatum/Zeitraum, tägliche Kalorienaufnahme
+- [ ] Modus A: Zielgewicht + Zieldatum → tägliches Kalorienziel berechnen
+- [ ] Modus B: tägliche Kalorienaufnahme + Zielgewicht → benötigte Dauer / Zieldatum berechnen
+- [ ] Modus C: tägliche Kalorienaufnahme + Zieldatum → modellhaft erreichbares Zielgewicht berechnen
 - [ ] adaptive Ziel-/Kalorienanpassung aus tatsächlichem Gewichtsverlauf
 - [ ] weitergehende Personalisierung
 - [ ] optional zusätzliche KFA-Seiten-/Rückansichten
