@@ -57,8 +57,28 @@ Der maschinenlesbare [Index](index.json) enthält ausschließlich tatsächlich g
 | female_bucket3_kfa40 | female | bucket-3 | ca. 40 % | [Frontansicht](female/bucket-3/kfa-40/front.png) |
 | female_bucket3_kfa45 | female | bucket-3 | ca. 45 % | [Frontansicht](female/bucket-3/kfa-45/front.png) |
 | female_bucket3_kfa50 | female | bucket-3 | ca. 50 % | [Frontansicht](female/bucket-3/kfa-50/front.png) |
+| male_bucket4_kfa10 | male | bucket-4 | ca. 10 % | [Frontansicht](male/bucket-4/kfa-10/front.png) |
+| male_bucket4_kfa15 | male | bucket-4 | ca. 15 % | [Frontansicht](male/bucket-4/kfa-15/front.png) |
+| male_bucket4_kfa20 | male | bucket-4 | ca. 20 % | [Frontansicht](male/bucket-4/kfa-20/front.png) |
+| male_bucket4_kfa25 | male | bucket-4 | ca. 25 % | [Frontansicht](male/bucket-4/kfa-25/front.png) |
+| male_bucket4_kfa30 | male | bucket-4 | ca. 30 % | [Frontansicht](male/bucket-4/kfa-30/front.png) |
+| male_bucket4_kfa35 | male | bucket-4 | ca. 35 % | [Frontansicht](male/bucket-4/kfa-35/front.png) |
+| male_bucket4_kfa40 | male | bucket-4 | ca. 40 % | [Frontansicht](male/bucket-4/kfa-40/front.png) |
+| male_bucket4_kfa45 | male | bucket-4 | ca. 45 % | [Frontansicht](male/bucket-4/kfa-45/front.png) |
+| female_bucket4_kfa15 | female | bucket-4 | ca. 15 % | [Frontansicht](female/bucket-4/kfa-15/front.png) |
+| female_bucket4_kfa20 | female | bucket-4 | ca. 20 % | [Frontansicht](female/bucket-4/kfa-20/front.png) |
+| female_bucket4_kfa25 | female | bucket-4 | ca. 25 % | [Frontansicht](female/bucket-4/kfa-25/front.png) |
+| female_bucket4_kfa30 | female | bucket-4 | ca. 30 % | [Frontansicht](female/bucket-4/kfa-30/front.png) |
+| female_bucket4_kfa35 | female | bucket-4 | ca. 35 % | [Frontansicht](female/bucket-4/kfa-35/front.png) |
+| female_bucket4_kfa40 | female | bucket-4 | ca. 40 % | [Frontansicht](female/bucket-4/kfa-40/front.png) |
+| female_bucket4_kfa45 | female | bucket-4 | ca. 45 % | [Frontansicht](female/bucket-4/kfa-45/front.png) |
+| female_bucket4_kfa50 | female | bucket-4 | ca. 50 % | [Frontansicht](female/bucket-4/kfa-50/front.png) |
 
 ## Einordnung und Herkunft
+
+### Bucket-4-Serie, vervollständigt am 17. September 2026
+
+Weitere 16 Bilder liegen unter `male/bucket-4/` und `female/bucket-4/`. Der Index enthält jetzt insgesamt 64 Einzelbilder. Bucket 4 wurde als breiterer und robusterer Körperrahmen gegenüber Bucket 3 angelegt; dies legt keine BMI-Zuordnung fest. Referenzen, Prüfbefunde und der Bildvergleich stehen in der [Bucket-4-Produktionsübersicht](bucket-4.md). Vollständige Prompts sind bei den PNGs gespeichert. Alle neuen Bilder behalten `validationStatus: pending`.
 
 ### Bucket-1-Serie, vervollständigt am 17. September 2026
 

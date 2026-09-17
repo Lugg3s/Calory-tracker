@@ -823,6 +823,278 @@
         "referenceImageId": "female_bucket1_kfa25",
         "promptPath": "female/bucket-1/kfa-50/prompt.txt"
       }
+    },
+    {
+      "id": "male_bucket4_kfa20",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-20",
+      "targetBodyFatPercent": 20,
+      "view": "front",
+      "path": "male/bucket-4/kfa-20/front.png",
+      "role": "series-anchor",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket3_kfa20",
+        "promptPath": "male/bucket-4/kfa-20/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa25",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-25",
+      "targetBodyFatPercent": 25,
+      "view": "front",
+      "path": "female/bucket-4/kfa-25/front.png",
+      "role": "series-anchor",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket3_kfa25",
+        "promptPath": "female/bucket-4/kfa-25/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa10",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-10",
+      "targetBodyFatPercent": 10,
+      "view": "front",
+      "path": "male/bucket-4/kfa-10/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa15",
+        "promptPath": "male/bucket-4/kfa-10/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa15",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-15",
+      "targetBodyFatPercent": 15,
+      "view": "front",
+      "path": "male/bucket-4/kfa-15/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa20",
+        "promptPath": "male/bucket-4/kfa-15/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa25",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-25",
+      "targetBodyFatPercent": 25,
+      "view": "front",
+      "path": "male/bucket-4/kfa-25/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa20",
+        "promptPath": "male/bucket-4/kfa-25/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa30",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-30",
+      "targetBodyFatPercent": 30,
+      "view": "front",
+      "path": "male/bucket-4/kfa-30/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa20",
+        "promptPath": "male/bucket-4/kfa-30/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa35",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-35",
+      "targetBodyFatPercent": 35,
+      "view": "front",
+      "path": "male/bucket-4/kfa-35/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa20",
+        "promptPath": "male/bucket-4/kfa-35/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa40",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-40",
+      "targetBodyFatPercent": 40,
+      "view": "front",
+      "path": "male/bucket-4/kfa-40/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa20",
+        "promptPath": "male/bucket-4/kfa-40/prompt.txt"
+      }
+    },
+    {
+      "id": "male_bucket4_kfa45",
+      "sex": "male",
+      "bucket": "bucket-4",
+      "kfa": "kfa-45",
+      "targetBodyFatPercent": 45,
+      "view": "front",
+      "path": "male/bucket-4/kfa-45/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "male_bucket4_kfa20",
+        "promptPath": "male/bucket-4/kfa-45/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa15",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-15",
+      "targetBodyFatPercent": 15,
+      "view": "front",
+      "path": "female/bucket-4/kfa-15/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa20",
+        "promptPath": "female/bucket-4/kfa-15/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa20",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-20",
+      "targetBodyFatPercent": 20,
+      "view": "front",
+      "path": "female/bucket-4/kfa-20/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa25",
+        "promptPath": "female/bucket-4/kfa-20/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa30",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-30",
+      "targetBodyFatPercent": 30,
+      "view": "front",
+      "path": "female/bucket-4/kfa-30/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa25",
+        "promptPath": "female/bucket-4/kfa-30/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa35",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-35",
+      "targetBodyFatPercent": 35,
+      "view": "front",
+      "path": "female/bucket-4/kfa-35/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa25",
+        "promptPath": "female/bucket-4/kfa-35/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa40",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-40",
+      "targetBodyFatPercent": 40,
+      "view": "front",
+      "path": "female/bucket-4/kfa-40/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa25",
+        "promptPath": "female/bucket-4/kfa-40/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa45",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-45",
+      "targetBodyFatPercent": 45,
+      "view": "front",
+      "path": "female/bucket-4/kfa-45/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa25",
+        "promptPath": "female/bucket-4/kfa-45/prompt.txt"
+      }
+    },
+    {
+      "id": "female_bucket4_kfa50",
+      "sex": "female",
+      "bucket": "bucket-4",
+      "kfa": "kfa-50",
+      "targetBodyFatPercent": 50,
+      "view": "front",
+      "path": "female/bucket-4/kfa-50/front.png",
+      "role": "series-variant",
+      "validationStatus": "pending",
+      "source": {
+        "type": "generated-image-edit",
+        "tool": "image_gen",
+        "referenceImageId": "female_bucket4_kfa25",
+        "promptPath": "female/bucket-4/kfa-50/prompt.txt"
+      }
     }
   ]
 }
