@@ -2,6 +2,8 @@
 
 Gespeicherte Produktionsbilder: [Bildbibliothek und Index](../assets/kfa-reference-images/README.md). Die dort erfassten Produktionsmetadaten ergänzen diese Spezifikation.
 
+**Produktionsstand vom 17. September 2026:** Alle 80 vorgesehenen Kombinationen (5 numerische Produktionsbuckets × 8 geschlechtsspezifische KFA-Anker × 2 Bildkategorien) sind gespeichert und indexiert. Dies bestätigt die Vollständigkeit der Entwürfe; die fachliche Kalibrierung, finale Freigabe und Zuordnung zu A–E bleiben offen. Alle Bilder tragen weiterhin den Validierungsstatus `pending`.
+
 Dieses Dokument definiert die V1-Struktur der visuellen KFA-Referenzbibliothek.
 
 ## Zweck

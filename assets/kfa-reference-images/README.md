@@ -73,8 +73,28 @@ Der maschinenlesbare [Index](index.json) enthält ausschließlich tatsächlich g
 | female_bucket4_kfa40 | female | bucket-4 | ca. 40 % | [Frontansicht](female/bucket-4/kfa-40/front.png) |
 | female_bucket4_kfa45 | female | bucket-4 | ca. 45 % | [Frontansicht](female/bucket-4/kfa-45/front.png) |
 | female_bucket4_kfa50 | female | bucket-4 | ca. 50 % | [Frontansicht](female/bucket-4/kfa-50/front.png) |
+| male_bucket5_kfa10 | male | bucket-5 | ca. 10 % | [Frontansicht](male/bucket-5/kfa-10/front.png) |
+| male_bucket5_kfa15 | male | bucket-5 | ca. 15 % | [Frontansicht](male/bucket-5/kfa-15/front.png) |
+| male_bucket5_kfa20 | male | bucket-5 | ca. 20 % | [Frontansicht](male/bucket-5/kfa-20/front.png) |
+| male_bucket5_kfa25 | male | bucket-5 | ca. 25 % | [Frontansicht](male/bucket-5/kfa-25/front.png) |
+| male_bucket5_kfa30 | male | bucket-5 | ca. 30 % | [Frontansicht](male/bucket-5/kfa-30/front.png) |
+| male_bucket5_kfa35 | male | bucket-5 | ca. 35 % | [Frontansicht](male/bucket-5/kfa-35/front.png) |
+| male_bucket5_kfa40 | male | bucket-5 | ca. 40 % | [Frontansicht](male/bucket-5/kfa-40/front.png) |
+| male_bucket5_kfa45 | male | bucket-5 | ca. 45 % | [Frontansicht](male/bucket-5/kfa-45/front.png) |
+| female_bucket5_kfa15 | female | bucket-5 | ca. 15 % | [Frontansicht](female/bucket-5/kfa-15/front.png) |
+| female_bucket5_kfa20 | female | bucket-5 | ca. 20 % | [Frontansicht](female/bucket-5/kfa-20/front.png) |
+| female_bucket5_kfa25 | female | bucket-5 | ca. 25 % | [Frontansicht](female/bucket-5/kfa-25/front.png) |
+| female_bucket5_kfa30 | female | bucket-5 | ca. 30 % | [Frontansicht](female/bucket-5/kfa-30/front.png) |
+| female_bucket5_kfa35 | female | bucket-5 | ca. 35 % | [Frontansicht](female/bucket-5/kfa-35/front.png) |
+| female_bucket5_kfa40 | female | bucket-5 | ca. 40 % | [Frontansicht](female/bucket-5/kfa-40/front.png) |
+| female_bucket5_kfa45 | female | bucket-5 | ca. 45 % | [Frontansicht](female/bucket-5/kfa-45/front.png) |
+| female_bucket5_kfa50 | female | bucket-5 | ca. 50 % | [Frontansicht](female/bucket-5/kfa-50/front.png) |
 
 ## Einordnung und Herkunft
+
+### Bucket-5-Serie, vervollständigt am 17. September 2026
+
+Weitere 16 Bilder liegen unter `male/bucket-5/` und `female/bucket-5/`. Der Index enthält jetzt insgesamt 80 Einzelbilder. Bucket 5 wurde als breitester und robustester Körperrahmen der bisherigen Produktion angelegt; dies legt keine BMI-Zuordnung fest. Referenzen, Prüfbefunde und der Bildvergleich stehen in der [Bucket-5-Produktionsübersicht](bucket-5.md). Vollständige Prompts sind bei den PNGs gespeichert. Alle neuen Bilder behalten `validationStatus: pending`.
 
 ### Bucket-4-Serie, vervollständigt am 17. September 2026
 
