@@ -9,6 +9,22 @@ Der maschinenlesbare [Index](index.json) enthält ausschließlich tatsächlich g
 
 | ID | Geschlecht | Produktionsbucket | KFA-Zielanker | Bild |
 | --- | --- | --- | --- | --- |
+| male_bucket1_kfa10 | male | bucket-1 | ca. 10 % | [Frontansicht](male/bucket-1/kfa-10/front.png) |
+| male_bucket1_kfa15 | male | bucket-1 | ca. 15 % | [Frontansicht](male/bucket-1/kfa-15/front.png) |
+| male_bucket1_kfa20 | male | bucket-1 | ca. 20 % | [Frontansicht](male/bucket-1/kfa-20/front.png) |
+| male_bucket1_kfa25 | male | bucket-1 | ca. 25 % | [Frontansicht](male/bucket-1/kfa-25/front.png) |
+| male_bucket1_kfa30 | male | bucket-1 | ca. 30 % | [Frontansicht](male/bucket-1/kfa-30/front.png) |
+| male_bucket1_kfa35 | male | bucket-1 | ca. 35 % | [Frontansicht](male/bucket-1/kfa-35/front.png) |
+| male_bucket1_kfa40 | male | bucket-1 | ca. 40 % | [Frontansicht](male/bucket-1/kfa-40/front.png) |
+| male_bucket1_kfa45 | male | bucket-1 | ca. 45 % | [Frontansicht](male/bucket-1/kfa-45/front.png) |
+| female_bucket1_kfa15 | female | bucket-1 | ca. 15 % | [Frontansicht](female/bucket-1/kfa-15/front.png) |
+| female_bucket1_kfa20 | female | bucket-1 | ca. 20 % | [Frontansicht](female/bucket-1/kfa-20/front.png) |
+| female_bucket1_kfa25 | female | bucket-1 | ca. 25 % | [Frontansicht](female/bucket-1/kfa-25/front.png) |
+| female_bucket1_kfa30 | female | bucket-1 | ca. 30 % | [Frontansicht](female/bucket-1/kfa-30/front.png) |
+| female_bucket1_kfa35 | female | bucket-1 | ca. 35 % | [Frontansicht](female/bucket-1/kfa-35/front.png) |
+| female_bucket1_kfa40 | female | bucket-1 | ca. 40 % | [Frontansicht](female/bucket-1/kfa-40/front.png) |
+| female_bucket1_kfa45 | female | bucket-1 | ca. 45 % | [Frontansicht](female/bucket-1/kfa-45/front.png) |
+| female_bucket1_kfa50 | female | bucket-1 | ca. 50 % | [Frontansicht](female/bucket-1/kfa-50/front.png) |
 | male_bucket2_kfa10 | male | bucket-2 | ca. 10 % | [Frontansicht](male/bucket-2/kfa-10/front.png) |
 | male_bucket2_kfa15 | male | bucket-2 | ca. 15 % | [Frontansicht](male/bucket-2/kfa-15/front.png) |
 | male_bucket2_kfa20 | male | bucket-2 | ca. 20 % | [Frontansicht](male/bucket-2/kfa-20/front.png) |
@@ -43,6 +59,10 @@ Der maschinenlesbare [Index](index.json) enthält ausschließlich tatsächlich g
 | female_bucket3_kfa50 | female | bucket-3 | ca. 50 % | [Frontansicht](female/bucket-3/kfa-50/front.png) |
 
 ## Einordnung und Herkunft
+
+### Bucket-1-Serie, vervollständigt am 17. September 2026
+
+Weitere 16 Bilder liegen unter `male/bucket-1/` und `female/bucket-1/`. Der Index enthält jetzt insgesamt 48 Einzelbilder. Bucket 1 wurde als feinster/schmalster Körperrahmen der bisherigen Produktion angelegt; dies legt keine BMI-Zuordnung fest. Referenzen, Prüfbefunde und der Bildvergleich stehen in der [Bucket-1-Produktionsübersicht](bucket-1.md). Vollständige Prompts sind bei den PNGs gespeichert. Alle neuen Bilder behalten `validationStatus: pending`.
 
 ### Bucket-2-Serie, ergänzt am 16. September 2026
 
