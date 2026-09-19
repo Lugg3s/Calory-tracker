@@ -1,14 +1,14 @@
-# Calory Tracker — Project Context
+# Theo — Project Context
 
 > Primary briefing for anyone, including another AI, who needs to understand the product without the original planning conversation.
 
 ## Product
 
-Calory Tracker is the current **working title** for a mobile weight-loss planning app focused on **transparent, deterministic calorie calculations**. The user enters body data, everyday activity, exercise habits and a goal. The app estimates maintenance energy expenditure, derives a calorie target for the requested timeframe and shows the calculation line by line.
+**Theo** (short for **Theory**) is the decided product name for a mobile weight-loss planning app focused on **transparent, deterministic calorie calculations**. The user enters body data, everyday activity, exercise habits and a goal. The app estimates maintenance energy expenditure, derives a calorie target for the requested timeframe and shows the calculation line by line.
 
 The MVP must work without an LLM. AI, voice food logging and advanced personalization are later layers.
 
-The working title is **not yet a final brand decision**. Market research found an existing product called `Calory / Calory AI` in the same category, so naming/brand clearance remains open.
+The name **Theo**, derived from **Theory**, was selected on 19 September 2026 (D-044). It replaces the former working title **Calory Tracker** and reflects the product's focus on explaining the reasoning behind its calculations. App-store, domain and trademark availability checks remain open; the naming decision does not imply clearance.
 
 ## Core UX principle
 

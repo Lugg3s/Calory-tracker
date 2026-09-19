@@ -15,8 +15,8 @@
 
 ## Phase 2 – Marke / UX / Design
 
-- [ ] finalen Produktnamen auswählen; `Calory Tracker` bleibt bis dahin Arbeitsname
-- [ ] Favoriten auf App-Store-, Domain- und Markenüberschneidungen prüfen
+- [x] Produktnamen festlegen: **Theo**, abgeleitet von **Theory** (D-044, 19. September 2026); ersetzt den Arbeitsnamen `Calory Tracker`
+- [ ] **Theo** auf App-Store-, Domain- und Markenüberschneidungen prüfen
 - [ ] visuelle Markenrichtung und Logo auf Basis des finalen Namens entwickeln
 - [ ] Wireframes erstellen
 - [ ] Wireframes mit Figma / Uizard / Motif bzw. geeignetem Tool iterieren

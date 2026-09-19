@@ -1,8 +1,8 @@
 # UI References
 
-This folder collects user-provided interface references and the specific design qualities that should inform Calory Tracker.
+This folder collects user-provided interface references and the specific design qualities that should inform Theo.
 
-These references are **directional**, not pixel-perfect implementation requirements. Future designers or implementation AIs should extract the stated principles, preserve the product requirements, and adapt the visual treatment to Calory Tracker rather than copying another interface literally.
+These references are **directional**, not pixel-perfect implementation requirements. Future designers or implementation AIs should extract the stated principles, preserve the product requirements, and adapt the visual treatment to Theo rather than copying another interface literally.
 
 ## References
 

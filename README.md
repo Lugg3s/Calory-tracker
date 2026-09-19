@@ -1,10 +1,12 @@
-# Calory Tracker
+# Theo
+
+**Theo** is short for **Theory**. The product name was selected on 19 September 2026 and replaces the former working title **Calory Tracker**; see [D-044](docs/PRODUCT-DECISIONS.md#d-044--the-product-is-named-theo-short-for-theory).
 
 A transparent, explainable weight-loss planning and calorie-tracking app.
 
 ## Product status
 
-Calory Tracker is currently in the product-definition / MVP-planning phase. The calculation model and scientific assumptions are not yet finalized.
+Theo is currently in the product-definition / MVP-planning phase. The calculation model and scientific assumptions are not yet finalized.
 
 ## What the product does
 

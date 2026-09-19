@@ -1,6 +1,6 @@
-# Calory Tracker – Product Documentation
+# Theo – Product Documentation
 
-Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation für Calory Tracker.
+Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation für Theo.
 
 ## Zentrale Referenz
 

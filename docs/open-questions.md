@@ -47,10 +47,12 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 
 ## Marke / Positionierung
 
-- Der aktuelle Projektname **Calory Tracker** ist ein Arbeitsname und noch nicht als finale Marke entschieden.
-- In der Marktanalyse wurde bereits ein bestehendes Produkt namens **Calory / Calory AI** in derselben Kategorie gefunden. Vor finalem Branding muss deshalb ein eigenständiger Name gewählt und anschließend systematisch auf App-Store-, Domain- und Markenüberschneidungen geprüft werden.
-- Bisher diskutierte Namen sind nur Brainstorming und **keine Produktentscheidung**.
-- Logo und visuelle Markenrichtung sollen erst auf Basis des finalen Namens festgelegt werden.
+Der Produktname ist entschieden: **Theo**, abgeleitet von **Theory** (D-044, 19. September 2026). Er ersetzt den bisherigen Arbeitsnamen **Calory Tracker**.
+
+Offen bleiben:
+
+- Prüfung von **Theo** auf App-Store-, Domain- und Markenüberschneidungen; die Namensentscheidung bestätigt noch keine Verfügbarkeit.
+- Finale visuelle Markenrichtung, Wortmarke und Logo auf Basis von **Theo**.
 
 ## KFA-Referenzbilder
 

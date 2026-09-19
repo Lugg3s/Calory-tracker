@@ -2,7 +2,7 @@
 
 ## Ausgangsidee
 
-Calory Tracker soll einen möglichst einfachen, persönlichen und nachvollziehbaren Plan zum Abnehmen erstellen.
+Theo soll einen möglichst einfachen, persönlichen und nachvollziehbaren Plan zum Abnehmen erstellen.
 
 Der Nutzer gibt seine aktuellen Werte, Essgewohnheiten, Alltagsbewegung und sportliche Aktivität an. Die App berechnet daraus den geschätzten aktuellen Kalorienbedarf. Anschließend kann der Nutzer Zielgewicht, optional Ziel-KFA und den gewünschten Zeitraum festlegen. Daraus wird ein durchschnittliches Kaloriendefizit und ein tägliches Kalorienziel abgeleitet.
 

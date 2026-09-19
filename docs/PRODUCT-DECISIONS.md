@@ -389,3 +389,13 @@ other sport                      5.0 MET
 Zumba / dance fitness is currently mapped to `other sport = 5.0 MET` in manual V1 examples unless a dedicated category is added later.
 
 These are pragmatic category defaults based on the Compendium-style MET approach, not exact energy costs for every individual session.
+
+## D-044 — The product is named Theo (short for Theory)
+**Status:** decided  
+**Date:** 2026-09-19
+
+The app is named **Theo**, short for **Theory**. This supersedes the former working title **Calory Tracker** and the earlier open product-name decision.
+
+The name connects the product to its focus on understandable, transparent calculations and the reasoning behind the user's plan. Use **Theo** as the product name in current documentation and future interface copy.
+
+App-store, domain and trademark availability have not been established by this decision and remain open tasks. The GitHub repository identifier is unchanged by this documentation update.
