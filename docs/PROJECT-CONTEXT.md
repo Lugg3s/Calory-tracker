@@ -10,6 +10,12 @@ The MVP must work without an LLM. AI, voice food logging and advanced personaliz
 
 The name **Theo**, derived from **Theory**, was selected on 19 September 2026 (D-044). It replaces the former working title **Calory Tracker** and reflects the product's focus on explaining the reasoning behind its calculations. App-store, domain and trademark availability checks remain open; the naming decision does not imply clearance.
 
+## Current visual direction and mascot guidance
+
+The user prefers **04 · Nocturne**, with generous whitespace and modest typography. Write **Theo** with a capital T. Use the app name on the start screen; do not require it in every subsequent header. The calculator mascot opens contextual explanations and calculation reasoning on tap. Its current lower-right onboarding placement above the primary action was rejected; the replacement position is still open. On its first appearance, show one short speech bubble explaining the tap-for-help interaction. Afterwards, explanations remain hidden until requested; do not repeat the introduction at every screen change.
+
+See [D-045](PRODUCT-DECISIONS.md#d-045--nocturne-direction-and-unobtrusive-theo-guidance) and the [existing Nocturne example with updated feedback](ui%20references/02-theo-nocturne.md). The old image is a visual reference and does not override the newer written feedback.
+
 ## Core UX principle
 
 The main calculation should resemble a cost calculation:

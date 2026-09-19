@@ -13,6 +13,20 @@ Das Onboarding sammelt nur Informationen, die für Berechnung oder Personalisier
 
 Jeder relevante Screen kann eine kleine optionale Erklärung enthalten: warum die Angabe benötigt wird und was sie beeinflusst.
 
+
+## Theo im Onboarding
+
+Siehe [D-045](PRODUCT-DECISIONS.md#d-045--nocturne-direction-and-unobtrusive-theo-guidance) und [Nocturne-Beispiel mit Änderungsnotizen](ui%20references/02-theo-nocturne.md).
+
+- **Theo** wird mit großem T geschrieben. Der Appname gehört auf den Startscreen; danach muss er nicht auf jedem Screen wiederholt werden.
+- Die bevorzugte Richtung ist **04 · Nocturne** mit viel Freiraum und zurückhaltenden, konsistenten Schriftgrößen.
+- Der Theo-Taschenrechner bietet beim Antippen eine Erklärung zum aktuellen Screen, zur Bedeutung der Eingabe sowie zu mathematischen Gründen und Auswirkungen. Vertiefende Rechenwege bleiben optional.
+- Die bisherige Position unten rechts oberhalb der Hauptaktion gefällt dem Nutzer nicht und ist **nicht freigegeben**. Die neue Position ist noch offen.
+- Beim **ersten Auftreten** zeigt Theo eine kurze Sprechblase, die seine antippbare Hilfsfunktion erklärt. Textvorschlag: „Tippe auf mich – ich erkläre dir diese Eingabe und wie sie deinen Plan beeinflusst.“
+- Danach erscheinen Sprechblasen nicht dauerhaft oder automatisch auf jedem weiteren Screen. Weitere Erklärungen werden durch Antippen geöffnet.
+
+Die einmalige Einführung ergänzt das Prinzip „Erklärungen nur auf Wunsch“; sie ersetzt es nicht. Der genaue erste Einsatzort sowie Ausblendverhalten und technische Speicherung des Einführungsstatus sind noch festzulegen.
+
 ## Vorgesehene Angaben
 
 ### Körperdaten

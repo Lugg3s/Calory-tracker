@@ -113,7 +113,7 @@ Each onboarding input screen should contain one primary parameter. Conditional s
 ## D-018 — Explanations are optional and hidden by default
 **Status:** decided
 
-Relevant screens can expose a short explanation of why an input is needed and what it influences, hidden by default.
+Relevant screens can expose a short explanation of why an input is needed and what it influences, hidden by default. D-045 adds a one-time introductory speech bubble on Theo's first appearance; subsequent contextual help remains user-triggered.
 
 ## D-019 — Current onboarding sequence
 **Status:** decided direction
@@ -399,3 +399,21 @@ The app is named **Theo**, short for **Theory**. This supersedes the former work
 The name connects the product to its focus on understandable, transparent calculations and the reasoning behind the user's plan. Use **Theo** as the product name in current documentation and future interface copy.
 
 App-store, domain and trademark availability have not been established by this decision and remain open tasks. The GitHub repository identifier is unchanged by this documentation update.
+
+## D-045 — Nocturne direction and unobtrusive Theo guidance
+**Status:** decided direction; mascot placement remains open  
+**Date:** 2026-09-19
+
+- Use **Theo** with a capital **T**, including the wordmark.
+- The preferred visual direction is **04 · Nocturne**: dark plum/charcoal surfaces, restrained peach accents, generous whitespace and modest, consistent typography. Empty space should not cause text to scale up.
+- Show the app name on the first/start screen. Repeating the name on every subsequent screen is unnecessary; it is not a mandatory persistent header.
+- Theo is a small calculator mascot that opens contextual help when tapped: what the current screen asks, why the input matters, and its mathematical reasoning and effects. Keep deeper calculation details optional and understandable (D-040); this does not introduce an LLM dependency.
+- The mascot's current onboarding position in the generated examples — near the lower-right above the main action — was explicitly **not approved**. Revisit placement; no replacement position has been chosen.
+- On Theo's **first appearance**, show one short introductory speech bubble explaining that the user can tap him for information. This is the narrow exception to D-018's hidden-by-default explanations.
+- After that introduction, do not automatically show persistent or repeated speech bubbles on each screen. The mascot remains available, and contextual explanations open on request.
+
+Suggested introductory copy, not final wording: **“Tippe auf mich – ich erkläre dir diese Eingabe und wie sie deinen Plan beeinflusst.”**
+
+The exact replacement position, first-appearance screen, bubble dismissal/timing and persistence mechanism remain design/implementation details. The introduction must not repeat merely because the user advances or returns to another onboarding screen.
+
+See [Nocturne reference and feedback](ui%20references/02-theo-nocturne.md) for an existing example and explicit differences from these updated requirements. The example is retained unchanged as a visual reference, not as approval of every detail.

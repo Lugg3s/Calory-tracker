@@ -7,6 +7,7 @@ These references are **directional**, not pixel-perfect implementation requireme
 ## References
 
 - [01 — Clean onboarding input screens](01-clean-onboarding.md)
+- [02 — Theo · Nocturne: visual direction, mascot guidance and existing example](02-theo-nocturne.md)
 
 ## Cross-reference principle
 
