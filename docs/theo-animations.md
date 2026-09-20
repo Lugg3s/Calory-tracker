@@ -1,10 +1,12 @@
 # Theo — geplante Animationen
 
 **Stand:** 20. September 2026  
-**Status:** als Designrichtung festgehalten, **noch nicht implementiert**  
+**Status:** ursprüngliches Animationskonzept; erste Teilumsetzung im Entwicklungsbranch (siehe unten)  
 **Entscheidung:** D-048
 
-Der Nutzer möchte die Animationen zunächst nur dokumentiert haben. Diese Spezifikation fügt weder Animationscode noch neue Screens hinzu.
+Der Nutzer wollte die Animationen zunächst nur dokumentiert haben. Später wurde die Entwicklung beauftragt. Größe, Hilfe und die temporäre Frisur sind inzwischen im Entwicklungsbranch vorläufig umgesetzt; die übrigen Animationen bleiben geplant. Diese Dokumentationsänderung fügt keinen Animationscode hinzu.
+
+Die zusammengeführte Spezifikation inklusive **Frisur nur auf dem Geschlechtsauswahl-Screen** und Beispielbild steht in [Theo — Charakter und Verhalten](theo-character.md).
 
 ## Grundprinzip
 
