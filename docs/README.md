@@ -10,6 +10,7 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 
 ## Fach- und Produktdokumente
 
+- [Implementierungsplan — V1 und spätere Ausbaustufen](implementation-plan.md)
 - [Tech Stack](tech-stack.md)
 - [Gastmodus und Konten](guest-mode.md)
 
