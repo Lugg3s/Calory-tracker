@@ -10,6 +10,9 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 
 ## Fach- und Produktdokumente
 
+- [Tech Stack](tech-stack.md)
+- [Gastmodus und Konten](guest-mode.md)
+
 - [Produktvision](product-vision.md)
 - [MVP-Anforderungen](mvp-requirements.md)
 - [Onboarding](onboarding.md)

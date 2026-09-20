@@ -32,6 +32,14 @@ The first MVP is intended to include:
 
 The MVP should **not depend on an LLM**.
 
+## Platforms, stack and guest access
+
+Theo targets **iOS, Android and web** using **Expo + React Native + TypeScript**, **Expo Router** and **Supabase Auth + PostgreSQL**. Calculation runs in an independent local TypeScript module.
+
+Onboarding and the first result are available without registration. Guest inputs remain local without an automatically created server account. After the result, users may register to save their existing inputs and plan for cross-device access.
+
+These are documented decisions, not implemented features. See [Tech Stack](docs/tech-stack.md) and [Guest mode and accounts](docs/guest-mode.md).
+
 ## Documentation
 
 Start with [`docs/PROJECT-CONTEXT.md`](docs/PROJECT-CONTEXT.md). It is the main briefing for understanding the product without the original planning conversation.

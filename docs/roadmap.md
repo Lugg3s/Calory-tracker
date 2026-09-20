@@ -11,7 +11,8 @@
 - [ ] wissenschaftliche End-to-End-Validierung / Kalibrierung der Modellannahmen durchführen
 - [ ] 7.700-kcal/kg-Annahme und Guardrails fachlich weiter dokumentieren/validieren
 - [ ] Doppelzählung Alltagsschritte vs. Alltags-MET technisch sauber lösen bzw. kalibrieren
-- [ ] Tech Stack festlegen
+- [x] Tech Stack: Expo + React Native + TypeScript, Expo Router, Supabase Auth + PostgreSQL für iOS, Android und Web (D-046)
+- [x] Lokalen Gastmodus mit optionaler Kontospeicherung festlegen (D-047)
 
 ## Phase 2 – Marke / UX / Design
 
@@ -42,6 +43,14 @@
 - [ ] Hauttöne/Diversitätsstrategie finalisieren
 
 ## Phase 3 – MVP-Entwicklung
+
+- [ ] Expo-Projekt für iOS, Android und Web einrichten
+- [ ] Technischen Prüfpfad umsetzen: Cheat-Day-Picker, Theo-Hilfe/Animation, Gastplan → Registrierung → Speicherung
+- [ ] Unabhängiges TypeScript-Berechnungsmodul mit Tests gegen dokumentierte Beispiele
+- [ ] Lokalen Gastmodus ohne Serverkonto implementieren
+- [ ] Supabase Auth, Datenbankschema und getestete nutzerbezogene Zugriffsregeln einrichten
+- [ ] Registrierung mit Übernahme von Gasteingaben und Plan
+- [ ] Speicherung, geräteübergreifenden Zugriff und Konfliktbehandlung implementieren
 
 - [ ] User Input
 - [ ] Kalorienberechnung

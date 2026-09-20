@@ -189,6 +189,12 @@ Mindestens anzeigen:
 
 Die **exakte visuelle Darstellung** der Berechnung ist nicht vorab festgelegt. Harte UX-Anforderung ist aber, dass die Rechenlogik in normaler Sprache so verständlich erklärt wird, dass sie auch ein Siebtklässler nachvollziehen kann. Keine unexplizierten Abkürzungen oder unnötiger Fachjargon; formale Gleichungen können optional vertieft werden.
 
+## Kontooption nach dem Ergebnis
+
+Der bestehende 18-Screen-Flow bleibt ohne Registrierung nutzbar. Gastberechnungen laufen lokal und benötigen kein Serverkonto. Nach dem Ergebnis kann „Plan im Konto speichern“ zur Registrierung und Übernahme der bestehenden Eingaben und des Plans gewählt werden.
+
+Anmeldung, Registrierung und Speicherstatus sind ergänzende Kontoflüsse, keine Pflichtfragen vor dem Ergebnis. Bei Abbruch oder Fehler bleibt der aktuelle Gastplan erhalten. Der Umgang mit einem vorhandenen Kontoplan beim Login ist noch offen. Siehe [Gastmodus und Konten](guest-mode.md), D-047.
+
 ## Nach dem Onboarding
 
 Zusätzliche Komplexität wird nachgelagert angeboten, z. B. über **„Plan verfeinern“**, Berechnungsdetails oder Einstellungen:

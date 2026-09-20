@@ -90,12 +90,17 @@ Offen bleiben:
 - Wie werden Halluzinationen bzw. falsche Nährwertangaben verhindert?
 - Welche Daten dürfen an externe Modelle übertragen werden?
 
-## Tech Stack
+## Technik und Konten — verbleibende Details
 
-- Frontend / Mobile Framework
-- Backend
-- Datenbank
-- Authentifizierung
-- Hosting
-- Analytics
-- KI-Infrastruktur
+Entschieden (D-046): **Expo + React Native + TypeScript**, **Expo Router**, **Supabase Auth + PostgreSQL** für **iOS, Android und Web**. Auch der lokale Gastmodus mit optionaler Kontospeicherung ist entschieden (D-047). Siehe [Tech Stack](tech-stack.md) und [Gastmodus](guest-mode.md).
+
+Offen bleiben:
+
+- konkrete Paketversionen sowie Animations-, Formular- und Testbibliotheken;
+- lokale Speichertechnik und Lebensdauer von Gastdaten;
+- konkrete Login-Verfahren, Anbieter und Kontowiederherstellung;
+- Datenbankschema, Synchronisierung und Konfliktbehandlung;
+- Übernahme eines Gastplans bei Anmeldung an einem Konto mit vorhandenem Plan;
+- Web-Hosting, Build-/Release-Prozess, Betriebsregion und Web-Offline-Caching;
+- Analytics;
+- spätere KI-Infrastruktur.

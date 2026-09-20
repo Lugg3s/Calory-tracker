@@ -226,6 +226,12 @@ Da Training in V1 mit MET, Körpergewicht und Zeit berechnet wird, wird bei Trai
 
 Eine separate Intensitätsfrage ist für das initiale Onboarding nicht zwingend. V1 verwendet zunächst die in `activity-model-v1.md` festgelegten Standard-MET-Werte pro Trainingsart; genauere Intensität kann später unter „Plan verfeinern“ ergänzt werden.
 
+## Kontooption nach dem Ergebnis
+
+Der bestehende 18-Screen-Flow bleibt ohne Registrierung nutzbar. Gastberechnungen laufen lokal und benötigen kein Serverkonto. Nach dem Ergebnis kann „Plan im Konto speichern“ zur Registrierung und Übernahme der bestehenden Eingaben und des Plans gewählt werden.
+
+Anmeldung, Registrierung und Speicherstatus sind ergänzende Kontoflüsse, keine Pflichtfragen vor dem Ergebnis. Bei Abbruch oder Fehler bleibt der aktuelle Gastplan erhalten. Der Umgang mit einem vorhandenen Kontoplan beim Login ist noch offen. Siehe [Gastmodus und Konten](guest-mode.md), D-047.
+
 ## Nach dem ersten Plan
 
 Nach der Planerstellung folgen keine weiteren Pflichtfragen. Zusätzliche Details gehören in „Plan verfeinern“, Berechnungsdetails oder Einstellungen, z. B.:

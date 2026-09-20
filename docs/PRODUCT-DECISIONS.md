@@ -417,3 +417,29 @@ Suggested introductory copy, not final wording: **“Tippe auf mich – ich erkl
 The exact replacement position, first-appearance screen, bubble dismissal/timing and persistence mechanism remain design/implementation details. The introduction must not repeat merely because the user advances or returns to another onboarding screen.
 
 See [Nocturne reference and feedback](ui%20references/02-theo-nocturne.md) for an existing example and explicit differences from these updated requirements. The example is retained unchanged as a visual reference, not as approval of every detail.
+
+## D-046 — Expo, React Native, TypeScript and Supabase for iOS, Android and web
+**Status:** decided for initial implementation  
+**Date:** 2026-09-20
+
+Theo targets **iOS, Android and web** using **Expo + React Native + TypeScript**, **Expo Router**, and Expo's React Native Web support. Build a small shared component library for Nocturne.
+
+Keep the deterministic calculation engine in an independent TypeScript module, executed locally and tested against documented calculation examples. It does not depend on authentication, a server call or an LLM.
+
+Use **Supabase Auth + PostgreSQL** for accounts and saved plans. No additional custom API backend is selected for V1. Implement and test user-scoped database access policies, synchronization and conflict handling.
+
+Development will primarily be AI-assisted. First validate the Cheat-Day picker, Theo help/animation and guest-to-account save flow on all three platforms. This validation is not yet complete.
+
+Exact versions, ancillary libraries, local persistence, login providers, hosting and release infrastructure remain open. See [Tech Stack](tech-stack.md).
+
+## D-047 — Account-optional onboarding and local guest calculations
+**Status:** decided  
+**Date:** 2026-09-20
+
+Users can complete onboarding and obtain a calculation without registration. Guest inputs and calculation remain local; do not create an anonymous backend account or upload body/activity inputs for a pure guest calculation.
+
+After the result, offer **“Plan im Konto speichern”**. Successful registration carries the existing guest inputs and plan into the new account without repeated entry. Accounts enable saved plans and cross-device access.
+
+Cancelled/failed registration must preserve the current guest plan. Failed saving must allow retry; do not report success before the save completes. Login into an existing account must not silently overwrite an existing plan; the specific conflict UX remains open.
+
+Account flows supplement the existing 18-screen calculation flow. Guest-data persistence across restarts and specific login methods are not yet decided. See [Guest mode and accounts](guest-mode.md).

@@ -10,6 +10,14 @@ The MVP must work without an LLM. AI, voice food logging and advanced personaliz
 
 The name **Theo**, derived from **Theory**, was selected on 19 September 2026 (D-044). It replaces the former working title **Calory Tracker** and reflects the product's focus on explaining the reasoning behind its calculations. App-store, domain and trademark availability checks remain open; the naming decision does not imply clearance.
 
+## Platforms, stack and guest access
+
+Decided, not yet implemented (D-046/D-047): **iOS, Android and web**, using **Expo + React Native + TypeScript**, **Expo Router** and a small Nocturne component library. Use an independent, locally executed TypeScript calculation module with tests against documented examples. **Supabase Auth + PostgreSQL** provide accounts and saved plans; no additional custom API backend is selected for V1.
+
+Onboarding and the first result are accessible without registration. Guest inputs/calculations stay local, with no automatic anonymous backend account or upload of body/activity inputs. After the result, “Plan im Konto speichern” offers registration and transfer of existing inputs and plan. Accounts enable cross-device access. Failed registration or saving must not discard the current guest plan. Guest persistence across restarts and conflicts with existing account plans remain open.
+
+Development will primarily be AI-assisted. Validate the picker, Theo help/animation and guest-to-account flow on all platforms. See [Tech Stack](tech-stack.md) and [Guest mode and accounts](guest-mode.md).
+
 ## Current visual direction and mascot guidance
 
 The user prefers **04 · Nocturne**, with generous whitespace and modest typography. Write **Theo** with a capital T. Use the app name on the start screen; do not require it in every subsequent header. The calculator mascot opens contextual explanations and calculation reasoning on tap. Its current lower-right onboarding placement above the primary action was rejected; the replacement position is still open. On its first appearance, show one short speech bubble explaining the tap-for-help interaction. Afterwards, explanations remain hidden until requested; do not repeat the introduction at every screen change.

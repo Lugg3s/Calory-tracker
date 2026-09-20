@@ -4,6 +4,14 @@
 
 Das MVP soll einen nachvollziehbaren Abnehmplan aus den wichtigsten Angaben des Nutzers erzeugen.
 
+## Plattformen, Konto und Gastmodus
+
+Theo wird für **iOS, Android und Web** mit **Expo + React Native + TypeScript**, **Expo Router** und **Supabase Auth + PostgreSQL** entwickelt (D-046).
+
+Onboarding und erste Berechnung sind ohne Registrierung möglich. Gasteingaben und Berechnung bleiben lokal, ohne Serverkonto oder Übertragung der Körper-/Aktivitätsdaten ans Backend. Nach dem Ergebnis wird optional „Plan im Konto speichern“ angeboten. Bei Registrierung werden bestehende Eingaben und Plan übernommen; Konten ermöglichen geräteübergreifenden Zugriff (D-047).
+
+Siehe [Tech Stack](tech-stack.md) und [Gastmodus und Konten](guest-mode.md). Diese Entscheidungen sind noch nicht implementiert.
+
 ## User Input
 
 Der Nutzer soll mindestens relevante Körperdaten und Informationen zur Alltagsaktivität angeben können. Dazu gehören insbesondere:
