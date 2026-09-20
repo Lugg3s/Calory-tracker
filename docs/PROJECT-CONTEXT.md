@@ -24,6 +24,10 @@ The user prefers **04 · Nocturne**, with generous whitespace and modest typogra
 
 See [D-045](PRODUCT-DECISIONS.md#d-045--nocturne-direction-and-unobtrusive-theo-guidance) and the [existing Nocturne example with updated feedback](ui%20references/02-theo-nocturne.md). The old image is a visual reference and does not override the newer written feedback.
 
+## Planned mascot motion
+
+D-048 records the animation direction only; the user explicitly deferred implementation. Height input scales Theo with anchored feet and stable layout. Additional ideas cover steps, exercise frequency, a duration timer, a timeframe calendar, Cheat-Day redistribution, calculation guidance, a successful-save checkmark and neutral weight feedback. Motion settles after interaction and respects reduced-motion preferences. The voice waveform belongs to a later version. See [Theo animations](theo-animations.md); final placement and motion parameters remain open.
+
 ## Core UX principle
 
 The main calculation should resemble a cost calculation:

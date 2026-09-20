@@ -27,6 +27,12 @@ Siehe [D-045](PRODUCT-DECISIONS.md#d-045--nocturne-direction-and-unobtrusive-the
 
 Die einmalige Einführung ergänzt das Prinzip „Erklärungen nur auf Wunsch“; sie ersetzt es nicht. Der genaue erste Einsatzort sowie Ausblendverhalten und technische Speicherung des Einführungsstatus sind noch festzulegen.
 
+## Geplante Theo-Animationen
+
+Die Animationen sind vorerst **nur dokumentiert, nicht implementiert** (D-048). Bei der Größeneingabe skaliert Theo mit dem Wert, mit fester Fußposition und unverändertem Layout. Weitere geplante Reaktionen betreffen Schritte, Sporthäufigkeit, Trainingsdauer, Zielzeitraum, Cheat-Day-Erklärung, Rechenschritte, erfolgreiche Speicherung und eine neutrale Gewichtseingabe.
+
+Bewegung endet nach der Interaktion und entfällt bei reduzierter Bewegung. Die Sprach-Wellenform bleibt einer späteren Version vorbehalten. Vollständige Beschreibung: [Theo-Animationen](theo-animations.md).
+
 ## Vorgesehene Angaben
 
 ### Körperdaten

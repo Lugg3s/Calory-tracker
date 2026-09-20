@@ -29,6 +29,8 @@
 - [x] Verständlichkeitsregel für Berechnungsansicht festlegen: auch für Siebtklässler nachvollziehbar
 - [ ] konkrete visuelle Berechnungsansicht definieren/implementieren
 - [ ] Main Screen definieren
+- [x] Theo-Animationsideen dokumentieren, Umsetzung ausdrücklich vertagt (D-048)
+- [ ] Theo-Animationen später ausarbeiten: zuerst Größe, Schritte und Cheat-Day-Erklärung prüfen; Details in `theo-animations.md`
 
 ## Phase 2b – KFA-Referenzbibliothek
 

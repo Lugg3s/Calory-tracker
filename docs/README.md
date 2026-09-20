@@ -16,6 +16,7 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [Produktvision](product-vision.md)
 - [MVP-Anforderungen](mvp-requirements.md)
 - [Onboarding](onboarding.md)
+- [Geplante Theo-Animationen](theo-animations.md)
 - [App Flow](app-flow.md)
 - [Kalorienberechnung](calorie-calculation.md)
 - [Manuelle Rechenbeispiele](calculation-examples.md)

@@ -443,3 +443,17 @@ After the result, offer **“Plan im Konto speichern”**. Successful registrati
 Cancelled/failed registration must preserve the current guest plan. Failed saving must allow retry; do not report success before the save completes. Login into an existing account must not silently overwrite an existing plan; the specific conflict UX remains open.
 
 Account flows supplement the existing 18-screen calculation flow. Guest-data persistence across restarts and specific login methods are not yet decided. See [Guest mode and accounts](guest-mode.md).
+
+## D-048 — Theo animations are planned, not implemented
+**Status:** documented design direction; implementation deferred by user  
+**Date:** 2026-09-20
+
+When the user changes their height, Theo should scale with that value, within restrained bounds and with his feet anchored. Other layout elements remain unchanged.
+
+Record the discussed companion animations: walking for steps, exercise and unit markers for training frequency, a timer for training duration, an expanding calendar for the target timeframe, conserved-budget redistribution in Cheat-Day help, pointing through calculation steps, a checkmark after confirmed saving, and a neutral scale-reading action for weight.
+
+Animations respond to interactions and then settle; no perpetual idle loops, automatic explanations, or body/emotion judgments based on weight, body fat or lower calorie targets. Respect reduced-motion settings and D-045's one-time help introduction. Final mascot position remains open.
+
+A voice-responsive display waveform is reserved for the later voice-tracking version, not V1. Height, steps and Cheat-Day redistribution are suggested first candidates; detailed timing and prioritization remain design work.
+
+The user explicitly requested documentation only. See [planned Theo animations](theo-animations.md). No animation implementation is included in this decision.
