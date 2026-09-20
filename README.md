@@ -6,7 +6,9 @@ A transparent, explainable weight-loss planning and calorie-tracking app.
 
 ## Product status
 
-Theo is currently in the product-definition / MVP-planning phase. The calculation model and scientific assumptions are not yet finalized.
+Theo now has an initial Expo implementation of the local guest planning flow. Account integration and full V1 acceptance remain open. The calculation model and scientific assumptions are not yet finalized.
+
+See [development status and local setup](docs/development-status.md) for implemented features, commands, verification and remaining work.
 
 ## What the product does
 
