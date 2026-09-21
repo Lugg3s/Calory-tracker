@@ -4,6 +4,7 @@ Diese Liste enthält nur noch Punkte, die nach aktuellem Stand nicht entschieden
 
 ## Berechnung
 
+- **Offen – Kalorienuntergrenze überarbeiten (Nutzerfeedback, 21. September 2026):** Die aktuelle Kalorienuntergrenze passt noch nicht. Die zugrunde liegende Regel und ihr Verhalten bei der Planberechnung müssen erneut geprüft und gemeinsam festgelegt werden. Noch keine neue Untergrenze beschlossen; dieser Eintrag dokumentiert den offenen Überarbeitungsbedarf.
 - Wie stark müssen die fünf 8-Stunden-MET-Profile aus `activity-model-v1.md` vor bzw. nach der ersten Implementierung gegen reale Daten kalibriert werden?
 - Wie soll allgemeines NEAT außerhalb des 8-Stunden-Alltagsprofils in einer späteren Version besser berücksichtigt werden? V1 ergänzt bewusst **keinen** pauschalen NEAT-Korrekturfaktor.
 - Wie wird bei körperlichen Berufen technisch zuverlässig verhindert bzw. reduziert, dass Aktivität über MET-Profil und Schritte doppelt gezählt wird?
