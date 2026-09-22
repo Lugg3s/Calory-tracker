@@ -28,6 +28,7 @@ Dieses Verzeichnis enthält die fortlaufende Produkt- und Wissensdokumentation f
 - [Ernährung & Makronährstoffe](nutrition-and-macros.md)
 - [Food Tracking](food-tracking.md)
 - [AI & Voice](ai-and-voice.md)
+- [Werbung & Feedback — spätere Produktstufe](ads-and-feedback.md)
 - [Zukünftige Features](future-features.md)
 - [Roadmap](roadmap.md)
 - [UI References](ui%20references/README.md)
