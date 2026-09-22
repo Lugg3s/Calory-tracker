@@ -99,3 +99,9 @@
 - [ ] weitergehende Personalisierung
 - [ ] optional zusätzliche KFA-Seiten-/Rückansichten
 - [ ] spätere Körper-/Zielvisualisierungen klar getrennt von KFA-Messung
+- [ ] Werbe-Monetarisierung für eine spätere Produktstufe definieren und implementieren
+- [ ] In-App-Feedbackkanal umsetzen
+- [ ] einmalige Belohnung für das erste erfolgreich abgegebene Feedback: **24 Stunden werbefrei**
+- [ ] Belohnungsstatus dauerhaft speichern, damit wiederholtes Feedback keine erneute Werbefreiheit auslöst
+- [ ] Mindestanforderung für belohnungsfähiges Erstfeedback und Missbrauchsschutz festlegen
+- [ ] Gast-/Account-Verhalten, Datenschutz und mögliche dauerhaft werbefreie Bezahloption für Werbung/Feedback klären; Details in `ads-and-feedback.md`
