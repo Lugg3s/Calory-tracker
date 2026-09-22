@@ -94,6 +94,16 @@ Alle drei Modi verwenden dieselbe transparente, deterministische Berechnungsbasi
 
 Auch diese flexible Drei-Größen-Planung ist ausdrücklich **Version 2** und nicht Teil des MVP/V1-Onboardings.
 
+## Später — Werbung und Feedback-Belohnung
+
+Theo kann in einer späteren Produktstufe Werbung enthalten und einen integrierten Feedback-Kanal anbieten.
+
+Beim **ersten erfolgreich abgegebenen Feedback** erhält der Nutzer **einmalig 24 Stunden Werbefreiheit**. Weitere Feedbacks bleiben möglich, lösen aber keine erneute Belohnung aus. Die Belohnung wird erst nach erfolgreicher Übermittlung aktiviert und muss dauerhaft als bereits genutzt gespeichert werden.
+
+Welche Mindestanforderung ein Feedback erfüllen muss, um die einmalige Belohnung auszulösen, ist noch offen. Ziel ist, bedeutungslose Einträge nur für die Belohnung zu erschweren, ohne ehrliches kurzes Feedback unnötig zu blockieren.
+
+Details und offene technische/produktseitige Fragen stehen in [`ads-and-feedback.md`](ads-and-feedback.md).
+
 ## Weitere mögliche Entwicklungen
 
 - adaptive Kalorienziele auf Basis des tatsächlichen Gewichtsverlaufs
